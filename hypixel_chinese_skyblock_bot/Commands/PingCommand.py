@@ -1,0 +1,26 @@
+import discord
+from discord.ext import commands
+from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension
+
+
+class PingCommand(Cod_Extension):
+
+    @commands.command()
+    async def ping(self, ctx):
+        print('呼叫延遲檢測 -> ' + str(self.bot.latency))
+        embed = discord.Embed(
+            title="連線延遲 ping",
+            description=str(self.bot.latency*1000)+' ms',
+            color=0x00ff00
+        )
+
+        embed.set_author(
+            name=ctx.message.author.name,
+            icon_url=ctx.message.author.avatar_url
+        )
+
+        await ctx.send(embed=embed)
+
+
+def setup(pybot):
+    pybot.add_cog(PingCommand(pybot))
