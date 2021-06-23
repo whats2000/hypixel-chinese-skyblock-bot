@@ -11,7 +11,10 @@ class TranslateCommand(Cod_Extension):
         print('位置 -> '
               + str(ctx)
               )
-        print('用戶 -> '+ctx.message.author.name)
+
+        print('用戶 -> '
+              +ctx.message.author.name
+              )
 
         result = TranslateText.translate_text(None, lang, args)
 

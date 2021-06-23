@@ -2,13 +2,18 @@ import googletrans
 
 
 def translate_text(originlang, targetlang, txt):
+
     t = googletrans.Translator()
+
     if originlang is None:
+
         result = t.translate(
             txt,
             dest=targetlang
         )
+
     else:
+
         result = t.translate(
             txt,
             scr=originlang,
