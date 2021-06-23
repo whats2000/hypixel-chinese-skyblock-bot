@@ -27,7 +27,7 @@ with open(os.getcwd()
           + '/Resources/Setting.json',
           mode='r',
           encoding='utf8'
-          ) as Setting_Json:
-    settingJsonData = json.load(Setting_Json)
+          ) as settingJson:
+    settingJsonData = json.load(settingJson)
 
-Setting_Json.close()
+settingJson.close()

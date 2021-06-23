@@ -1,3 +1,6 @@
+import json
+import os
+
 import discord
 from discord.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension, get_hypixel_api, get_setting_json
@@ -34,6 +37,26 @@ class Verify(Cod_Extension):
                         role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('VerifyRoleId'))
 
                         await ctx.author.add_roles(role)
+
+                        with open(os.getcwd()
+                             + '/Resources/VerifyIdList.json',
+                             mode='r',
+                             encoding='utf8'
+                             ) as VerifyIdListJson:
+                            VerifyIdListJsonData = json.load(VerifyIdListJson)
+
+                        outputJson = VerifyIdListJsonData;
+
+                        outputJson[str(ctx.message.author)] = args;
+
+                        outputJson = json.dumps(outputJson, ensure_ascii=False, indent=4)
+
+                        with open(os.getcwd()
+                             + '/Resources/VerifyIdList.json',
+                             mode='w',
+                             encoding='utf8'
+                             ) as outJson:
+                            outJson.write(outputJson)
                     else:
                         print('Player not found')
 
