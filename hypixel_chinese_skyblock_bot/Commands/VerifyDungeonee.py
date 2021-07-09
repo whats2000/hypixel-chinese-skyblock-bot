@@ -67,7 +67,7 @@ class VerifyDungeoneer(Cod_Extension):
                         await ctx.author.add_roles(role)
 
                     embed = discord.Embed(
-                        title='成功驗證',
+                        title='成功驗證地下城等級',
                         description=str(ctx.message.author)
                                     + ' ---> '
                                     + str(playerDung),
