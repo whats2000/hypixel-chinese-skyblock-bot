@@ -23,6 +23,15 @@ def get_hypixel_api(name):
     return js.json()
 
 
+def get_hypixel_skyblock_api(profile):
+    js = requests.get(settingJsonData['SkyblockLink']
+                      + settingJsonData['ApiKey']
+                      + '&profile=' + profile
+                      )
+
+    return js.json()
+
+
 with open(os.getcwd()
           + '/Resources/Setting.json',
           mode='r',

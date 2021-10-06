@@ -10,7 +10,7 @@ class VerifyId(Cod_Extension):
 
     @commands.command()
     async def verifyid(self, ctx, args):
-        if get_setting_json('VerifyRoleId') not in [y.name.lower() for y in ctx.message.author.roles]:
+        if get_setting_json('VerifyIdRole') not in [y.name.lower() for y in ctx.message.author.roles]:
             playerApi = get_hypixel_api(args)
 
             print('verify player user : ' + str(ctx.message.author))
@@ -20,7 +20,7 @@ class VerifyId(Cod_Extension):
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
 
                     if str(ctx.message.author) == playerDisord:
-                        print('VerifyId success')
+                        print('- Verify Id success')
 
                         embed = discord.Embed(
                             title='成功驗證',
@@ -142,7 +142,7 @@ class VerifyId(Cod_Extension):
 
         print('update player user : ' + str(ctx.message.author))
 
-        if get_setting_json('VerifyRoleId') in [y.name.lower() for y in ctx.message.author.roles]:
+        if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             if playerApi['success']:
                 try:
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']

@@ -15,7 +15,7 @@ pybot = commands.Bot(command_prefix='sb?')
 
 @pybot.event
 async def on_ready():
-    print("debug code 0")
+    print("bot is ready")
 
 for filename in os.listdir(os.getcwd() + '/Commands'):
     print('Commands.'+filename[:-3])

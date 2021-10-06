@@ -10,7 +10,7 @@ class VerifyDungeoneer(Cod_Extension):
 
     @commands.command()
     async def verifydung(self, ctx):
-        if get_setting_json('VerifyRoleId') in [y.name.lower() for y in ctx.message.author.roles]:
+        if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('DungeoneerRole'))
 
             await ctx.author.add_roles(role)
@@ -37,7 +37,7 @@ class VerifyDungeoneer(Cod_Extension):
                 try:
                     playerDung = playerApi['player']['achievements']['skyblock_dungeoneer']
 
-                    print(playerDung)
+                    print('- ' + playerDung)
 
                     for i in range(10):
                         if i < 5:
