@@ -3,6 +3,33 @@
   "AuthorName" : "whats2000_",
   "ApiKey" : "",
   "NameLink" : "https://api.hypixel.net/player?key=",
+  "SkyblockLink": "https://api.hypixel.net/skyblock/profile?key=",
   "SeverId": "",
-  "VerifyRoleId" : ""
+
+  "cata50": "< \uD83D\uDD065 0\uD83D\uDD06>",
+  "AllSlayer7": "\uD83C\uDFC5 All Slayer Ⅶ",
+  "AllSlayer8": "\uD83C\uDFC6 All Slayer Ⅷ",
+  "AllSlayer9": "⚜️ All Slayer Ⅸ",
+
+  "skill_list": {
+                  "farming" : 111672425,
+                  "mining" : 111672425,
+                  "combat" : 111672425,
+                  "foraging" : 55172425,
+                  "fishing" : 55172425,
+                  "enchanting" : 111672425,
+                  "alchemy" : 55172425
+  },
+
+  "skill_farming": "\uD83C\uDF3F \uD835\uDE41\uD835\uDE56\uD835\uDE67\uD835\uDE62\uD835\uDE5E\uD835\uDE63\uD835\uDE5C \uD835\uDE47\uD835\uDE53",
+  "skill_mining": "\uD83D\uDC8E \uD835\uDE48\uD835\uDE5E\uD835\uDE63\uD835\uDE5E\uD835\uDE63\uD835\uDE5C \uD835\uDE47\uD835\uDE53",
+  "skill_combat": "\uD83D\uDEE1️ \uD835\uDE3E\uD835\uDE64\uD835\uDE62\uD835\uDE57\uD835\uDE56\uD835\uDE69 \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47\uD835\uDE53",
+  "skill_foraging": "\uD83C\uDF40 \uD835\uDE41\uD835\uDE64\uD835\uDE67\uD835\uDE56\uD835\uDE5C\uD835\uDE5E\uD835\uDE63\uD835\uDE5C \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47",
+  "skill_fishing": "\uD83C\uDFA3 \uD835\uDE41\uD835\uDE5E\uD835\uDE68\uD835\uDE5D\uD835\uDE5E\uD835\uDE63\uD835\uDE5C \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47",
+  "skill_enchanting": "\uD83D\uDD2E \uD835\uDE40\uD835\uDE63\uD835\uDE58\uD835\uDE5D\uD835\uDE56\uD835\uDE63\uD835\uDE69\uD835\uDE5E\uD835\uDE63\uD835\uDE5C \uD835\uDE47\uD835\uDE53",
+  "skill_alchemy": "⚗️ \uD835\uDE3C\uD835\uDE61\uD835\uDE58\uD835\uDE5D\uD835\uDE5A\uD835\uDE62\uD835\uDE6E \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47",
+
+  "VerifyIdRole": "✔ 已驗證成員",
+  "DungeoneerRole": "＊═─═─═─═─═─＊地下城等級＊─═─═─═─═─═ ＊",
+  "ProgressRole": "＊═─═─═─═─═─＊遊戲進度＊═─═─═─═─═─ ＊"
 }
