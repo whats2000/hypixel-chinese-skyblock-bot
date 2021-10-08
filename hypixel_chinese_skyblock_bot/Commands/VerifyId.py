@@ -37,7 +37,7 @@ class VerifyId(Cod_Extension):
 
                         await ctx.send(embed=embed)
 
-                        role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('VerifyRoleId'))
+                        role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('VerifyIdRole'))
 
                         await ctx.author.add_roles(role)
 
