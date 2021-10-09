@@ -3,10 +3,10 @@ import os
 
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension, get_hypixel_api, get_setting_json
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id
 
 
-class VerifyId(Cod_Extension):
+class VerifyId(CodExtension):
 
     @commands.command()
     async def verifyid(self, ctx, args):
@@ -20,6 +20,8 @@ class VerifyId(Cod_Extension):
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
 
                     if str(ctx.message.author) == playerDisord:
+                        set_user_id(ctx.message.author, args)
+
                         print('- Verify Id success')
 
                         embed = discord.Embed(
@@ -41,29 +43,6 @@ class VerifyId(Cod_Extension):
 
                         await ctx.author.add_roles(role)
 
-                        with open(os.getcwd()
-                             + '/Resources/VerifyIdList.json',
-                             mode='r',
-                             encoding='utf8'
-                             ) as VerifyIdListJson:
-                            VerifyIdListJsonData = json.load(VerifyIdListJson)
-
-                        VerifyIdListJson.close()
-
-                        outputJson = VerifyIdListJsonData
-
-                        outputJson[str(ctx.message.author)] = args
-
-                        outputJson = json.dumps(outputJson, ensure_ascii=False, indent=4)
-
-                        with open(os.getcwd()
-                             + '/Resources/VerifyIdList.json',
-                             mode='w',
-                             encoding='utf8'
-                             ) as outJson:
-                            outJson.write(outputJson)
-
-                        outJson.close()
                     else:
                         print('Player not found')
 
@@ -148,6 +127,8 @@ class VerifyId(Cod_Extension):
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
 
                     if str(ctx.message.author) == playerDisord:
+                        set_user_id(ctx.message.author, args)
+
                         print('update Id success')
 
                         embed = discord.Embed(
@@ -164,30 +145,6 @@ class VerifyId(Cod_Extension):
                         )
 
                         await ctx.send(embed=embed)
-
-                        with open(os.getcwd()
-                                  + '/Resources/VerifyIdList.json',
-                                  mode='r',
-                                  encoding='utf8'
-                                  ) as VerifyIdListJson:
-                            VerifyIdListJsonData = json.load(VerifyIdListJson)
-
-                        VerifyIdListJson.close()
-
-                        outputJson = VerifyIdListJsonData
-
-                        outputJson[str(ctx.message.author)] = args
-
-                        outputJson = json.dumps(outputJson, ensure_ascii=False, indent=4)
-
-                        with open(os.getcwd()
-                                  + '/Resources/VerifyIdList.json',
-                                  mode='w',
-                                  encoding='utf8'
-                                  ) as outJson:
-                            outJson.write(outputJson)
-
-                        outJson.close()
 
                     else:
                         print('Player not found')
@@ -242,6 +199,7 @@ class VerifyId(Cod_Extension):
                 await ctx.send(embed=embed, delete_after=20.0)
 
         await ctx.message.delete()
+
 
 def setup(pybot):
     pybot.add_cog(VerifyId(pybot))

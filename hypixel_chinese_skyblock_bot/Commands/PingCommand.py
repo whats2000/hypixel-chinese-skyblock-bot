@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
 
-class PingCommand(Cod_Extension):
+class PingCommand(CodExtension):
 
     @commands.command()
     async def ping(self, ctx):

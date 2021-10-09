@@ -3,10 +3,10 @@ import os
 
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension, get_hypixel_api, get_setting_json
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, get_verify_id_list
 
 
-class VerifyDungeoneer(Cod_Extension):
+class VerifyDungeoneer(CodExtension):
 
     @commands.command()
     async def verifydung(self, ctx):
@@ -15,19 +15,7 @@ class VerifyDungeoneer(Cod_Extension):
 
             await ctx.author.add_roles(role)
 
-            with open(os.getcwd()
-                      + '/Resources/VerifyIdList.json',
-                      mode='r',
-                      encoding='utf8'
-                      ) as VerifyIdListJson:
-                VerifyIdListJsonData = json.load(VerifyIdListJson)
-
-            try:
-                player = VerifyIdListJsonData[str(ctx.message.author)]
-
-            except:
-                print('player not found')
-                player = ''
+            player = get_verify_id_list(ctx.message.author)
 
             playerApi = get_hypixel_api(player)
 

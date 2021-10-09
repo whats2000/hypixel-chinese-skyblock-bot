@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 from hypixel_chinese_skyblock_bot.Core import TranslateText
 
 
-class TranslateCommand(Cod_Extension):
+class TranslateCommand(CodExtension):
 
     @commands.command()
     async def translate(self, ctx, lang, *, args):

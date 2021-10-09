@@ -3,11 +3,12 @@ import os
 
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import Cod_Extension, get_hypixel_api, get_setting_json, \
-    get_hypixel_skyblock_api
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
+    get_hypixel_skyblock_api, get_verify_id_list
+from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
-class VerifyProgress(Cod_Extension):
+class VerifyProgress(CodExtension):
 
     @commands.command()
     async def verifyprog(self, ctx):
@@ -16,19 +17,7 @@ class VerifyProgress(Cod_Extension):
 
             await ctx.author.add_roles(role)
 
-            with open(os.getcwd()
-                      + '/Resources/VerifyIdList.json',
-                      mode='r',
-                      encoding='utf8'
-                      ) as VerifyIdListJson:
-                VerifyIdListJsonData = json.load(VerifyIdListJson)
-
-            try:
-                player = VerifyIdListJsonData[str(ctx.message.author)]
-
-            except:
-                print('player not found')
-                player = ''
+            player = get_verify_id_list(ctx.message.author)
 
             playerApi = get_hypixel_api(player)
 
@@ -37,6 +26,8 @@ class VerifyProgress(Cod_Extension):
             if playerApi['success']:
                 try:
                     playerProfile = playerApi['player']['stats']['SkyBlock']['profiles']
+
+                    playerData = UserData(player)
 
                     for profileId in playerProfile:
                         print('- 正在驗證'
@@ -77,20 +68,7 @@ class VerifyProgress(Cod_Extension):
 
                                         print('- slayer ' + str(i))
 
-                                        embed = discord.Embed(
-                                            title='成功驗證進度',
-                                            description=str(ctx.message.author)
-                                                        + ' ---> slayer'
-                                                        + str(i),
-                                            color=0x00ff00
-                                        )
-
-                                        embed.set_author(
-                                            name=ctx.message.author.name,
-                                            icon_url=ctx.message.author.avatar_url
-                                        )
-
-                                        await ctx.send(embed=embed)
+                                        playerData.set_slayer_level(i, True)
 
                                     else:
                                         print('-no slayer archive' + str(i))
@@ -117,33 +95,18 @@ class VerifyProgress(Cod_Extension):
                                 for skill in skillList:
                                     skillLevel = api['experience_skill_' + skill]
 
-                                    print('- ' + str(skill) + ' : ' + str(skillLevel))
-
                                     if skillLevel >= skillList[skill]:
                                         role = discord.utils.get(ctx.message.author.guild.roles,
                                                                  name=get_setting_json('skill_' + skill))
 
                                         await ctx.author.add_roles(role)
 
-                                        print('- ' + skill + 'is verified')
+                                        print('- ' + skill + ' : ' + str(skillLevel) + ' is verified')
 
-                                        embed = discord.Embed(
-                                            title='成功驗證進度',
-                                            description=str(ctx.message.author)
-                                                        + ' ---> '
-                                                        + str(skill),
-                                            color=0x00ff00
-                                        )
-
-                                        embed.set_author(
-                                            name=ctx.message.author.name,
-                                            icon_url=ctx.message.author.avatar_url
-                                        )
-
-                                        await ctx.send(embed=embed)
+                                        playerData.set_skill_level(skill, True)
 
                                     else:
-                                        print('- ' + str(skill) + ' is not archive')
+                                        print('- ' + skill + ' : ' + str(skillLevel) + ' is not archive')
                             except :
                                 print('fail in verify skill')
 
@@ -160,6 +123,49 @@ class VerifyProgress(Cod_Extension):
                                 )
 
                                 await ctx.send(embed=embed, delete_after=20.0)
+
+                            desc = ''
+
+                            try:
+                                for i in range(7, 10):
+                                    boolean = playerData.get_slayer_level(i)
+
+                                    if boolean:
+                                        desc += '\u2705 : '
+
+                                    else:
+                                        desc += '\u274c : '
+
+                                    desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
+
+                                skillList = get_setting_json('skill_list')
+
+                                for skill in skillList:
+                                    boolean = playerData.get_skill_level(skill)
+
+                                    if boolean:
+                                        desc += '\u2705 : '
+
+                                    else:
+                                        desc += '\u274c : '
+
+                                    desc += str(get_setting_json('skill_' + skill)) + '\n\n'
+
+                                embed = discord.Embed(
+                                    title='已更新進度',
+                                    description=str(desc),
+                                    color=0x00ff00
+                                )
+
+                                embed.set_author(
+                                    name=ctx.message.author.name,
+                                    icon_url=ctx.message.author.avatar_url
+                                )
+
+                                await ctx.send(embed=embed)
+
+                            except:
+                                print('fail at create index embed')
 
                         else:
                             print('Please wait a little bit and try again')
