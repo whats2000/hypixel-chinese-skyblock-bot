@@ -143,8 +143,6 @@ class VerifyProgress(Cod_Extension):
                             except :
                                 print('fail in verify skill')
 
-                                print('fail in verify slayer')
-
                                 embed = discord.Embed(
                                     title='驗證失敗，連結API錯誤，請稍後重試',
                                     description=str(ctx.message.author)
