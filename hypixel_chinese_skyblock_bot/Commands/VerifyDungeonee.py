@@ -19,7 +19,7 @@ class VerifyDungeoneer(CodExtension):
 
             playerApi = get_hypixel_api(player)
 
-            print('verify player dungeoneer : ' + str(ctx.message.author))
+            print('> verify player dungeoneer : ' + str(ctx.message.author))
 
             if playerApi['success']:
                 try:
@@ -70,7 +70,7 @@ class VerifyDungeoneer(CodExtension):
                     await ctx.send(embed=embed)
 
                 except:
-                    print('The player do not open the social media')
+                    print('> The player do not open the social media')
 
                     embed = discord.Embed(
                         title='驗證失敗，請先打開discord api',
@@ -86,7 +86,7 @@ class VerifyDungeoneer(CodExtension):
 
                     await ctx.send(embed=embed, delete_after=20.0)
             else:
-                print('Please wait a little bit and try again')
+                print('> Please wait a little bit and try again')
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
@@ -103,7 +103,7 @@ class VerifyDungeoneer(CodExtension):
                 await ctx.send(embed=embed, delete_after=20.0)
 
         else:
-            print('Require verify id')
+            print('> Require verify id')
 
             embed = discord.Embed(
                 title='你未登記id，請先登記id',

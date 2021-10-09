@@ -8,11 +8,11 @@ class TranslateCommand(CodExtension):
 
     @commands.command()
     async def translate(self, ctx, lang, *, args):
-        print('位置 -> '
+        print('> 位置 -> '
               + str(ctx)
               )
 
-        print('用戶 -> '
+        print('>　用戶 -> '
               +ctx.message.author.name
               )
 

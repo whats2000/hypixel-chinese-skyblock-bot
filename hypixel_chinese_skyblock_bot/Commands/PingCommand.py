@@ -7,7 +7,7 @@ class PingCommand(CodExtension):
 
     @commands.command()
     async def ping(self, ctx):
-        print('呼叫延遲檢測 -> ' + str(self.bot.latency))
+        print('＞　呼叫延遲檢測 -> ' + str(self.bot.latency))
 
         embed = discord.Embed(
             title="連線延遲 ping",
