@@ -54,6 +54,8 @@ class VerifyProgress(CodExtension):
 
                             api = skyblockApi['profile']['members'][profileId]
 
+                            isVerifyPass = False
+
                             try:
                                 for i in range(7, 10):
                                     if 'level_' + str(i) in (api['slayer_bosses']['zombie']['claimed_levels'] and
@@ -69,6 +71,9 @@ class VerifyProgress(CodExtension):
                                         print('- slayer ' + str(i))
 
                                         playerData.set_slayer_level(i, True)
+
+                                        if not isVerifyPass:
+                                            isVerifyPass = True
 
                                     else:
                                         print('-no slayer archive' + str(i))
@@ -105,6 +110,9 @@ class VerifyProgress(CodExtension):
 
                                         playerData.set_skill_level(skill, True)
 
+                                        if not isVerifyPass:
+                                            isVerifyPass = True
+
                                     else:
                                         print('- ' + skill + ' : ' + str(skillLevel) + ' is not archive')
                             except :
@@ -126,35 +134,53 @@ class VerifyProgress(CodExtension):
 
                             desc = ''
 
-                            try:
-                                for i in range(7, 10):
-                                    boolean = playerData.get_slayer_level(i)
+                            if isVerifyPass:
+                                try:
+                                    for i in range(7, 10):
+                                        boolean = playerData.get_slayer_level(i)
 
-                                    if boolean:
-                                        desc += '\u2705 : '
+                                        if boolean:
+                                            desc += '\u2705 : '
 
-                                    else:
-                                        desc += '\u274c : '
+                                        else:
+                                            desc += '\u274c : '
 
-                                    desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
+                                        desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
 
-                                skillList = get_setting_json('skill_list')
+                                    skillList = get_setting_json('skill_list')
 
-                                for skill in skillList:
-                                    boolean = playerData.get_skill_level(skill)
+                                    for skill in skillList:
+                                        boolean = playerData.get_skill_level(skill)
 
-                                    if boolean:
-                                        desc += '\u2705 : '
+                                        if boolean:
+                                            desc += '\u2705 : '
 
-                                    else:
-                                        desc += '\u274c : '
+                                        else:
+                                            desc += '\u274c : '
 
-                                    desc += str(get_setting_json('skill_' + skill)) + '\n\n'
+                                        desc += str(get_setting_json('skill_' + skill)) + '\n\n'
 
+                                    embed = discord.Embed(
+                                        title='已更新進度',
+                                        description=str(desc),
+                                        color=0x00ff00
+                                    )
+
+                                    embed.set_author(
+                                        name=ctx.message.author.name,
+                                        icon_url=ctx.message.author.avatar_url
+                                    )
+
+                                    await ctx.send(embed=embed)
+
+                                except:
+                                    print('fail at create index embed')
+                            else:
                                 embed = discord.Embed(
-                                    title='已更新進度',
-                                    description=str(desc),
-                                    color=0x00ff00
+                                    title='你目前未有任何進度達標，請再接再厲',
+                                    description=str(ctx.message.author)
+                                                + ' -x-> Progress',
+                                    color=0xe74c3c
                                 )
 
                                 embed.set_author(
@@ -162,10 +188,7 @@ class VerifyProgress(CodExtension):
                                     icon_url=ctx.message.author.avatar_url
                                 )
 
-                                await ctx.send(embed=embed)
-
-                            except:
-                                print('fail at create index embed')
+                                await ctx.send(embed=embed, delete_after=20.0)
 
                         else:
                             print('Please wait a little bit and try again')
