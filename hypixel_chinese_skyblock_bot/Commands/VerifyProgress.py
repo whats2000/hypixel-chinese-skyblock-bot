@@ -115,7 +115,11 @@ class VerifyProgress(Cod_Extension):
                                 skillList = get_setting_json('skill_list')
 
                                 for skill in skillList:
-                                    if api['experience_skill_' + skill] >= skillList[skill]:
+                                    skillLevel = api['experience_skill_' + skill]
+
+                                    print('- ' + str(skill) + ' : ' + str(skillLevel))
+
+                                    if skillLevel >= skillList[skill]:
                                         role = discord.utils.get(ctx.message.author.guild.roles,
                                                                  name=get_setting_json('skill_' + skill))
 
@@ -139,7 +143,7 @@ class VerifyProgress(Cod_Extension):
                                         await ctx.send(embed=embed)
 
                                     else:
-                                        print('- ' + skill + ' is not archive')
+                                        print('- ' + str(skill) + ' is not archive')
                             except :
                                 print('fail in verify skill')
 
