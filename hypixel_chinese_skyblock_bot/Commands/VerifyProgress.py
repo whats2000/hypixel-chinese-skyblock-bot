@@ -66,9 +66,9 @@ class VerifyProgress(CodExtension):
                                 try:
                                     for i in range(7, 10):
                                         if 'level_' + str(i) in (api['slayer_bosses']['zombie']['claimed_levels'] and
-                                                         api['slayer_bosses']['spider']['claimed_levels'] and
-                                                         api['slayer_bosses']['wolf']['claimed_levels'] and
-                                                         api['slayer_bosses']['enderman']['claimed_levels']):
+                                                                 api['slayer_bosses']['spider']['claimed_levels'] and
+                                                                 api['slayer_bosses']['wolf']['claimed_levels'] and
+                                                                 api['slayer_bosses']['enderman']['claimed_levels']):
 
                                             role = discord.utils.get(ctx.message.author.guild.roles,
                                                                      name=get_setting_json('AllSlayer' + str(i)))
@@ -123,7 +123,7 @@ class VerifyProgress(CodExtension):
 
                                         else:
                                             print('- ' + skill + ' : ' + str(skillLevel) + ' is not archive')
-                                except :
+                                except:
                                     print('> fail in verify skill')
 
                                     embed = discord.Embed(
@@ -185,6 +185,37 @@ class VerifyProgress(CodExtension):
 
                                     except:
                                         print('> fail at create index embed')
+
+                                    try:
+                                        for skill in playerData.skill:
+                                            if skill != 'carpentry' and not playerData.skill[skill]:
+                                                print('- all skills arent max')
+                                                break
+                                        else:
+                                            print('- all skills are max')
+
+                                            role = discord.utils.get(ctx.message.author.guild.roles,
+                                                                     name=get_setting_json('AllSkillMax'))
+
+                                            await ctx.author.add_roles(role)
+
+                                            embed = discord.Embed(
+                                                title=playerProfile[profileId]['cute_name']
+                                                      + ' 已更新進度',
+                                                description='\u2705 : '
+                                                            + get_setting_json('AllSkillMax'),
+                                                color=0x00ff00
+                                            )
+
+                                            embed.set_author(
+                                                name=ctx.message.author.name,
+                                                icon_url=ctx.message.author.avatar_url
+                                            )
+
+                                            await ctx.send(embed=embed)
+
+                                    except:
+                                        print('> fail at create extra embed')
                                 else:
                                     print('> nothing is verified')
 
@@ -223,7 +254,7 @@ class VerifyProgress(CodExtension):
                             print('> fail to get skyblock api in ' + str(playerProfile[profileId]['cute_name']))
 
                 except:
-                    print('＞　The player do not open the social media')
+                    print('> The player do not open the social media')
 
                     embed = discord.Embed(
                         title='驗證失敗，請先打開discord api',
