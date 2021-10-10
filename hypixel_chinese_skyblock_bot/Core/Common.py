@@ -69,6 +69,8 @@ def get_verify_id_list(key):
 
 
 def get_hypixel_api(name):
+    print('> try to get hypixel api of ' + name)
+
     js = requests.get(settingJsonData['NameLink']
                       + settingJsonData['ApiKey']
                       + '&name=' + name
@@ -78,6 +80,8 @@ def get_hypixel_api(name):
 
 
 def get_hypixel_skyblock_api(profile):
+    print('> try to get hypixel skyblock api of ' + profile)
+
     js = requests.get(settingJsonData['SkyblockLink']
                       + settingJsonData['ApiKey']
                       + '&profile=' + profile

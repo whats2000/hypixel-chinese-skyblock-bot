@@ -167,7 +167,7 @@ class VerifyId(CodExtension):
                     print('> The player do not open the social media')
 
                     embed = discord.Embed(
-                        title='驗證失敗，請先打開discord api',
+                        title='驗證失敗，請先打開 hypixel discord api',
                         description=str(ctx.message.author)
                                     + ' -x-> '
                                     + args,
@@ -183,11 +183,16 @@ class VerifyId(CodExtension):
             else:
                 print('>　Please wait a little bit and try again')
 
+                print('> fail reason : ' + playerApi['cause'])
+
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
                     description=str(ctx.message.author)
                                 + ' -x-> '
-                                + args,
+                                + args
+                                + '\n\n'
+                                + '原因 : '
+                                + playerApi['cause'],
                     color=0xe74c3c
                 )
 

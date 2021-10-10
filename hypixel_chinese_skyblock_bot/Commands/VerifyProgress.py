@@ -24,6 +24,8 @@ class VerifyProgress(CodExtension):
             print('> verify player progress : ' + str(ctx.message.author))
 
             if playerApi['success']:
+                print('> get hypixel api success')
+
                 try:
                     playerUUID = playerApi['player']['uuid']
 
@@ -57,7 +59,7 @@ class VerifyProgress(CodExtension):
 
                             if skyblockApi['success']:
 
-                                api = skyblockApi['profile']['members'][playerUUID]
+                                playerProfileApi = skyblockApi['profile']['members'][playerUUID]
 
                                 print('> get profileId success')
 
@@ -65,10 +67,10 @@ class VerifyProgress(CodExtension):
 
                                 try:
                                     for i in range(7, 10):
-                                        if 'level_' + str(i) in (api['slayer_bosses']['zombie']['claimed_levels'] and
-                                                                 api['slayer_bosses']['spider']['claimed_levels'] and
-                                                                 api['slayer_bosses']['wolf']['claimed_levels'] and
-                                                                 api['slayer_bosses']['enderman']['claimed_levels']):
+                                        if 'level_' + str(i) in (playerProfileApi['slayer_bosses']['zombie']['claimed_levels'] and
+                                                                 playerProfileApi['slayer_bosses']['spider']['claimed_levels'] and
+                                                                 playerProfileApi['slayer_bosses']['wolf']['claimed_levels'] and
+                                                                 playerProfileApi['slayer_bosses']['enderman']['claimed_levels']):
 
                                             role = discord.utils.get(ctx.message.author.guild.roles,
                                                                      name=get_setting_json('AllSlayer' + str(i)))
@@ -77,7 +79,7 @@ class VerifyProgress(CodExtension):
 
                                             print('- slayer ' + str(i))
 
-                                            playerData.set_slayer_level(i, True)
+                                            playerData.set_slayer_level_is_max(i, True)
 
                                             if not isVerifyPass:
                                                 isVerifyPass = True
@@ -106,7 +108,7 @@ class VerifyProgress(CodExtension):
                                     skillList = get_setting_json('skill_list')
 
                                     for skill in skillList:
-                                        skillLevel = api['experience_skill_' + skill]
+                                        skillLevel = playerProfileApi['experience_skill_' + skill]
 
                                         if skillLevel >= skillList[skill]:
                                             role = discord.utils.get(ctx.message.author.guild.roles,
@@ -116,7 +118,7 @@ class VerifyProgress(CodExtension):
 
                                             print('- ' + skill + ' : ' + str(skillLevel) + ' is verified')
 
-                                            playerData.set_skill_level(skill, True)
+                                            playerData.set_skill_level_is_max(skill, True)
 
                                             if not isVerifyPass:
                                                 isVerifyPass = True
@@ -146,7 +148,7 @@ class VerifyProgress(CodExtension):
                                         desc = ''
 
                                         for i in range(7, 10):
-                                            boolean = playerData.get_slayer_level(i)
+                                            boolean = playerData.get_slayer_level_is_max(i)
 
                                             if boolean:
                                                 desc += '\u2705 : '
@@ -159,7 +161,7 @@ class VerifyProgress(CodExtension):
                                         skillList = get_setting_json('skill_list')
 
                                         for skill in skillList:
-                                            boolean = playerData.get_skill_level(skill)
+                                            boolean = playerData.get_skill_level_is_max(skill)
 
                                             if boolean:
                                                 desc += '\u2705 : '
@@ -187,8 +189,8 @@ class VerifyProgress(CodExtension):
                                         print('> fail at create index embed')
 
                                     try:
-                                        for skill in playerData.skill:
-                                            if skill != 'carpentry' and not playerData.skill[skill]:
+                                        for skill in playerData.skillIsMax:
+                                            if skill != 'carpentry' and not playerData.skillIsMax[skill]:
                                                 print('- all skills arent max')
                                                 break
                                         else:
@@ -257,7 +259,7 @@ class VerifyProgress(CodExtension):
                     print('> The player do not open the social media')
 
                     embed = discord.Embed(
-                        title='驗證失敗，請先打開discord api',
+                        title='驗證失敗，請先打開 hypixel discord api',
                         description=str(ctx.message.author)
                                     + ' -x-> Progress',
                         color=0xe74c3c
@@ -272,10 +274,14 @@ class VerifyProgress(CodExtension):
             else:
                 print('> Please wait a little bit and try again')
 
+                print('> fail reason : ' + playerApi['cause'])
+
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
                     description=str(ctx.message.author)
-                                + ' -x-> Progress',
+                                + ' -x-> Progress\n\n'
+                                + '原因 : '
+                                + playerApi['cause'],
                     color=0xe74c3c
                 )
 
