@@ -147,7 +147,7 @@ class VerifyDungeoneer(CodExtension):
                             print('> fail to get skyblock api in ' + str(playerProfile[profileId]['cute_name']))
 
                         try:
-                            desc = ':trophy: 最高職業等級 : ' \
+                            desc = ':trophy: 最高地下城等級 : ' \
                                    + str(playerDungMaxLevel) \
                                    + '\n\n===============\n\n:island: 島嶼職業等級 :\n\n'
 
