@@ -72,13 +72,24 @@ class VerifyDungeoneer(CodExtension):
 
                                         playerData.set_dung_class_level(dungClass, classExp)
 
-                                        classLevel = playerData.get_dung_class_level(dungClass)
-
-                                        if classLevel > playerDungMaxLevel:
-                                            playerDungMaxLevel = classLevel
-
                                 except:
                                     print('> fail at get class level')
+
+                                try:
+                                    for dung in playerData.dungLevel:
+                                        dungExp = dungApi['dungeon_types'][dung]['experience']
+
+                                        print('- ' + dung + ' : ' + str(dungExp))
+
+                                        playerData.set_dung_level(dung, dungExp)
+
+                                        dungLevel = playerData.get_dung_level(dung)
+
+                                        if dungLevel > playerDungMaxLevel:
+                                            playerDungMaxLevel = dungLevel
+
+                                except:
+                                    print('> fail at get dung level')
 
                                 try:
                                     for i in range(10):
@@ -114,16 +125,6 @@ class VerifyDungeoneer(CodExtension):
                                 except:
                                     print('> fail at give role')
 
-                                try:
-                                    for dung in playerData.dungLevel:
-                                        dungExp = dungApi['dungeon_types'][dung]['experience']
-
-                                        print('- ' + dung + ' : ' + str(dungExp))
-
-                                        playerData.set_dung_level(dung, dungExp)
-
-                                except:
-                                    print('> fail at get dung level')
 
                             else:
                                 print('>　Please wait a little bit and try again')
