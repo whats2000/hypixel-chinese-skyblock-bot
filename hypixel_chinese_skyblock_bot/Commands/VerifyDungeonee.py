@@ -1,6 +1,3 @@
-import json
-import os
-
 import discord
 from discord.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
@@ -12,6 +9,7 @@ class VerifyDungeoneer(CodExtension):
 
     @commands.command()
     async def verifydung(self, ctx):
+        # check is player has been verified
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('DungeoneerRole'))
 
@@ -23,9 +21,11 @@ class VerifyDungeoneer(CodExtension):
 
             print('> verify player dungeoneer : ' + str(ctx.message.author))
 
+            # check get hypixel api is successes
             if playerApi['success']:
                 print('> get hypixel api success')
 
+                # try to get dungeon max class data
                 try:
                     playerDungMaxLevel = playerApi['player']['achievements']['skyblock_dungeoneer']
 
@@ -35,7 +35,12 @@ class VerifyDungeoneer(CodExtension):
 
                     playerProfile = playerApi['player']['stats']['SkyBlock']['profiles']
 
+                    # loop for checking all profile
                     for profileId in playerProfile:
+                        isClassLevelGetSuccess = False
+
+                        isDungLevelGetSuccess = False
+
                         print('- 正在驗證'
                               + playerProfile[profileId]['cute_name']
                               )
@@ -56,14 +61,17 @@ class VerifyDungeoneer(CodExtension):
 
                         await ctx.send(embed=embed, delete_after=10.0)
 
+                        # try to get skyblock api
                         try:
                             skyblockApi = get_hypixel_skyblock_api(profileId)
 
                             print('> get api success')
 
+                            # check get skyblock api is successes
                             if skyblockApi['success']:
                                 dungApi = skyblockApi['profile']['members'][playerUUID]['dungeons']
 
+                                # get dungeon classes level
                                 try:
                                     for dungClass in dungApi['player_classes']:
                                         classExp = dungApi['player_classes'][dungClass]['experience']
@@ -72,9 +80,12 @@ class VerifyDungeoneer(CodExtension):
 
                                         playerData.set_dung_class_level(dungClass, classExp)
 
+                                    isClassLevelGetSuccess = True
+
                                 except:
                                     print('> fail at get class level')
 
+                                # get dungeon level
                                 try:
                                     for dung in playerData.dungLevel:
                                         dungExp = dungApi['dungeon_types'][dung]['experience']
@@ -87,6 +98,8 @@ class VerifyDungeoneer(CodExtension):
 
                                         if dungLevel > playerDungMaxLevel:
                                             playerDungMaxLevel = dungLevel
+
+                                    isDungLevelGetSuccess = True
 
                                 except:
                                     print('> fail at get dung level')
@@ -111,59 +124,78 @@ class VerifyDungeoneer(CodExtension):
                         except:
                             print('> fail to get skyblock api in ' + str(playerProfile[profileId]['cute_name']))
 
+                        # create embed
                         try:
-                            desc = ':trophy: 最高地下城等級 : ' \
-                                   + str(playerDungMaxLevel) \
-                                   + '\n\n===============\n\n:island: 島嶼職業等級 :\n\n'
+                            if isClassLevelGetSuccess and isDungLevelGetSuccess:
+                                desc = ':trophy: 最高地下城等級 : ' \
+                                       + str(playerDungMaxLevel) \
+                                       + '\n\n===============\n\n:island: 島嶼職業等級 :\n\n'
 
-                            for dungClass in playerData.dungClassLevel:
-                                print('- '
-                                      + dungClass
-                                      + ' : '
-                                      + str(playerData.get_dung_class_level(dungClass)))
+                                for dungClass in playerData.dungClassLevel:
+                                    print('- '
+                                          + dungClass
+                                          + ' : '
+                                          + str(playerData.get_dung_class_level(dungClass)))
 
-                                dungClassList = get_setting_json('dung_class_list')
+                                    dungClassList = get_setting_json('dung_class_list')
 
-                                desc = desc \
-                                       + ' - ' \
-                                       + dungClassList[dungClass] \
-                                       + ' : ' \
-                                       + str(playerData.get_dung_class_level(dungClass)) \
-                                       + '\n\n'
+                                    desc = desc \
+                                           + ' - ' \
+                                           + dungClassList[dungClass] \
+                                           + ' : ' \
+                                           + str(playerData.get_dung_class_level(dungClass)) \
+                                           + '\n\n'
 
-                            desc += '===============\n\n:classical_building: 地下城等級 : \n\n'
+                                desc += '===============\n\n:classical_building: 地下城等級 : \n\n'
 
-                            for dung in playerData.dungLevel:
-                                print(dung
-                                      + ' : '
-                                      + str(playerData.get_dung_level(dung)))
+                                for dung in playerData.dungLevel:
+                                    print(dung
+                                          + ' : '
+                                          + str(playerData.get_dung_level(dung)))
 
-                                dungList = get_setting_json('dung_list')
+                                    dungList = get_setting_json('dung_list')
 
-                                desc = desc \
-                                       + ' - ' \
-                                       + dungList[dung] \
-                                       + ' : ' \
-                                       + str(playerData.get_dung_level(dung)) \
-                                       + '\n\n'
+                                    desc = desc \
+                                           + ' - ' \
+                                           + dungList[dung] \
+                                           + ' : ' \
+                                           + str(playerData.get_dung_level(dung)) \
+                                           + '\n\n'
 
-                            embed = discord.Embed(
-                                title=playerProfile[profileId]['cute_name']
-                                      + ' 已更新地下城',
-                                description=str(desc),
-                                color=0x00ff00
-                            )
+                                embed = discord.Embed(
+                                    title=playerProfile[profileId]['cute_name']
+                                          + ' 已更新地下城',
+                                    description=str(desc),
+                                    color=0x00ff00
+                                )
 
-                            embed.set_author(
-                                name=ctx.message.author.name,
-                                icon_url=ctx.message.author.avatar_url
-                            )
+                                embed.set_author(
+                                    name=ctx.message.author.name,
+                                    icon_url=ctx.message.author.avatar_url
+                                )
 
-                            await ctx.send(embed=embed)
+                                await ctx.send(embed=embed)
+
+                            else:
+                                embed = discord.Embed(
+                                    title='驗證 '
+                                          + playerProfile[profileId]['cute_name'] + ' 失敗，請打開該島api',
+                                    description=playerProfile[profileId]['cute_name']
+                                                + ' -x-> Dungeoneer',
+                                    color=0xe74c3c
+                                )
+
+                                embed.set_author(
+                                    name=ctx.message.author.name,
+                                    icon_url=ctx.message.author.avatar_url
+                                )
+
+                                await ctx.send(embed=embed, delete_after=20.0)
 
                         except:
                             print('> fail at create index embed')
 
+                    # give role
                     try:
                         for i in range(10):
                             if i < 5:
