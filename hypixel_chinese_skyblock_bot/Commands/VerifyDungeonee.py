@@ -91,41 +91,6 @@ class VerifyDungeoneer(CodExtension):
                                 except:
                                     print('> fail at get dung level')
 
-                                try:
-                                    for i in range(10):
-                                        if i < 5:
-                                            i = str(i)
-
-                                            role = discord.utils.get(ctx.message.author.guild.roles, name='< ' + i)
-
-                                            await ctx.author.remove_roles(role)
-
-                                        i = str(i)
-
-                                        role = discord.utils.get(ctx.message.author.guild.roles, name=i + ' >')
-
-                                        await ctx.author.remove_roles(role)
-                                    if playerDungMaxLevel >= 50:
-                                        role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                 name=get_setting_json('cata50'))
-
-                                        await ctx.author.add_roles(role)
-
-                                    else:
-                                        role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                 name='< ' + str(playerDungMaxLevel // 10))
-
-                                        await ctx.author.add_roles(role)
-
-                                        role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                 name=str(playerDungMaxLevel % 10) + ' >')
-
-                                        await ctx.author.add_roles(role)
-
-                                except:
-                                    print('> fail at give role')
-
-
                             else:
                                 print('>　Please wait a little bit and try again')
 
@@ -198,6 +163,41 @@ class VerifyDungeoneer(CodExtension):
 
                         except:
                             print('> fail at create index embed')
+
+                    try:
+                        for i in range(10):
+                            if i < 5:
+                                i = str(i)
+
+                                role = discord.utils.get(ctx.message.author.guild.roles, name='< ' + i)
+
+                                await ctx.author.remove_roles(role)
+
+                            i = str(i)
+
+                            role = discord.utils.get(ctx.message.author.guild.roles, name=i + ' >')
+
+                            await ctx.author.remove_roles(role)
+                        if playerDungMaxLevel >= 50:
+                            role = discord.utils.get(ctx.message.author.guild.roles,
+                                                     name=get_setting_json('cata50'))
+
+                            await ctx.author.add_roles(role)
+
+                        else:
+                            role = discord.utils.get(ctx.message.author.guild.roles,
+                                                     name='< ' + str(playerDungMaxLevel // 10))
+
+                            await ctx.author.add_roles(role)
+
+                            role = discord.utils.get(ctx.message.author.guild.roles,
+                                                     name=str(playerDungMaxLevel % 10) + ' >')
+
+                            await ctx.author.add_roles(role)
+
+                    except:
+                        print('> fail at give role')
+
 
                 except:
                     print('> The player do not open the social media')
