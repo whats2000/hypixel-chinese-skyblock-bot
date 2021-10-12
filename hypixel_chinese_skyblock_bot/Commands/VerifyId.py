@@ -1,5 +1,3 @@
-import json
-import os
 
 import discord
 from discord.ext import commands
@@ -10,15 +8,19 @@ class VerifyId(CodExtension):
 
     @commands.command()
     async def verifyid(self, ctx, args):
+        # check is player has been verified
         if get_setting_json('VerifyIdRole') not in [y.name.lower() for y in ctx.message.author.roles]:
             playerApi = get_hypixel_api(args)
 
             print('> verify player user : ' + str(ctx.message.author))
 
+            # check get hypixel api is successes
             if playerApi['success']:
+                # try to get player social media discord
                 try:
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
 
+                    # check user name is correct in api
                     if str(ctx.message.author) == playerDisord:
                         set_user_id(ctx.message.author, args)
 
@@ -121,11 +123,15 @@ class VerifyId(CodExtension):
 
         print('> update player user : ' + str(ctx.message.author))
 
+        # check is player has been verified
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
+            # check get hypixel api is successes
             if playerApi['success']:
+                # try to get player social media discord
                 try:
                     playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
 
+                    # check user name is correct in api
                     if str(ctx.message.author) == playerDisord:
                         set_user_id(ctx.message.author, args)
 

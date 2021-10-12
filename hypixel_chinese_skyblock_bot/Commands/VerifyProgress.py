@@ -1,6 +1,3 @@
-import json
-import os
-
 import discord
 from discord.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
@@ -12,6 +9,7 @@ class VerifyProgress(CodExtension):
 
     @commands.command()
     async def verifyprog(self, ctx):
+        # check is player has been verified
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('ProgressRole'))
 
@@ -23,9 +21,11 @@ class VerifyProgress(CodExtension):
 
             print('> verify player progress : ' + str(ctx.message.author))
 
+            # check get hypixel api is successes
             if playerApi['success']:
                 print('> get hypixel api success')
 
+                # try to get profile data
                 try:
                     playerUUID = playerApi['player']['uuid']
 
@@ -33,6 +33,7 @@ class VerifyProgress(CodExtension):
 
                     playerData = UserData(player)
 
+                    # loop for checking all profile
                     for profileId in playerProfile:
                         print('- 正在驗證'
                               + playerProfile[profileId]['cute_name']
@@ -52,11 +53,13 @@ class VerifyProgress(CodExtension):
 
                         await ctx.send(embed=embed, delete_after=10.0)
 
+                        # try to get skyblock api
                         try:
                             skyblockApi = get_hypixel_skyblock_api(profileId)
 
                             print('> get api success')
 
+                            # check get skyblock api is successes
                             if skyblockApi['success']:
 
                                 playerProfileApi = skyblockApi['profile']['members'][playerUUID]
@@ -65,8 +68,11 @@ class VerifyProgress(CodExtension):
 
                                 isVerifyPass = False
 
+                                # try to get slayer level
                                 try:
+                                    # loop for checking all slayers
                                     for i in range(7, 10):
+                                        # check if player achieve slayer level
                                         if 'level_' + str(i) in (playerProfileApi['slayer_bosses']['zombie']['claimed_levels'] and
                                                                  playerProfileApi['slayer_bosses']['spider']['claimed_levels'] and
                                                                  playerProfileApi['slayer_bosses']['wolf']['claimed_levels'] and
@@ -81,6 +87,7 @@ class VerifyProgress(CodExtension):
 
                                             playerData.set_slayer_level_is_max(i, True)
 
+                                            # check if pass
                                             if not isVerifyPass:
                                                 isVerifyPass = True
 
@@ -104,12 +111,15 @@ class VerifyProgress(CodExtension):
 
                                     await ctx.send(embed=embed, delete_after=20.0)
 
+                                # try to get skill level
                                 try:
                                     skillList = get_setting_json('skill_list')
 
+                                    # loop for checking all skill
                                     for skill in skillList:
                                         skillLevel = playerProfileApi['experience_skill_' + skill]
 
+                                        # check if player achieve max skill level
                                         if skillLevel >= skillList[skill]:
                                             role = discord.utils.get(ctx.message.author.guild.roles,
                                                                      name=get_setting_json('skill_' + skill))
@@ -120,6 +130,7 @@ class VerifyProgress(CodExtension):
 
                                             playerData.set_skill_level_is_max(skill, True)
 
+                                            # check if pass
                                             if not isVerifyPass:
                                                 isVerifyPass = True
 
@@ -143,13 +154,17 @@ class VerifyProgress(CodExtension):
 
                                     await ctx.send(embed=embed, delete_after=20.0)
 
+                                # check if any slayer or skill achieve
                                 if isVerifyPass:
+                                    # try to create index output
                                     try:
                                         desc = ''
 
+                                        # loop for checking all slayers
                                         for i in range(7, 10):
                                             boolean = playerData.get_slayer_level_is_max(i)
 
+                                            # check if pass
                                             if boolean:
                                                 desc += '\u2705 : '
 
@@ -160,9 +175,11 @@ class VerifyProgress(CodExtension):
 
                                         skillList = get_setting_json('skill_list')
 
+                                        # loop for checking all skill
                                         for skill in skillList:
                                             boolean = playerData.get_skill_level_is_max(skill)
 
+                                            # check if pass
                                             if boolean:
                                                 desc += '\u2705 : '
 
@@ -188,8 +205,11 @@ class VerifyProgress(CodExtension):
                                     except:
                                         print('> fail at create index embed')
 
+                                    # try to create extra index output
                                     try:
+                                        # loop for player all skill
                                         for skill in playerData.skillIsMax:
+                                            # check player all skill is max
                                             if skill != 'carpentry' and not playerData.skillIsMax[skill]:
                                                 print('- all skills arent max')
                                                 break

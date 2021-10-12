@@ -13,7 +13,7 @@ class TranslateCommand(CodExtension):
               )
 
         print('>　用戶 -> '
-              +ctx.message.author.name
+              + ctx.message.author.name
               )
 
         result = TranslateText.translate_text(None, lang, args)

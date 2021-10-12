@@ -25,7 +25,7 @@ class VerifyDungeoneer(CodExtension):
             if playerApi['success']:
                 print('> get hypixel api success')
 
-                # try to get dungeon max class data
+                # try to get profile data and max class data
                 try:
                     playerDungMaxLevel = playerApi['player']['achievements']['skyblock_dungeoneer']
 
@@ -135,7 +135,8 @@ class VerifyDungeoneer(CodExtension):
                                     print('- '
                                           + dungClass
                                           + ' : '
-                                          + str(playerData.get_dung_class_level(dungClass)))
+                                          + str(playerData.get_dung_class_level(dungClass))
+                                          )
 
                                     dungClassList = get_setting_json('dung_class_list')
 
@@ -151,7 +152,8 @@ class VerifyDungeoneer(CodExtension):
                                 for dung in playerData.dungLevel:
                                     print(dung
                                           + ' : '
-                                          + str(playerData.get_dung_level(dung)))
+                                          + str(playerData.get_dung_level(dung))
+                                          )
 
                                     dungList = get_setting_json('dung_list')
 
