@@ -10,7 +10,10 @@ with open(os.getcwd()
     settingJsonData = json.load(settingJson)
 settingJson.close()
 
-pybot = commands.Bot(command_prefix='sb?')
+pybot = commands.Bot(
+                     command_prefix='sb?',
+                     help_command=None
+                    )
 
 
 @pybot.event

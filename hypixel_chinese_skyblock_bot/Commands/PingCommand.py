@@ -22,6 +22,8 @@ class PingCommand(CodExtension):
 
         await ctx.send(embed=embed)
 
+        await ctx.message.delete()
+
 
 def setup(pybot):
     pybot.add_cog(PingCommand(pybot))
