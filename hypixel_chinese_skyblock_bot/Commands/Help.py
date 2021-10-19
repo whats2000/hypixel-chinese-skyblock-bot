@@ -17,6 +17,7 @@ class Help(CodExtension):
                         '\n\n==============='
                         '\n\n:scroll: 驗證命令'
                         '\n\n :arrow_right: `sb?verifyid [玩家遊戲id]` : 輸入要驗證的id，需與hypixel社群discord綁定一致'
+                        '\n\n :arrow_right: `sb?verifyidupdate [玩家遊戲id]` : 輸入要更新的id，需與hypixel社群discord綁定一致'
                         '\n\n :arrow_right: `sb?verifydung` : 驗證地下城職業等級與地下城等級'
                         '\n\n :arrow_right: `sb?verifyprog` : 驗證玩家進度是否滿等'
                         '\n\n================'
