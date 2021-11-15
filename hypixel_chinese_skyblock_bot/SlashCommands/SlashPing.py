@@ -18,11 +18,6 @@ class SlashPingCommand(CodExtension):
             color=0x00ff00
         )
 
-        embed.set_author(
-            name=inter.message.author.name,
-            icon_url=inter.message.author.avatar_url
-        )
-
         await inter.respond(embed=embed)
 
 
