@@ -10,7 +10,7 @@ class SlashEmbed(CodExtension):
     @slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name="embed",
-        description="build a embed",
+        description="Build a embed",
         options=[
             Option('title', 'Makes the title of the embed', OptionType.STRING),
             Option('description', 'Makes the description', OptionType.STRING),
@@ -24,7 +24,7 @@ class SlashEmbed(CodExtension):
             except:
                 color = None
 
-        if color is None:
+        else:
             color = discord.Color.default()
 
         emb = discord.Embed(color=color)
