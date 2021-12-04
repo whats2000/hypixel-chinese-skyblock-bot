@@ -18,7 +18,7 @@ class SlashEmbed(CodExtension):
             Option('picture', 'The picture of the embed', OptionType.STRING)
         ]
     )
-    async def embed(self, inter, title=None, description=None, color=None, picture = None):
+    async def embed(self, inter, title=None, description=None, color=None, picture=None):
         if color is not None:
             try:
                 color = await commands.ColorConverter().convert(inter, color)
