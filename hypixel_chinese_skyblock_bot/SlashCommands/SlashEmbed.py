@@ -14,10 +14,11 @@ class SlashEmbed(CodExtension):
         options=[
             Option('title', 'Makes the title of the embed', OptionType.STRING),
             Option('description', 'Makes the description', OptionType.STRING),
-            Option('color', 'The color of the embed', OptionType.STRING)
+            Option('color', 'The color of the embed', OptionType.STRING),
+            Option('picture', 'The picture of the embed', OptionType.STRING)
         ]
     )
-    async def embed(self, inter, title=None, description=None, color=None):
+    async def embed(self, inter, title=None, description=None, color=None, picture = None):
         if color is not None:
             try:
                 color = await commands.ColorConverter().convert(inter, color)
@@ -34,6 +35,9 @@ class SlashEmbed(CodExtension):
 
         if description is not None:
             emb.description = description
+
+        if picture is not None:
+            emb.set_image(url=picture)
 
         await inter.respond(embed=emb)
 

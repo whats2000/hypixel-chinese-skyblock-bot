@@ -1,15 +1,7 @@
-import json
 import os
 from discord.ext import commands
 from dislash import InteractionClient
-
-with open(os.getcwd()
-          + '/Resources/Setting.json',
-          mode='r',
-          encoding='utf8'
-          ) as settingJson:
-    settingJsonData = json.load(settingJson)
-settingJson.close()
+from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
 
 pybot = commands.Bot(
     command_prefix='sb?',
@@ -43,4 +35,4 @@ inter_client = InteractionClient(pybot)
 
 
 if __name__ == '__main__':
-    pybot.run(settingJsonData['Token'])
+    pybot.run((get_setting_json('Token')))

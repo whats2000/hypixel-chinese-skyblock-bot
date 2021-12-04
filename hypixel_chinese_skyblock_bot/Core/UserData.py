@@ -2,8 +2,8 @@ from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
 
 
 class UserData:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self, user):
+        self.id = user
 
         self.dungClassLevel = {
             'healer': 0,
@@ -35,19 +35,19 @@ class UserData:
             'carpentry': False
         }
 
-    def set_dung_class_level(self, dungClass, exp):
+    def set_dung_class_level(self, dungclass, exp):
         xpToLevelList = get_setting_json('dungeon_xp_to_level')
 
         for i in range(50, 0, -1):
             if exp >= xpToLevelList[str(i)]:
-                self.dungClassLevel[dungClass] = i
+                self.dungClassLevel[dungclass] = i
                 break
 
         else:
-            self.dungClassLevel[dungClass] = -1
+            self.dungClassLevel[dungclass] = -1
 
-    def get_dung_class_level(self, dungClass):
-        return self.dungClassLevel[dungClass]
+    def get_dung_class_level(self, dungclass):
+        return self.dungClassLevel[dungclass]
 
     def set_dung_level(self, dung, exp):
         xpToLevelList = get_setting_json('dungeon_xp_to_level')
@@ -63,8 +63,8 @@ class UserData:
     def get_dung_level(self, dung):
         return self.dungLevel[dung]
 
-    def get_dung_class_is_max(self, dungClass):
-        return self.dungClassLevel[dungClass] >= 50
+    def get_dung_class_is_max(self, dungclass):
+        return self.dungClassLevel[dungclass] >= 50
 
     def set_slayer_level_is_max(self, num, boolean):
         if 7 <= num <= 9:

@@ -16,7 +16,7 @@ def translate_text(originlang, targetlang, txt):
 
         result = t.translate(
             txt,
-            scr=originlang,
+            src=originlang,
             dest=targetlang
         )
 
