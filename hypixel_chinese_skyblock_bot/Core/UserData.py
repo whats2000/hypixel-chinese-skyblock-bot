@@ -5,7 +5,17 @@ class UserData:
     def __init__(self, user):
         self.id = user
 
-        self.dungClassLevel = {
+        self.discord = ''
+
+        self.uuid = ''
+
+        self.api = {}
+
+        self.profile = {}
+
+        self.skyblock_api = {}
+
+        self.dung_class_level = {
             'healer': 0,
             'mage': 0,
             'berserk': 0,
@@ -13,17 +23,17 @@ class UserData:
             'tank': 0
         }
 
-        self.dungLevel = {
+        self.dung_level = {
             'catacombs': 0
         }
 
-        self.slayerIsMax = {
+        self.slayer_is_max = {
             7: False,
             8: False,
             9: False
         }
 
-        self.skillIsMax = {
+        self.skill_is_max = {
             'taming': False,
             'farming': False,
             'mining': False,
@@ -35,47 +45,47 @@ class UserData:
             'carpentry': False
         }
 
-    def set_dung_class_level(self, dungclass, exp):
-        xpToLevelList = get_setting_json('dungeon_xp_to_level')
+    def set_dung_class_level(self, dung_class, exp):
+        xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
         for i in range(50, 0, -1):
-            if exp >= xpToLevelList[str(i)]:
-                self.dungClassLevel[dungclass] = i
+            if exp >= xp_to_level_list[str(i)]:
+                self.dung_class_level[dung_class] = i
                 break
 
         else:
-            self.dungClassLevel[dungclass] = -1
+            self.dung_class_level[dung_class] = -1
 
-    def get_dung_class_level(self, dungclass):
-        return self.dungClassLevel[dungclass]
+    def get_dung_class_level(self, dung_class):
+        return self.dung_class_level[dung_class]
 
     def set_dung_level(self, dung, exp):
-        xpToLevelList = get_setting_json('dungeon_xp_to_level')
+        xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
         for i in range(50, 0, -1):
-            if exp >= xpToLevelList[str(i)]:
-                self.dungLevel[dung] = i
+            if exp >= xp_to_level_list[str(i)]:
+                self.dung_level[dung] = i
                 break
 
         else:
-            self.dungLevel[dung] = -1
+            self.dung_level[dung] = -1
 
     def get_dung_level(self, dung):
-        return self.dungLevel[dung]
+        return self.dung_level[dung]
 
-    def get_dung_class_is_max(self, dungclass):
-        return self.dungClassLevel[dungclass] >= 50
+    def get_dung_class_is_max(self, dung_class):
+        return self.dung_class_level[dung_class] >= 50
 
     def set_slayer_level_is_max(self, num, boolean):
         if 7 <= num <= 9:
-            self.slayerIsMax[num] = boolean
+            self.slayer_is_max[num] = boolean
 
     def get_slayer_level_is_max(self, num):
-        return self.slayerIsMax[num]
+        return self.slayer_is_max[num]
 
     def set_skill_level_is_max(self, skill, boolean):
-        if skill in self.skillIsMax:
-            self.skillIsMax[skill] = boolean
+        if skill in self.skill_is_max:
+            self.skill_is_max[skill] = boolean
 
     def get_skill_level_is_max(self, skill):
-        return self.skillIsMax[skill]
+        return self.skill_is_max[skill]

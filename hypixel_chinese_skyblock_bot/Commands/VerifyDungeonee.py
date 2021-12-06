@@ -16,41 +16,41 @@ class VerifyDungeoneer(CodExtension):
             await ctx.author.add_roles(role)
 
             player = get_verify_id_list(ctx.message.author)
+            
+            player_data = UserData(player)
 
-            player_api = get_hypixel_api(player)
+            player_data.api = get_hypixel_api(player)
 
             print('> verify player dungeoneer : ' + str(ctx.message.author))
 
             # check get hypixel api is successes
-            if player_api['success']:
+            if player_data.api['success']:
                 print('> get hypixel api success')
 
                 # try to get profile data and max class data
                 try:
-                    player_dung_max_level = player_api['player']['achievements']['skyblock_dungeoneer']
+                    player_dung_max_level = player_data.api['player']['achievements']['skyblock_dungeoneer']
 
                     print('- ' + str(player_dung_max_level))
 
-                    player_uuid = player_api['player']['uuid']
+                    player_data.uuid = player_data.api['player']['uuid']
 
-                    player_profile = player_api['player']['stats']['SkyBlock']['profiles']
+                    player_data.profile = player_data.api['player']['stats']['SkyBlock']['profiles']
 
                     # loop for checking all profile
-                    for profileId in player_profile:
+                    for profile_id in player_data.profile:
                         is_class_level_get_success = False
 
                         is_dung_level_get_success = False
 
                         print('- 正在驗證'
-                              + player_profile[profileId]['cute_name']
+                              + player_data.profile[profile_id]['cute_name']
                               )
-
-                        player_data = UserData(player)
 
                         embed = discord.Embed(
                             title='驗證處理中',
                             description='正在驗證 -> '
-                                        + player_profile[profileId]['cute_name'],
+                                        + player_data.profile[profile_id]['cute_name'],
                             color=0xf1c40f
                         )
 
@@ -63,22 +63,22 @@ class VerifyDungeoneer(CodExtension):
 
                         # try to get skyblock api
                         try:
-                            skyblock_api = get_hypixel_skyblock_api(profileId)
+                            player_data.skyblock_api = get_hypixel_skyblock_api(profile_id)
 
                             print('> get api success')
 
                             # check get skyblock api is successes
-                            if skyblock_api['success']:
-                                dung_api = skyblock_api['profile']['members'][player_uuid]['dungeons']
+                            if player_data.skyblock_api['success']:
+                                dung_api = player_data.skyblock_api['profile']['members'][player_data.uuid]['dungeons']
 
                                 # get dungeon classes level
                                 try:
-                                    for dungClass in dung_api['player_classes']:
-                                        class_exp = dung_api['player_classes'][dungClass]['experience']
+                                    for dung_class in dung_api['player_classes']:
+                                        class_exp = dung_api['player_classes'][dung_class]['experience']
 
-                                        print('- ' + dungClass + ' : ' + str(class_exp))
+                                        print('- ' + dung_class + ' : ' + str(class_exp))
 
-                                        player_data.set_dung_class_level(dungClass, class_exp)
+                                        player_data.set_dung_class_level(dung_class, class_exp)
 
                                     is_class_level_get_success = True
 
@@ -87,7 +87,7 @@ class VerifyDungeoneer(CodExtension):
 
                                 # get dungeon level
                                 try:
-                                    for dung in player_data.dungLevel:
+                                    for dung in player_data.dung_level:
                                         dung_exp = dung_api['dungeon_types'][dung]['experience']
 
                                         print('- ' + dung + ' : ' + str(dung_exp))
@@ -109,7 +109,7 @@ class VerifyDungeoneer(CodExtension):
 
                                 embed = discord.Embed(
                                     title='驗證失敗，請稍後重試',
-                                    description=player_profile[profileId]['cute_name'] + ' -x-> Dungeoneer',
+                                    description=player_data.profile[profile_id]['cute_name'] + ' -x-> Dungeoneer',
                                     color=0xe74c3c
                                 )
 
@@ -121,7 +121,7 @@ class VerifyDungeoneer(CodExtension):
                                 await ctx.send(embed=embed, delete_after=20.0)
 
                         except:
-                            print('> fail to get skyblock api in ' + str(player_profile[profileId]['cute_name']))
+                            print('> fail to get skyblock api in ' + str(player_data.profile[profile_id]['cute_name']))
 
                         # create embed
                         try:
@@ -130,24 +130,24 @@ class VerifyDungeoneer(CodExtension):
                                        + str(player_dung_max_level) \
                                        + '\n\n===============\n\n:island: 島嶼職業等級 :\n\n'
 
-                                for dungClass in player_data.dungClassLevel:
+                                for dung_class in player_data.dung_class_level:
                                     print('- '
-                                          + dungClass
+                                          + dung_class
                                           + ' : '
-                                          + str(player_data.get_dung_class_level(dungClass))
+                                          + str(player_data.get_dung_class_level(dung_class))
                                           )
 
                                     dung_class_list = get_setting_json('dung_class_list')
 
                                     desc = desc + ' - ' \
-                                                + dung_class_list[dungClass] \
+                                                + dung_class_list[dung_class] \
                                                 + ' : ' \
-                                                + str(player_data.get_dung_class_level(dungClass)) \
+                                                + str(player_data.get_dung_class_level(dung_class)) \
                                                 + '\n\n'
 
                                 desc += '===============\n\n:classical_building: 地下城等級 : \n\n'
 
-                                for dung in player_data.dungLevel:
+                                for dung in player_data.dung_level:
                                     print(dung
                                           + ' : '
                                           + str(player_data.get_dung_level(dung))
@@ -162,7 +162,7 @@ class VerifyDungeoneer(CodExtension):
                                                 + '\n\n'
 
                                 embed = discord.Embed(
-                                    title=player_profile[profileId]['cute_name'] + ' 已更新地下城',
+                                    title=player_data.profile[profile_id]['cute_name'] + ' 已更新地下城',
                                     description=str(desc),
                                     color=0x00ff00
                                 )
@@ -177,8 +177,8 @@ class VerifyDungeoneer(CodExtension):
                             else:
                                 embed = discord.Embed(
                                     title='驗證 '
-                                          + player_profile[profileId]['cute_name'] + ' 失敗，請打開該島api',
-                                    description=player_profile[profileId]['cute_name'] + ' -x-> Dungeoneer',
+                                          + player_data.profile[profile_id]['cute_name'] + ' 失敗，請打開該島api',
+                                    description=player_data.profile[profile_id]['cute_name'] + ' -x-> Dungeoneer',
                                     color=0xe74c3c
                                 )
 
@@ -246,11 +246,11 @@ class VerifyDungeoneer(CodExtension):
             else:
                 print('> Please wait a little bit and try again')
 
-                print('> fail reason : ' + player_api['cause'])
+                print('> fail reason : ' + player_data.api['cause'])
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author) + ' -x-> Dungeoneer\n\n' + '原因 : ' + player_api['cause'],
+                    description=str(ctx.message.author) + ' -x-> Dungeoneer\n\n' + '原因 : ' + player_data.api['cause'],
                     color=0xe74c3c
                 )
 

@@ -1,7 +1,8 @@
-
 import discord
 from discord.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id
+from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id, \
+    get_verify_id_list
+from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
 class VerifyId(CodExtension):
@@ -10,18 +11,22 @@ class VerifyId(CodExtension):
     async def verifyid(self, ctx, args):
         # check is player has been verified
         if get_setting_json('VerifyIdRole') not in [y.name.lower() for y in ctx.message.author.roles]:
-            player_api = get_hypixel_api(args)
+            player = get_verify_id_list(ctx.message.author)
+
+            player_data = UserData(player)
+
+            player_data.api = get_hypixel_api(args)
 
             print('> verify player user : ' + str(ctx.message.author))
 
             # check get hypixel api is successes
-            if player_api['success']:
+            if player_data.api['success']:
                 # try to get player social media discord
                 try:
-                    player_discord = player_api['player']['socialMedia']['links']['DISCORD']
+                    player_data.discord = player_data.api['player']['socialMedia']['links']['DISCORD']
 
                     # check user name is correct in api
-                    if str(ctx.message.author) == player_discord:
+                    if str(ctx.message.author) == player_data.discord:
                         set_user_id(ctx.message.author, args)
 
                         print('- Verify Id success')
@@ -109,20 +114,24 @@ class VerifyId(CodExtension):
 
     @commands.command()
     async def verifyidupdate(self, ctx, args):
-        player_api = get_hypixel_api(args)
+        player = get_verify_id_list(ctx.message.author)
+
+        player_data = UserData(player)
+
+        player_data.api = get_hypixel_api(args)
 
         print('> update player user : ' + str(ctx.message.author))
 
         # check is player has been verified
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             # check get hypixel api is successes
-            if player_api['success']:
+            if player_data.api['success']:
                 # try to get player social media discord
                 try:
-                    player_discord = player_api['player']['socialMedia']['links']['DISCORD']
+                    player_data.discord = player_data.api['player']['socialMedia']['links']['DISCORD']
 
                     # check user name is correct in api
-                    if str(ctx.message.author) == player_discord:
+                    if str(ctx.message.author) == player_data.discord:
                         set_user_id(ctx.message.author, args)
 
                         print('> update Id success')
@@ -173,11 +182,11 @@ class VerifyId(CodExtension):
             else:
                 print('>　Please wait a little bit and try again')
 
-                print('> fail reason : ' + player_api['cause'])
+                print('> fail reason : ' + player_data.api['cause'])
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author) + ' -x-> ' + args + '\n\n' + '原因 : ' + player_api['cause'],
+                    description=str(ctx.message.author) + ' -x-> ' + args + '\n\n' + '原因 : ' + player_data.api['cause'],
                     color=0xe74c3c
                 )
 
