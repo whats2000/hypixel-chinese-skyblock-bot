@@ -11,28 +11,28 @@ class CodExtension(commands.Cog):
         self.bot = bot
 
 
-def set_user_id(user, id):
+def set_user_id(user, name):
     with open(os.getcwd()
               + '/Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
               ) as verifyIdListJson:
-        verifyIdListJsonData = json.load(verifyIdListJson)
+        data = json.load(verifyIdListJson)
 
     verifyIdListJson.close()
 
-    outputJson = verifyIdListJsonData
+    output = data
 
-    outputJson[str(user)] = str(id)
+    output[str(user)] = str(name)
 
-    outputJson = json.dumps(outputJson, ensure_ascii=False, indent=4)
+    output = json.dumps(output, ensure_ascii=False, indent=4)
 
     with open(os.getcwd()
               + '/Resources/VerifyIdList.json',
               mode='w',
               encoding='utf8'
               ) as outJson:
-        outJson.write(outputJson)
+        outJson.write(output)
 
     outJson.close()
 
@@ -53,14 +53,14 @@ def get_verify_id_list(key):
               mode='r',
               encoding='utf8'
               ) as verifyIdListJson:
-        verifyIdListJsonData = json.load(verifyIdListJson)
+        data = json.load(verifyIdListJson)
 
         verifyIdListJson.close()
 
     key = str(key)
 
-    if key in verifyIdListJsonData:
-        return verifyIdListJsonData[key]
+    if key in data:
+        return data[key]
 
     else:
         print('player no found')
