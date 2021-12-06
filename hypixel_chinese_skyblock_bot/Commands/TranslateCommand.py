@@ -20,9 +20,7 @@ class TranslateCommand(CodExtension):
 
         embed = discord.Embed(
             title=result.text,
-            description=result.src
-                        + ' -> '
-                        + result.dest,
+            description=result.src + ' -> ' + result.dest,
             color=0x00ff00
         )
 

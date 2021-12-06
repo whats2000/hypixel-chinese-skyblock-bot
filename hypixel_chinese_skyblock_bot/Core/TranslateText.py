@@ -1,27 +1,27 @@
 import googletrans
 
 
-def translate_text(originlang, targetlang, txt):
+def translate_text(originals, targets, txt):
 
     t = googletrans.Translator()
 
-    if originlang is None:
+    if originals is None:
 
         result = t.translate(
             txt,
-            dest=targetlang
+            dest=targets
         )
 
     else:
 
         result = t.translate(
             txt,
-            src=originlang,
-            dest=targetlang
+            src=originals,
+            dest=targets
         )
 
     print('目標語言 -> '
-          + str(targetlang)
+          + str(targets)
           )
 
     print('句子 -> '

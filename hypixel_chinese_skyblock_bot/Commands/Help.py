@@ -1,7 +1,6 @@
-import os
-
 import discord
 from discord.ext import commands
+
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
 

@@ -17,32 +17,32 @@ class VerifyProgress(CodExtension):
 
             player = get_verify_id_list(ctx.message.author)
 
-            playerApi = get_hypixel_api(player)
+            player_api = get_hypixel_api(player)
 
             print('> verify player progress : ' + str(ctx.message.author))
 
             # check get hypixel api is successes
-            if playerApi['success']:
+            if player_api['success']:
                 print('> get hypixel api success')
 
                 # try to get profile data
                 try:
-                    playerUUID = playerApi['player']['uuid']
+                    player_uuid = player_api['player']['uuid']
 
-                    playerProfile = playerApi['player']['stats']['SkyBlock']['profiles']
+                    player_profile = player_api['player']['stats']['SkyBlock']['profiles']
 
-                    playerData = UserData(player)
+                    player_data = UserData(player)
 
                     # loop for checking all profile
-                    for profileId in playerProfile:
+                    for profileId in player_profile:
                         print('- 正在驗證'
-                              + playerProfile[profileId]['cute_name']
+                              + player_profile[profileId]['cute_name']
                               )
 
                         embed = discord.Embed(
                             title='驗證處理中',
                             description='正在驗證 -> '
-                                        + playerProfile[profileId]['cute_name'],
+                                        + player_profile[profileId]['cute_name'],
                             color=0xf1c40f
                         )
 
@@ -55,28 +55,29 @@ class VerifyProgress(CodExtension):
 
                         # try to get skyblock api
                         try:
-                            skyblockApi = get_hypixel_skyblock_api(profileId)
+                            skyblock_api = get_hypixel_skyblock_api(profileId)
 
                             print('> get api success')
 
                             # check get skyblock api is successes
-                            if skyblockApi['success']:
+                            if skyblock_api['success']:
 
-                                playerProfileApi = skyblockApi['profile']['members'][playerUUID]
+                                player_profile_api = skyblock_api['profile']['members'][player_uuid]
 
                                 print('> get profileId success')
 
-                                isVerifyPass = False
+                                is_verify_pass = False
 
                                 # try to get slayer level
                                 try:
                                     # loop for checking all slayers
                                     for i in range(7, 10):
                                         # check if player achieve slayer level
-                                        if 'level_' + str(i) in (playerProfileApi['slayer_bosses']['zombie']['claimed_levels'] and
-                                                                 playerProfileApi['slayer_bosses']['spider']['claimed_levels'] and
-                                                                 playerProfileApi['slayer_bosses']['wolf']['claimed_levels'] and
-                                                                 playerProfileApi['slayer_bosses']['enderman']['claimed_levels']):
+                                        if 'level_' + str(i) in \
+                                            (player_profile_api['slayer_bosses']['zombie']['claimed_levels'] and
+                                             player_profile_api['slayer_bosses']['spider']['claimed_levels'] and
+                                             player_profile_api['slayer_bosses']['wolf']['claimed_levels'] and
+                                             player_profile_api['slayer_bosses']['enderman']['claimed_levels']):
 
                                             role = discord.utils.get(ctx.message.author.guild.roles,
                                                                      name=get_setting_json('AllSlayer' + str(i)))
@@ -85,11 +86,11 @@ class VerifyProgress(CodExtension):
 
                                             print('- slayer ' + str(i))
 
-                                            playerData.set_slayer_level_is_max(i, True)
+                                            player_data.set_slayer_level_is_max(i, True)
 
                                             # check if pass
-                                            if not isVerifyPass:
-                                                isVerifyPass = True
+                                            if not is_verify_pass:
+                                                is_verify_pass = True
 
                                         else:
                                             print('- no slayer archive' + str(i))
@@ -99,7 +100,7 @@ class VerifyProgress(CodExtension):
                                     embed = discord.Embed(
                                         title='驗證slayer失敗，連結API錯誤，請稍後重試',
                                         description='請卻保有打開skyblock中slayer訪問api\n\n'
-                                                    + playerProfile[profileId]['cute_name']
+                                                    + player_profile[profileId]['cute_name']
                                                     + ' -x-> Progress',
                                         color=0xe74c3c
                                     )
@@ -113,36 +114,36 @@ class VerifyProgress(CodExtension):
 
                                 # try to get skill level
                                 try:
-                                    skillList = get_setting_json('skill_list')
+                                    skill_list = get_setting_json('skill_list')
 
                                     # loop for checking all skill
-                                    for skill in skillList:
-                                        skillLevel = playerProfileApi['experience_skill_' + skill]
+                                    for skill in skill_list:
+                                        skill_level = player_profile_api['experience_skill_' + skill]
 
                                         # check if player achieve max skill level
-                                        if skillLevel >= skillList[skill]:
+                                        if skill_level >= skill_list[skill]:
                                             role = discord.utils.get(ctx.message.author.guild.roles,
                                                                      name=get_setting_json('skill_' + skill))
 
                                             await ctx.author.add_roles(role)
 
-                                            print('- ' + skill + ' : ' + str(skillLevel) + ' is verified')
+                                            print('- ' + skill + ' : ' + str(skill_level) + ' is verified')
 
-                                            playerData.set_skill_level_is_max(skill, True)
+                                            player_data.set_skill_level_is_max(skill, True)
 
                                             # check if pass
-                                            if not isVerifyPass:
-                                                isVerifyPass = True
+                                            if not is_verify_pass:
+                                                is_verify_pass = True
 
                                         else:
-                                            print('- ' + skill + ' : ' + str(skillLevel) + ' is not archive')
+                                            print('- ' + skill + ' : ' + str(skill_level) + ' is not archive')
                                 except:
                                     print('> fail in verify skill')
 
                                     embed = discord.Embed(
                                         title='驗證skill失敗，連結API錯誤，請稍後重試',
                                         description='請卻保有打開skyblock中skill訪問api\n\n'
-                                                    + playerProfile[profileId]['cute_name']
+                                                    + player_profile[profileId]['cute_name']
                                                     + ' -x-> Progress',
                                         color=0xe74c3c
                                     )
@@ -155,14 +156,14 @@ class VerifyProgress(CodExtension):
                                     await ctx.send(embed=embed, delete_after=20.0)
 
                                 # check if any slayer or skill achieve
-                                if isVerifyPass:
+                                if is_verify_pass:
                                     # try to create index output
                                     try:
                                         desc = ''
 
                                         # loop for checking all slayers
                                         for i in range(7, 10):
-                                            boolean = playerData.get_slayer_level_is_max(i)
+                                            boolean = player_data.get_slayer_level_is_max(i)
 
                                             # check if pass
                                             if boolean:
@@ -173,11 +174,11 @@ class VerifyProgress(CodExtension):
 
                                             desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
 
-                                        skillList = get_setting_json('skill_list')
+                                        skill_list = get_setting_json('skill_list')
 
                                         # loop for checking all skill
-                                        for skill in skillList:
-                                            boolean = playerData.get_skill_level_is_max(skill)
+                                        for skill in skill_list:
+                                            boolean = player_data.get_skill_level_is_max(skill)
 
                                             # check if pass
                                             if boolean:
@@ -189,8 +190,7 @@ class VerifyProgress(CodExtension):
                                             desc += str(get_setting_json('skill_' + skill)) + '\n\n'
 
                                         embed = discord.Embed(
-                                            title=playerProfile[profileId]['cute_name']
-                                                  + ' 已更新進度',
+                                            title=player_profile[profileId]['cute_name'] + ' 已更新進度',
                                             description=str(desc),
                                             color=0x00ff00
                                         )
@@ -208,9 +208,9 @@ class VerifyProgress(CodExtension):
                                     # try to create extra index output
                                     try:
                                         # loop for player all skill
-                                        for skill in playerData.skillIsMax:
+                                        for skill in player_data.skillIsMax:
                                             # check player all skill is max
-                                            if skill != 'carpentry' and not playerData.skillIsMax[skill]:
+                                            if skill != 'carpentry' and not player_data.skillIsMax[skill]:
                                                 print('- all skills arent max')
                                                 break
                                         else:
@@ -222,8 +222,7 @@ class VerifyProgress(CodExtension):
                                             await ctx.author.add_roles(role)
 
                                             embed = discord.Embed(
-                                                title=playerProfile[profileId]['cute_name']
-                                                      + ' 已更新進度',
+                                                title=player_profile[profileId]['cute_name'] + ' 已更新進度',
                                                 description='\u2705 : '
                                                             + get_setting_json('AllSkillMax'),
                                                 color=0x00ff00
@@ -243,8 +242,7 @@ class VerifyProgress(CodExtension):
 
                                     embed = discord.Embed(
                                         title='你目前未有任何進度達標，請再接再厲',
-                                        description=playerProfile[profileId]['cute_name']
-                                                    + ' -x-> Progress',
+                                        description=player_profile[profileId]['cute_name'] + ' -x-> Progress',
                                         color=0xe74c3c
                                     )
 
@@ -260,8 +258,7 @@ class VerifyProgress(CodExtension):
 
                                 embed = discord.Embed(
                                     title='驗證失敗，請稍後重試',
-                                    description=playerProfile[profileId]['cute_name']
-                                                + ' -x-> Progress',
+                                    description=player_profile[profileId]['cute_name'] + ' -x-> Progress',
                                     color=0xe74c3c
                                 )
 
@@ -273,15 +270,14 @@ class VerifyProgress(CodExtension):
                                 await ctx.send(embed=embed, delete_after=20.0)
 
                         except:
-                            print('> fail to get skyblock api in ' + str(playerProfile[profileId]['cute_name']))
+                            print('> fail to get skyblock api in ' + str(player_profile[profileId]['cute_name']))
 
                 except:
                     print('> The player do not open the social media')
 
                     embed = discord.Embed(
                         title='驗證失敗，請先打開 hypixel discord api',
-                        description=str(ctx.message.author)
-                                    + ' -x-> Progress',
+                        description=str(ctx.message.author) + ' -x-> Progress',
                         color=0xe74c3c
                     )
 
@@ -294,14 +290,11 @@ class VerifyProgress(CodExtension):
             else:
                 print('> Please wait a little bit and try again')
 
-                print('> fail reason : ' + playerApi['cause'])
+                print('> fail reason : ' + player_api['cause'])
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author)
-                                + ' -x-> Progress\n\n'
-                                + '原因 : '
-                                + playerApi['cause'],
+                    description=str(ctx.message.author) + ' -x-> Progress\n\n' + '原因 : ' + player_api['cause'],
                     color=0xe74c3c
                 )
 
@@ -317,8 +310,7 @@ class VerifyProgress(CodExtension):
 
             embed = discord.Embed(
                 title='你未登記id，請先登記id',
-                description=str(ctx.message.author)
-                            + ' -x-> Progress',
+                description=str(ctx.message.author) + ' -x-> Progress',
                 color=0xe74c3c
             )
 

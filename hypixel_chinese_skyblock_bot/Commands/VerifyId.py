@@ -10,27 +10,25 @@ class VerifyId(CodExtension):
     async def verifyid(self, ctx, args):
         # check is player has been verified
         if get_setting_json('VerifyIdRole') not in [y.name.lower() for y in ctx.message.author.roles]:
-            playerApi = get_hypixel_api(args)
+            player_api = get_hypixel_api(args)
 
             print('> verify player user : ' + str(ctx.message.author))
 
             # check get hypixel api is successes
-            if playerApi['success']:
+            if player_api['success']:
                 # try to get player social media discord
                 try:
-                    playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
+                    player_discord = player_api['player']['socialMedia']['links']['DISCORD']
 
                     # check user name is correct in api
-                    if str(ctx.message.author) == playerDisord:
+                    if str(ctx.message.author) == player_discord:
                         set_user_id(ctx.message.author, args)
 
                         print('- Verify Id success')
 
                         embed = discord.Embed(
                             title='成功驗證',
-                            description=str(ctx.message.author)
-                                        + ' ---> '
-                                        + args,
+                            description=str(ctx.message.author) + ' ---> ' + args,
                             color=0x00ff00
                         )
 
@@ -50,9 +48,7 @@ class VerifyId(CodExtension):
 
                         embed = discord.Embed(
                             title='驗證失敗，玩家id不正確',
-                            description=str(ctx.message.author)
-                                        + ' -x-> '
-                                        + args,
+                            description=str(ctx.message.author) + ' -x-> ' + args,
                             color=0xe74c3c
                         )
 
@@ -67,9 +63,7 @@ class VerifyId(CodExtension):
 
                     embed = discord.Embed(
                         title='驗證失敗，請先打開discord api',
-                        description=str(ctx.message.author)
-                                    + ' -x-> '
-                                    + args,
+                        description=str(ctx.message.author) + ' -x-> ' + args,
                         color=0xe74c3c
                     )
 
@@ -84,9 +78,7 @@ class VerifyId(CodExtension):
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author)
-                                + ' -x-> '
-                                + args,
+                    description=str(ctx.message.author) + ' -x-> ' + args,
                     color=0xe74c3c
                 )
 
@@ -102,9 +94,7 @@ class VerifyId(CodExtension):
 
             embed = discord.Embed(
                 title='你已經驗證，更新請用sb?verifyidupdate',
-                description=str(ctx.message.author)
-                            + ' -x-> '
-                            + args,
+                description=str(ctx.message.author) + ' -x-> ' + args,
                 color=0xe74c3c
             )
 
@@ -119,29 +109,27 @@ class VerifyId(CodExtension):
 
     @commands.command()
     async def verifyidupdate(self, ctx, args):
-        playerApi = get_hypixel_api(args)
+        player_api = get_hypixel_api(args)
 
         print('> update player user : ' + str(ctx.message.author))
 
         # check is player has been verified
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             # check get hypixel api is successes
-            if playerApi['success']:
+            if player_api['success']:
                 # try to get player social media discord
                 try:
-                    playerDisord = playerApi['player']['socialMedia']['links']['DISCORD']
+                    player_discord = player_api['player']['socialMedia']['links']['DISCORD']
 
                     # check user name is correct in api
-                    if str(ctx.message.author) == playerDisord:
+                    if str(ctx.message.author) == player_discord:
                         set_user_id(ctx.message.author, args)
 
                         print('> update Id success')
 
                         embed = discord.Embed(
                             title='成功更新',
-                            description=str(ctx.message.author)
-                                        + ' ---> '
-                                        + args,
+                            description=str(ctx.message.author) + ' ---> ' + args,
                             color=0x00ff00
                         )
 
@@ -157,9 +145,7 @@ class VerifyId(CodExtension):
 
                         embed = discord.Embed(
                             title='驗證失敗，玩家id不正確',
-                            description=str(ctx.message.author)
-                                        + ' -x-> '
-                                        + args,
+                            description=str(ctx.message.author) + ' -x-> ' + args,
                             color=0xe74c3c
                         )
 
@@ -174,9 +160,7 @@ class VerifyId(CodExtension):
 
                     embed = discord.Embed(
                         title='驗證失敗，請先打開 hypixel discord api',
-                        description=str(ctx.message.author)
-                                    + ' -x-> '
-                                    + args,
+                        description=str(ctx.message.author) + ' -x-> ' + args,
                         color=0xe74c3c
                     )
 
@@ -189,16 +173,11 @@ class VerifyId(CodExtension):
             else:
                 print('>　Please wait a little bit and try again')
 
-                print('> fail reason : ' + playerApi['cause'])
+                print('> fail reason : ' + player_api['cause'])
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author)
-                                + ' -x-> '
-                                + args
-                                + '\n\n'
-                                + '原因 : '
-                                + playerApi['cause'],
+                    description=str(ctx.message.author) + ' -x-> ' + args + '\n\n' + '原因 : ' + player_api['cause'],
                     color=0xe74c3c
                 )
 
