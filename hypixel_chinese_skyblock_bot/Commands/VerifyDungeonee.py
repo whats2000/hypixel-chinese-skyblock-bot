@@ -16,7 +16,7 @@ class VerifyDungeoneer(CodExtension):
             await ctx.author.add_roles(role)
 
             player = get_verify_id_list(ctx.message.author)
-            
+
             player_data = UserData(player)
 
             player_data.api = get_hypixel_api(player)
@@ -82,7 +82,7 @@ class VerifyDungeoneer(CodExtension):
 
                                     is_class_level_get_success = True
 
-                                except:
+                                except KeyError:
                                     print('> fail at get class level')
 
                                 # get dungeon level
@@ -101,7 +101,7 @@ class VerifyDungeoneer(CodExtension):
 
                                     is_dung_level_get_success = True
 
-                                except:
+                                except KeyError:
                                     print('> fail at get dung level')
 
                             else:
@@ -120,7 +120,7 @@ class VerifyDungeoneer(CodExtension):
 
                                 await ctx.send(embed=embed, delete_after=20.0)
 
-                        except:
+                        except KeyError:
                             print('> fail to get skyblock api in ' + str(player_data.profile[profile_id]['cute_name']))
 
                         # create embed
@@ -189,7 +189,7 @@ class VerifyDungeoneer(CodExtension):
 
                                 await ctx.send(embed=embed, delete_after=20.0)
 
-                        except:
+                        except TypeError:
                             print('> fail at create index embed')
 
                     # give role
@@ -224,11 +224,10 @@ class VerifyDungeoneer(CodExtension):
 
                             await ctx.author.add_roles(role)
 
-                    except:
+                    except KeyError:
                         print('> fail at give role')
 
-
-                except:
+                except KeyError:
                     print('> The player do not open the social media')
 
                     embed = discord.Embed(

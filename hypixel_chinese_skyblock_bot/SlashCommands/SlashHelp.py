@@ -28,6 +28,11 @@ class SlashHelp(CodExtension):
             color=0x00ff00
         )
 
+        embed.set_author(
+            name=inter.author.name,
+            icon_url=inter.author.avatar_url
+        )
+
         embed.set_image(url='https://media.giphy.com/media/e2uLbm9lZm1J4QyUvQ/giphy-downsized-large.gif')
 
         await inter.respond(embed=embed)

@@ -95,7 +95,7 @@ class VerifyProgress(CodExtension):
 
                                         else:
                                             print('- no slayer archive' + str(i))
-                                except:
+                                except KeyError:
                                     print('> fail in verify slayer')
 
                                     embed = discord.Embed(
@@ -138,7 +138,7 @@ class VerifyProgress(CodExtension):
 
                                         else:
                                             print('- ' + skill + ' : ' + str(skill_level) + ' is not archive')
-                                except:
+                                except KeyError:
                                     print('> fail in verify skill')
 
                                     embed = discord.Embed(
@@ -203,7 +203,7 @@ class VerifyProgress(CodExtension):
 
                                         await ctx.send(embed=embed)
 
-                                    except:
+                                    except TypeError:
                                         print('> fail at create index embed')
 
                                     # try to create extra index output
@@ -236,7 +236,7 @@ class VerifyProgress(CodExtension):
 
                                             await ctx.send(embed=embed)
 
-                                    except:
+                                    except TypeError:
                                         print('> fail at create extra embed')
                                 else:
                                     print('> nothing is verified')
@@ -270,10 +270,10 @@ class VerifyProgress(CodExtension):
 
                                 await ctx.send(embed=embed, delete_after=20.0)
 
-                        except:
+                        except KeyError:
                             print('> fail to get skyblock api in ' + str(player_data.profile[profile_id]['cute_name']))
 
-                except:
+                except KeyError:
                     print('> The player do not open the social media')
 
                     embed = discord.Embed(

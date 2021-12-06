@@ -12,17 +12,17 @@ class SlashEmbed(CodExtension):
         name="embed",
         description="Build a embed",
         options=[
-            Option('title', 'Makes the title of the embed', OptionType.STRING),
-            Option('description', 'Makes the description', OptionType.STRING),
-            Option('color', 'The color of the embed', OptionType.STRING),
-            Option('picture', 'The picture of the embed', OptionType.STRING)
+            Option(name='title', description='Makes the title of the embed', type=OptionType.STRING),
+            Option(name='description', description='Makes the description', type=OptionType.STRING),
+            Option(name='color', description='The color of the embed', type=OptionType.STRING),
+            Option(name='picture', description='The picture of the embed', type=OptionType.STRING)
         ]
     )
     async def embed(self, inter, title=None, description=None, color=None, picture=None):
         if color is not None:
             try:
                 color = await commands.ColorConverter().convert(inter, color)
-            except:
+            except KeyError:
                 color = None
 
         else:
