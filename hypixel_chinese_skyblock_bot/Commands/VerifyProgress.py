@@ -21,11 +21,19 @@ class VerifyProgress(CodExtension):
 
             player_data.api = get_hypixel_api(player)
 
+            # try to call the cache in order to skip the api request cool down
+            if not player_data.api['success']:
+                player_data.try_get_latest_user_api()
+
+                print('> 嘗試呼叫緩存')
+
             print('> verify player progress : ' + str(ctx.message.author))
 
             # check get hypixel api is successes
             if player_data.api['success']:
                 print('> get hypixel api success')
+
+                player_data.set_latest_user_api()
 
                 # try to get profile data
                 try:

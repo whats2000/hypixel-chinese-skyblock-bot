@@ -1,3 +1,6 @@
+import json
+import os
+
 from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
 
 
@@ -89,3 +92,35 @@ class UserData:
 
     def get_skill_level_is_max(self, skill):
         return self.skill_is_max[skill]
+
+    def set_latest_user_api(self):
+        if self.api['success']:
+            output = self.api
+
+            output = json.dumps(output, ensure_ascii=False, indent=4)
+
+            with open(os.getcwd()
+                      + '/Resources/LatestUserApi.json',
+                      mode='w',
+                      encoding='utf8'
+                      ) as out_json:
+                out_json.write(output)
+
+            out_json.close()
+
+    def try_get_latest_user_api(self):
+        with open(os.getcwd()
+                  + '/Resources/LatestUserApi.json',
+                  mode='r',
+                  encoding='utf8'
+                  ) as verify_id_list_json:
+            data = json.load(verify_id_list_json)
+
+            verify_id_list_json.close()
+
+        try:
+            if self.id == data['player']['playername']:
+                self.api = data
+
+        except KeyError:
+            print('Get latest api fail')

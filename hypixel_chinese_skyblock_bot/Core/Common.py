@@ -16,10 +16,10 @@ def set_user_id(user, name):
               + '/Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
-              ) as verifyIdListJson:
-        data = json.load(verifyIdListJson)
+              ) as verify_id_list_json:
+        data = json.load(verify_id_list_json)
 
-    verifyIdListJson.close()
+    verify_id_list_json.close()
 
     output = data
 
@@ -31,17 +31,17 @@ def set_user_id(user, name):
               + '/Resources/VerifyIdList.json',
               mode='w',
               encoding='utf8'
-              ) as outJson:
-        outJson.write(output)
+              ) as out_json:
+        out_json.write(output)
 
-    outJson.close()
+    out_json.close()
 
 
 def get_setting_json(key):
     key = str(key)
 
-    if key in settingJsonData:
-        return settingJsonData[key]
+    if key in setting_json_data:
+        return setting_json_data[key]
 
     else:
         raise NameError("Invalid Key")
@@ -52,10 +52,10 @@ def get_verify_id_list(key):
               + '/Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
-              ) as verifyIdListJson:
-        data = json.load(verifyIdListJson)
+              ) as verify_id_list_json:
+        data = json.load(verify_id_list_json)
 
-        verifyIdListJson.close()
+        verify_id_list_json.close()
 
     key = str(key)
 
@@ -71,8 +71,8 @@ def get_verify_id_list(key):
 def get_hypixel_api(name):
     print('> try to get hypixel api of ' + name)
 
-    js = requests.get(settingJsonData['NameLink']
-                      + settingJsonData['ApiKey']
+    js = requests.get(setting_json_data['NameLink']
+                      + setting_json_data['ApiKey']
                       + '&name=' + name
                       )
 
@@ -82,8 +82,8 @@ def get_hypixel_api(name):
 def get_hypixel_skyblock_api(profile):
     print('> try to get hypixel skyblock api of ' + profile)
 
-    js = requests.get(settingJsonData['SkyblockLink']
-                      + settingJsonData['ApiKey']
+    js = requests.get(setting_json_data['SkyblockLink']
+                      + setting_json_data['ApiKey']
                       + '&profile=' + profile
                       )
 
@@ -94,7 +94,7 @@ with open(os.getcwd()
           + '/Resources/Setting.json',
           mode='r',
           encoding='utf8'
-          ) as settingJson:
-    settingJsonData = json.load(settingJson)
+          ) as setting_json:
+    setting_json_data = json.load(setting_json)
 
-settingJson.close()
+setting_json.close()
