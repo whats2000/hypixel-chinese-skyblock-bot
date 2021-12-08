@@ -21,6 +21,10 @@ class VerifyId(CodExtension):
 
             # check get hypixel api is successes
             if player_data.api['success']:
+                print('> get hypixel api success')
+
+                player_data.set_latest_user_api()
+                
                 # try to get player social media discord
                 try:
                     player_data.discord = player_data.api['player']['socialMedia']['links']['DISCORD']
@@ -126,6 +130,8 @@ class VerifyId(CodExtension):
         if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
             # check get hypixel api is successes
             if player_data.api['success']:
+                print('> get hypixel api success')
+
                 player_data.set_latest_user_api()
 
                 # try to get player social media discord
