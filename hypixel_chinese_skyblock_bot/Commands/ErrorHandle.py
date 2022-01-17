@@ -4,7 +4,7 @@ from discord.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
 
-class ErrorHandler(CodExtension):
+class ErrorHandle(CodExtension):
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         if isinstance(error, commands.CommandNotFound):
@@ -41,4 +41,4 @@ class ErrorHandler(CodExtension):
 
 
 def setup(pybot):
-    pybot.add_cog(ErrorHandler(pybot))
+    pybot.add_cog(ErrorHandle(pybot))
