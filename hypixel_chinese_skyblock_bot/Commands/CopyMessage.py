@@ -8,14 +8,15 @@ class CopyMessage(CodExtension):
 
     @commands.has_any_role(get_setting_json('AdminRole'))
     @commands.command()
-    async def cp(self, ctx, args):
-        embed = discord.Embed(
-            title="警告",
-            description=str(args),
-            color=0xe74c3c
-        )
+    async def cp(self, ctx, args=None):
+        if args is not None:
+            embed = discord.Embed(
+                title="警告",
+                description=str(args),
+                color=0xe74c3c
+            )
 
-        await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
         await ctx.message.delete()
 

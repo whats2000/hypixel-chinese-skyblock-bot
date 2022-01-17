@@ -6,6 +6,10 @@
   "SkyblockLink": "https://api.hypixel.net/skyblock/profile?key=",
   "ServerId": "",
 
+  "VerifyIdChannelId": 0,
+  "VerifyProgressChannelId": 0,
+  "VerifyDungeoneerChannelId": 0,
+
   "cata50": "< \uD83D\uDD065 0\uD83D\uDD06>",
 
   "dungeon_xp_to_level": {

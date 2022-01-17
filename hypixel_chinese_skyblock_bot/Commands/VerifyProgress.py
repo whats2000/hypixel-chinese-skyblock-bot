@@ -9,199 +9,111 @@ class VerifyProgress(CodExtension):
 
     @commands.command()
     async def verifyprog(self, ctx):
-        # check is player has been verified
-        if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
-            role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('ProgressRole'))
+        # check is in the desired channel.
+        if ctx.channel.id == get_setting_json('VerifyProgressChannelId'):
+            # check is player has been verified
+            if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
+                role = discord.utils.get(ctx.message.author.guild.roles, name=get_setting_json('ProgressRole'))
 
-            await ctx.author.add_roles(role)
+                await ctx.author.add_roles(role)
 
-            player = get_verify_id_list(ctx.message.author)
+                player = get_verify_id_list(ctx.message.author)
 
-            player_data = UserData(player)
+                player_data = UserData(player)
 
-            player_data.api = get_hypixel_api(player)
+                player_data.api = get_hypixel_api(player)
 
-            # try to call the cache in order to skip the api request cool down
-            if not player_data.api['success']:
-                player_data.try_get_latest_user_api()
+                # try to call the cache in order to skip the api request cool down
+                if not player_data.api['success']:
+                    player_data.try_get_latest_user_api()
 
-                print('> 嘗試呼叫緩存')
+                    print('> 嘗試呼叫緩存')
 
-            print('> verify player progress : ' + str(ctx.message.author))
+                print('> verify player progress : ' + str(ctx.message.author))
 
-            # check get hypixel api is successes
-            if player_data.api['success']:
-                print('> get hypixel api success')
+                # check get hypixel api is successes
+                if player_data.api['success']:
+                    print('> get hypixel api success')
 
-                player_data.set_latest_user_api()
+                    player_data.set_latest_user_api()
 
-                # try to get profile data
-                try:
-                    player_data.uuid = player_data.api['player']['uuid']
+                    # try to get profile data
+                    try:
+                        player_data.uuid = player_data.api['player']['uuid']
 
-                    player_data.profile = player_data.api['player']['stats']['SkyBlock']['profiles']
+                        player_data.profile = player_data.api['player']['stats']['SkyBlock']['profiles']
 
-                    # loop for checking all profile
-                    for profile_id in player_data.profile:
-                        print('- 正在驗證'
-                              + player_data.profile[profile_id]['cute_name']
-                              )
+                        # loop for checking all profile
+                        for profile_id in player_data.profile:
+                            print('- 正在驗證'
+                                  + player_data.profile[profile_id]['cute_name']
+                                  )
 
-                        embed = discord.Embed(
-                            title='驗證處理中',
-                            description='正在驗證 -> '
-                                        + player_data.profile[profile_id]['cute_name'],
-                            color=0xf1c40f
-                        )
+                            embed = discord.Embed(
+                                title='驗證處理中',
+                                description='正在驗證 -> '
+                                            + player_data.profile[profile_id]['cute_name'],
+                                color=0xf1c40f
+                            )
 
-                        embed.set_author(
-                            name=ctx.message.author.name,
-                            icon_url=ctx.message.author.avatar_url
-                        )
+                            embed.set_author(
+                                name=ctx.message.author.name,
+                                icon_url=ctx.message.author.avatar_url
+                            )
 
-                        await ctx.send(embed=embed, delete_after=10.0)
+                            await ctx.send(embed=embed, delete_after=10.0)
 
-                        # try to get skyblock api
-                        try:
-                            player_data.skyblock_api = get_hypixel_skyblock_api(profile_id)
+                            # try to get skyblock api
+                            try:
+                                player_data.skyblock_api = get_hypixel_skyblock_api(profile_id)
 
-                            print('> get api success')
+                                print('> get api success')
 
-                            # check get skyblock api is successes
-                            if player_data.skyblock_api['success']:
+                                # check get skyblock api is successes
+                                if player_data.skyblock_api['success']:
 
-                                profile_api \
-                                    = player_data.skyblock_api['profile']['members'][player_data.uuid]
+                                    profile_api \
+                                        = player_data.skyblock_api['profile']['members'][player_data.uuid]
 
-                                print('> get profileId success')
+                                    print('> get profileId success')
 
-                                is_verify_pass = False
+                                    is_verify_pass = False
 
-                                # try to get slayer level
-                                try:
-                                    # loop for checking all slayers
-                                    for i in range(7, 10):
-                                        # check if player achieve slayer level
-                                        if 'level_' + str(i) in \
-                                            (profile_api['slayer_bosses']['zombie']['claimed_levels'] and
-                                             profile_api['slayer_bosses']['spider']['claimed_levels'] and
-                                             profile_api['slayer_bosses']['wolf']['claimed_levels'] and
-                                             profile_api['slayer_bosses']['enderman']['claimed_levels']):
-
-                                            role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                     name=get_setting_json('AllSlayer' + str(i)))
-
-                                            await ctx.author.add_roles(role)
-
-                                            print('- slayer ' + str(i))
-
-                                            player_data.set_slayer_level_is_max(i, True)
-
-                                            # check if pass
-                                            if not is_verify_pass:
-                                                is_verify_pass = True
-
-                                        else:
-                                            print('- no slayer archive' + str(i))
-                                except KeyError:
-                                    print('> fail in verify slayer')
-
-                                    embed = discord.Embed(
-                                        title='驗證slayer失敗，連結API錯誤，請稍後重試',
-                                        description='請卻保有打開skyblock中slayer訪問api\n\n'
-                                                    + player_data.profile[profile_id]['cute_name']
-                                                    + ' -x-> Progress',
-                                        color=0xe74c3c
-                                    )
-
-                                    embed.set_author(
-                                        name=ctx.message.author.name,
-                                        icon_url=ctx.message.author.avatar_url
-                                    )
-
-                                    await ctx.send(embed=embed, delete_after=20.0)
-
-                                # try to get skill level
-                                try:
-                                    skill_list = get_setting_json('skill_list')
-
-                                    # loop for checking all skill
-                                    for skill in skill_list:
-                                        skill_level = profile_api['experience_skill_' + skill]
-
-                                        # check if player achieve max skill level
-                                        if skill_level >= skill_list[skill]:
-                                            role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                     name=get_setting_json('skill_' + skill))
-
-                                            await ctx.author.add_roles(role)
-
-                                            print('- ' + skill + ' : ' + str(skill_level) + ' is verified')
-
-                                            player_data.set_skill_level_is_max(skill, True)
-
-                                            # check if pass
-                                            if not is_verify_pass:
-                                                is_verify_pass = True
-
-                                        else:
-                                            print('- ' + skill + ' : ' + str(skill_level) + ' is not archive')
-                                except KeyError:
-                                    print('> fail in verify skill')
-
-                                    embed = discord.Embed(
-                                        title='驗證skill失敗，連結API錯誤，請稍後重試',
-                                        description='請卻保有打開skyblock中skill訪問api\n\n'
-                                                    + player_data.profile[profile_id]['cute_name']
-                                                    + ' -x-> Progress',
-                                        color=0xe74c3c
-                                    )
-
-                                    embed.set_author(
-                                        name=ctx.message.author.name,
-                                        icon_url=ctx.message.author.avatar_url
-                                    )
-
-                                    await ctx.send(embed=embed, delete_after=20.0)
-
-                                # check if any slayer or skill achieve
-                                if is_verify_pass:
-                                    # try to create index output
+                                    # try to get slayer level
                                     try:
-                                        desc = ''
-
                                         # loop for checking all slayers
                                         for i in range(7, 10):
-                                            boolean = player_data.get_slayer_level_is_max(i)
+                                            # check if player achieve slayer level
+                                            if 'level_' + str(i) in \
+                                                (profile_api['slayer_bosses']['zombie']['claimed_levels'] and
+                                                 profile_api['slayer_bosses']['spider']['claimed_levels'] and
+                                                 profile_api['slayer_bosses']['wolf']['claimed_levels'] and
+                                                 profile_api['slayer_bosses']['enderman']['claimed_levels']):
 
-                                            # check if pass
-                                            if boolean:
-                                                desc += '\u2705 : '
+                                                role = discord.utils.get(ctx.message.author.guild.roles,
+                                                                         name=get_setting_json('AllSlayer' + str(i)))
+
+                                                await ctx.author.add_roles(role)
+
+                                                print('- slayer ' + str(i))
+
+                                                player_data.set_slayer_level_is_max(i, True)
+
+                                                # check if pass
+                                                if not is_verify_pass:
+                                                    is_verify_pass = True
 
                                             else:
-                                                desc += '\u274c : '
-
-                                            desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
-
-                                        skill_list = get_setting_json('skill_list')
-
-                                        # loop for checking all skill
-                                        for skill in skill_list:
-                                            boolean = player_data.get_skill_level_is_max(skill)
-
-                                            # check if pass
-                                            if boolean:
-                                                desc += '\u2705 : '
-
-                                            else:
-                                                desc += '\u274c : '
-
-                                            desc += str(get_setting_json('skill_' + skill)) + '\n\n'
+                                                print('- no slayer archive' + str(i))
+                                    except KeyError:
+                                        print('> fail in verify slayer')
 
                                         embed = discord.Embed(
-                                            title=player_data.profile[profile_id]['cute_name'] + ' 已更新進度',
-                                            description=str(desc),
-                                            color=0x00ff00
+                                            title='驗證slayer失敗，連結API錯誤，請稍後重試',
+                                            description='請卻保有打開skyblock中slayer訪問api\n\n'
+                                                        + player_data.profile[profile_id]['cute_name']
+                                                        + ' -x-> Progress',
+                                            color=0xe74c3c
                                         )
 
                                         embed.set_author(
@@ -209,31 +121,88 @@ class VerifyProgress(CodExtension):
                                             icon_url=ctx.message.author.avatar_url
                                         )
 
-                                        await ctx.send(embed=embed)
+                                        await ctx.send(embed=embed, delete_after=20.0)
 
-                                    except TypeError:
-                                        print('> fail at create index embed')
-
-                                    # try to create extra index output
+                                    # try to get skill level
                                     try:
-                                        # loop for player all skill
-                                        for skill in player_data.skill_is_max:
-                                            # check player all skill is max
-                                            if skill != 'carpentry' and not player_data.skill_is_max[skill]:
-                                                print('- all skills arent max')
-                                                break
-                                        else:
-                                            print('- all skills are max')
+                                        skill_list = get_setting_json('skill_list')
 
-                                            role = discord.utils.get(ctx.message.author.guild.roles,
-                                                                     name=get_setting_json('AllSkillMax'))
+                                        # loop for checking all skill
+                                        for skill in skill_list:
+                                            skill_level = profile_api['experience_skill_' + skill]
 
-                                            await ctx.author.add_roles(role)
+                                            # check if player achieve max skill level
+                                            if skill_level >= skill_list[skill]:
+                                                role = discord.utils.get(ctx.message.author.guild.roles,
+                                                                         name=get_setting_json('skill_' + skill))
+
+                                                await ctx.author.add_roles(role)
+
+                                                print('- ' + skill + ' : ' + str(skill_level) + ' is verified')
+
+                                                player_data.set_skill_level_is_max(skill, True)
+
+                                                # check if pass
+                                                if not is_verify_pass:
+                                                    is_verify_pass = True
+
+                                            else:
+                                                print('- ' + skill + ' : ' + str(skill_level) + ' is not archive')
+                                    except KeyError:
+                                        print('> fail in verify skill')
+
+                                        embed = discord.Embed(
+                                            title='驗證skill失敗，連結API錯誤，請稍後重試',
+                                            description='請卻保有打開skyblock中skill訪問api\n\n'
+                                                        + player_data.profile[profile_id]['cute_name']
+                                                        + ' -x-> Progress',
+                                            color=0xe74c3c
+                                        )
+
+                                        embed.set_author(
+                                            name=ctx.message.author.name,
+                                            icon_url=ctx.message.author.avatar_url
+                                        )
+
+                                        await ctx.send(embed=embed, delete_after=20.0)
+
+                                    # check if any slayer or skill achieve
+                                    if is_verify_pass:
+                                        # try to create index output
+                                        try:
+                                            desc = ''
+
+                                            # loop for checking all slayers
+                                            for i in range(7, 10):
+                                                boolean = player_data.get_slayer_level_is_max(i)
+
+                                                # check if pass
+                                                if boolean:
+                                                    desc += '\u2705 : '
+
+                                                else:
+                                                    desc += '\u274c : '
+
+                                                desc = desc + str(get_setting_json('AllSlayer' + str(i))) + '\n\n'
+
+                                            skill_list = get_setting_json('skill_list')
+
+                                            # loop for checking all skill
+                                            for skill in skill_list:
+                                                boolean = player_data.get_skill_level_is_max(skill)
+
+                                                # check if pass
+                                                if boolean:
+                                                    desc += '\u2705 : '
+
+                                                else:
+                                                    desc += '\u274c : '
+
+                                                desc += str(get_setting_json('skill_' + skill)) + '\n\n'
 
                                             embed = discord.Embed(
                                                 title=player_data.profile[profile_id]['cute_name'] + ' 已更新進度',
-                                                description='\u2705 : '
-                                                            + get_setting_json('AllSkillMax'),
+                                                description=str(desc),
                                                 color=0x00ff00
                                             )
 
@@ -244,13 +213,62 @@ class VerifyProgress(CodExtension):
 
                                             await ctx.send(embed=embed)
 
-                                    except TypeError:
-                                        print('> fail at create extra embed')
+                                        except TypeError:
+                                            print('> fail at create index embed')
+
+                                        # try to create extra index output
+                                        try:
+                                            # loop for player all skill
+                                            for skill in player_data.skill_is_max:
+                                                # check player all skill is max
+                                                if skill != 'carpentry' and not player_data.skill_is_max[skill]:
+                                                    print('- all skills arent max')
+                                                    break
+                                            else:
+                                                print('- all skills are max')
+
+                                                role = discord.utils.get(ctx.message.author.guild.roles,
+                                                                         name=get_setting_json('AllSkillMax'))
+
+                                                await ctx.author.add_roles(role)
+
+                                                embed = discord.Embed(
+                                                    title=player_data.profile[profile_id]['cute_name'] + ' 已更新進度',
+                                                    description='\u2705 : '
+                                                                + get_setting_json('AllSkillMax'),
+                                                    color=0x00ff00
+                                                )
+
+                                                embed.set_author(
+                                                    name=ctx.message.author.name,
+                                                    icon_url=ctx.message.author.avatar_url
+                                                )
+
+                                                await ctx.send(embed=embed)
+
+                                        except TypeError:
+                                            print('> fail at create extra embed')
+                                    else:
+                                        print('> nothing is verified')
+
+                                        embed = discord.Embed(
+                                            title='你目前未有任何進度達標，請再接再厲',
+                                            description=player_data.profile[profile_id]['cute_name'] + ' -x-> Progress',
+                                            color=0xe74c3c
+                                        )
+
+                                        embed.set_author(
+                                            name=ctx.message.author.name,
+                                            icon_url=ctx.message.author.avatar_url
+                                        )
+
+                                        await ctx.send(embed=embed, delete_after=20.0)
+
                                 else:
-                                    print('> nothing is verified')
+                                    print('>　Please wait a little bit and try again')
 
                                     embed = discord.Embed(
-                                        title='你目前未有任何進度達標，請再接再厲',
+                                        title='驗證失敗，請稍後重試',
                                         description=player_data.profile[profile_id]['cute_name'] + ' -x-> Progress',
                                         color=0xe74c3c
                                     )
@@ -262,31 +280,34 @@ class VerifyProgress(CodExtension):
 
                                     await ctx.send(embed=embed, delete_after=20.0)
 
-                            else:
-                                print('>　Please wait a little bit and try again')
+                            except KeyError:
+                                print('> fail to get skyblock api in '
+                                      + str(player_data.profile[profile_id]['cute_name'])
+                                      )
 
-                                embed = discord.Embed(
-                                    title='驗證失敗，請稍後重試',
-                                    description=player_data.profile[profile_id]['cute_name'] + ' -x-> Progress',
-                                    color=0xe74c3c
-                                )
+                    except KeyError:
+                        print('> The player do not open the social media')
 
-                                embed.set_author(
-                                    name=ctx.message.author.name,
-                                    icon_url=ctx.message.author.avatar_url
-                                )
+                        embed = discord.Embed(
+                            title='驗證失敗，請先打開 hypixel discord api',
+                            description=str(ctx.message.author) + ' -x-> Progress',
+                            color=0xe74c3c
+                        )
 
-                                await ctx.send(embed=embed, delete_after=20.0)
+                        embed.set_author(
+                            name=ctx.message.author.name,
+                            icon_url=ctx.message.author.avatar_url
+                        )
 
-                        except KeyError:
-                            print('> fail to get skyblock api in ' + str(player_data.profile[profile_id]['cute_name']))
+                        await ctx.send(embed=embed, delete_after=20.0)
+                else:
+                    print('> Please wait a little bit and try again')
 
-                except KeyError:
-                    print('> The player do not open the social media')
+                    print('> fail reason : ' + player_data.api['cause'])
 
                     embed = discord.Embed(
-                        title='驗證失敗，請先打開 hypixel discord api',
-                        description=str(ctx.message.author) + ' -x-> Progress',
+                        title='驗證失敗，請稍後重試',
+                        description=str(ctx.message.author) + ' -x-> Progress\n\n' + '原因 : ' + player_data.api['cause'],
                         color=0xe74c3c
                     )
 
@@ -296,14 +317,13 @@ class VerifyProgress(CodExtension):
                     )
 
                     await ctx.send(embed=embed, delete_after=20.0)
-            else:
-                print('> Please wait a little bit and try again')
 
-                print('> fail reason : ' + player_data.api['cause'])
+            else:
+                print('> Require verify id')
 
                 embed = discord.Embed(
-                    title='驗證失敗，請稍後重試',
-                    description=str(ctx.message.author) + ' -x-> Progress\n\n' + '原因 : ' + player_data.api['cause'],
+                    title='你未登記id，請先登記id',
+                    description=str(ctx.message.author) + ' -x-> Progress',
                     color=0xe74c3c
                 )
 
@@ -315,11 +335,10 @@ class VerifyProgress(CodExtension):
                 await ctx.send(embed=embed, delete_after=20.0)
 
         else:
-            print('> Require verify id')
+            print('> Wrong channel')
 
             embed = discord.Embed(
-                title='你未登記id，請先登記id',
-                description=str(ctx.message.author) + ' -x-> Progress',
+                title='請在正確頻道輸入',
                 color=0xe74c3c
             )
 

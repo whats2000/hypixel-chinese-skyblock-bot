@@ -7,29 +7,30 @@ from hypixel_chinese_skyblock_bot.Core import TranslateText
 class TranslateCommand(CodExtension):
 
     @commands.command()
-    async def translate(self, ctx, lang, *, args):
-        print('> 位置 -> '
-              + str(ctx)
-              )
+    async def translate(self, ctx, lang=None, *, args=None):
+        if lang is not None and args is not None:
+            print('> 位置 -> '
+                  + str(ctx)
+                  )
 
-        print('>　用戶 -> '
-              + ctx.message.author.name
-              )
+            print('>　用戶 -> '
+                  + ctx.message.author.name
+                  )
 
-        result = TranslateText.translate_text(None, lang, args)
+            result = TranslateText.translate_text(None, lang, args)
 
-        embed = discord.Embed(
-            title=result.text,
-            description=result.src + ' -> ' + result.dest,
-            color=0x00ff00
-        )
+            embed = discord.Embed(
+                title=result.text,
+                description=result.src + ' -> ' + result.dest,
+                color=0x00ff00
+            )
 
-        embed.set_author(
-            name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar_url
-        )
+            embed.set_author(
+                name=ctx.message.author.name,
+                icon_url=ctx.message.author.avatar_url
+            )
 
-        await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
 
 def setup(pybot):
