@@ -88,7 +88,8 @@ class VerifyProgress(CodExtension):
                                                 (profile_api['slayer_bosses']['zombie']['claimed_levels'] and
                                                  profile_api['slayer_bosses']['spider']['claimed_levels'] and
                                                  profile_api['slayer_bosses']['wolf']['claimed_levels'] and
-                                                 profile_api['slayer_bosses']['enderman']['claimed_levels']):
+                                                 profile_api['slayer_bosses']['enderman']['claimed_levels'] and
+                                                 profile_api['slayer_bosses']['blaze']['claimed_levels']):
 
                                                 role = discord.utils.get(ctx.message.author.guild.roles,
                                                                          name=get_setting_json('AllSlayer' + str(i)))

@@ -14,9 +14,6 @@ class SlashVerifyDungeoneer(CodExtension):
         description="Verify your dungeon class level and dungeon exp level",
     )
     async def verifydung(self, inter):
-        print(inter.channel.id)
-        print(get_setting_json('VerifyDungeoneerChannelId'))
-
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyDungeoneerChannelId'):
             # check is player has been verified
