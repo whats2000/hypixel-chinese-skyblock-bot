@@ -18,7 +18,7 @@ for filename in os.listdir(os.getcwd() + '/Commands'):
     if not filename.endswith('.py'):
         continue
 
-    print('Commands.' + filename[:-3])
+    print('Setup > Commands.' + filename[:-3])
 
     pybot.load_extension('Commands.' + filename[:-3])
 
@@ -26,7 +26,7 @@ for filename in os.listdir(os.getcwd() + '/SlashCommands'):
     if not filename.endswith('.py'):
         continue
 
-    print('SlashCommands.' + filename[:-3])
+    print('Setup > SlashCommands.' + filename[:-3])
 
     pybot.load_extension('SlashCommands.' + filename[:-3])
 

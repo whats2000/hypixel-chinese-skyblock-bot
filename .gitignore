@@ -1,0 +1,4 @@
+
+*.pyc
+hypixel_chinese_skyblock_bot/Resources/LatestUserApi.json
+hypixel_chinese_skyblock_bot/Resources/VerifyIdList.json
