@@ -4,11 +4,15 @@
   "ApiKey" : "",
   "NameLink" : "https://api.hypixel.net/player?key=",
   "SkyblockLink": "https://api.hypixel.net/skyblock/profile?key=",
+  "SenitherLink": "https://hypixel-api.senither.com/v1/profiles/",
   "ServerId": "",
 
   "VerifyIdChannelId": 0,
   "VerifyProgressChannelId": 0,
   "VerifyDungeoneerChannelId": 0,
+  "VerifyWeightChannelId": 0,
+
+  "SkillWeightRequire": 20000,
 
   "cata50": "< \uD83D\uDD065 0\uD83D\uDD06>",
 
@@ -103,6 +107,7 @@
   "skill_alchemy": "⚗️ \uD835\uDE3C\uD835\uDE61\uD835\uDE58\uD835\uDE5D\uD835\uDE5A\uD835\uDE62\uD835\uDE6E \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47",
   "skill_carpentry": "\uD83D\uDEE0 \uD835\uDE3E\uD835\uDE56\uD835\uDE67\uD835\uDE65\uD835\uDE5A\uD835\uDE63\uD835\uDE69\uD835\uDE67\uD835\uDE6E \uD835\uDE47\uD835\uDE5A\uD835\uDE6B\uD835\uDE5A\uD835\uDE61 \uD835\uDE47",
   "AllSkillMax": "\uD83D\uDC51 \uD835\uDE3C\uD835\uDE61\uD835\uDE61 \uD835\uDE4E\uD835\uDE60\uD835\uDE5E\uD835\uDE61\uD835\uDE61 \uD835\uDE48\uD835\uDE56\uD835\uDE6D",
+  "SeniorPlayer": "\uD83C\uDF96️ 3代資深玩家",
 
   "VerifyIdRole": "✔ 已驗證成員",
   "DungeoneerRole": "＊═─═─═─═─═─＊地下城等級＊─═─═─═─═─═ ＊",
