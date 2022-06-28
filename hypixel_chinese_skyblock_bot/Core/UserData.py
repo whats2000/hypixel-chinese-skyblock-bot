@@ -48,6 +48,12 @@ class UserData:
             'carpentry': False
         }
 
+        self.senither_weight = 0.0
+
+        self.senither_weight_overflow = 0.0
+
+        self.max_senither_weight = 0.0
+
     def set_dung_class_level(self, dung_class, exp):
         xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
@@ -118,9 +124,10 @@ class UserData:
 
             verify_id_list_json.close()
 
-        try:
-            if self.id == data['player']['playername']:
-                self.api = data
+        if data['player'] is not None:
+            try:
+                if self.id == data['player']['playername']:
+                    self.api = data
 
-        except KeyError:
-            print('Get latest api fail')
+            except KeyError:
+                print('Get latest api fail')

@@ -69,14 +69,19 @@ def get_verify_id_list(key):
 
 
 def get_hypixel_api(name):
-    print('> try to get hypixel api of ' + name)
+    if name != '':
+        print('> try to get hypixel api of ' + name)
 
-    js = requests.get(setting_json_data['NameLink']
-                      + setting_json_data['ApiKey']
-                      + '&name=' + name
-                      )
+        js = requests.get(setting_json_data['NameLink']
+                          + setting_json_data['ApiKey']
+                          + '&name=' + name
+                          )
 
-    return js.json()
+        return js.json()
+    else:
+        print('id is missing')
+
+        return {'success': False}
 
 
 def get_hypixel_skyblock_api(profile):
@@ -85,6 +90,18 @@ def get_hypixel_skyblock_api(profile):
     js = requests.get(setting_json_data['SkyblockLink']
                       + setting_json_data['ApiKey']
                       + '&profile=' + profile
+                      )
+
+    return js.json()
+
+
+def get_senither_weight(profile):
+    print('> try to get senither weight api of ' + profile)
+
+    js = requests.get(setting_json_data['SenitherLink']
+                      + profile
+                      + '/weight?key='
+                      + setting_json_data['ApiKey']
                       )
 
     return js.json()
