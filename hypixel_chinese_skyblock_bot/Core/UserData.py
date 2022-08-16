@@ -130,8 +130,9 @@ class UserData:
 
         if data['player'] is not None:
             try:
-                if self.id == data['player']['playername']:
+                if self.id == data['player']['displayname']:
                     self.api = data
+                    print(self.api)
 
             except KeyError:
                 print('Get latest api fail')
