@@ -71,13 +71,17 @@ class UserData:
     def set_dung_level(self, dung, exp):
         xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
-        for i in range(50, 0, -1):
-            if exp >= xp_to_level_list[str(i)]:
-                self.dung_level[dung] = i
-                break
+        if exp - 569809640 >= 200000000:
+            self.dung_level[dung] = 50 + int((exp - 569809640) // 200000000)
 
         else:
-            self.dung_level[dung] = -1
+            for i in range(50, 0, -1):
+                if exp >= xp_to_level_list[str(i)]:
+                    self.dung_level[dung] = i
+                    break
+
+            else:
+                self.dung_level[dung] = -1
 
     def get_dung_level(self, dung):
         return self.dung_level[dung]

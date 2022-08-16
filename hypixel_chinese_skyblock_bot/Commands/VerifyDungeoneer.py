@@ -226,6 +226,22 @@ class VerifyDungeoneer(CodExtension):
 
                                 await ctx.author.add_roles(role)
 
+                            if player_dung_max_level >= 100 or player_dung_max_level < 0:
+                                print('> No match role can give')
+
+                                embed = discord.Embed(
+                                    title='驗證失敗，目前沒有匹配身分組',
+                                    description=str(ctx.message.author) + ' -x-> Dungeoneer',
+                                    color=0xe74c3c
+                                )
+
+                                embed.set_author(
+                                    name=ctx.message.author.name,
+                                    icon_url=ctx.message.author.avatar_url
+                                )
+
+                                await ctx.send(embed=embed, delete_after=20.0)
+
                             else:
                                 role = discord.utils.get(ctx.message.author.guild.roles,
                                                          name='< ' + str(player_dung_max_level // 10))
