@@ -35,13 +35,13 @@ class VerifyId(CodExtension):
 
                             # check user name is correct in api
                             if str(ctx.message.author) == player_data.discord:
-                                set_user_id(ctx.message.author, args)
+                                set_user_id(ctx.message.author, player_data.api['player']['displayname'])
 
                                 print('Info > Verify Id success')
 
                                 embed = discord.Embed(
                                     title='成功驗證',
-                                    description=f'{ctx.message.author} ---> {args}',
+                                    description=f'{ctx.message.author} ---> {player_data.api["player"]["displayname"]}',
                                     color=0x00ff00
                                 )
 
@@ -179,13 +179,13 @@ class VerifyId(CodExtension):
 
                             # check user name is correct in api
                             if str(ctx.message.author) == player_data.discord:
-                                set_user_id(ctx.message.author, args)
+                                set_user_id(ctx.message.author, player_data.api['player']["displayname"])
 
                                 print('Info > update Id success')
 
                                 embed = discord.Embed(
                                     title='成功更新',
-                                    description=f'{ctx.message.author} ---> {args}',
+                                    description=f'{ctx.message.author} ---> {player_data.api["player"]["displayname"]}',
                                     color=0x00ff00
                                 )
 

@@ -46,13 +46,13 @@ class SlashVerifyId(CodExtension):
 
                             # check user name is correct in api
                             if str(inter.author) == player_data.discord:
-                                set_user_id(inter.author, user_id)
+                                set_user_id(inter.author, player_data.api['player']['displayname'])
 
                                 print('Info > Verify Id success')
 
                                 embed = discord.Embed(
                                     title='成功驗證',
-                                    description=f'{inter.author} ---> {user_id}',
+                                    description=f'{inter.author} ---> {player_data.api["player"]["displayname"]}',
                                     color=0x00ff00
                                 )
 
@@ -200,13 +200,13 @@ class SlashVerifyId(CodExtension):
 
                             # check user name is correct in api
                             if str(inter.author) == player_data.discord:
-                                set_user_id(inter.author, user_id)
+                                set_user_id(inter.author, player_data.api['player']['displayname'])
 
                                 print('Info > update Id success')
 
                                 embed = discord.Embed(
                                     title='成功更新',
-                                    description=f'{inter.author} ---> {user_id}',
+                                    description=f'{inter.author} ---> {player_data.api["player"]["displayname"]}',
                                     color=0x00ff00
                                 )
 
