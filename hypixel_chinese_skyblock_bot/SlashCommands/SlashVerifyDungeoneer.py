@@ -257,6 +257,9 @@ class SlashVerifyDungeoneer(CodExtension):
                 else:
                     print('Error > Please wait a little bit and try again')
 
+                    if 'cause' not in player_data.api:
+                        player_data.api['cause'] = 'player id is missing, try verify id first'
+
                     print(f'Error > fail reason : {player_data.api["cause"]}')
 
                     embed = discord.Embed(
