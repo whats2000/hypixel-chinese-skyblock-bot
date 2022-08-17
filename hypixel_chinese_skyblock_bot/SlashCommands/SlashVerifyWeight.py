@@ -190,7 +190,7 @@ class SlashVerifyWeight(CodExtension):
                     print('Error > Please wait a little bit and try again')
 
                     if 'cause' not in player_data.api:
-                        player_data.api['cause'] = 'player id is missing, try verify id first'
+                        player_data.api['cause'] = '玩家 id 綁定丟失，請更新 id (很可能是 nitro 導致編號變更)'
 
                     print(f'Error > fail reason : {player_data.api["cause"]}')
 
