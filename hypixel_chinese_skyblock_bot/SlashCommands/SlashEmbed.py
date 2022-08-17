@@ -9,8 +9,8 @@ from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_j
 class SlashEmbed(CodExtension):
     @slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
-        name="embed",
-        description="Build a embed",
+        name='embed',
+        description='Build a embed',
         options=[
             Option(name='title', description='Makes the title of the embed', type=OptionType.STRING),
             Option(name='description', description='Makes the description', type=OptionType.STRING),

@@ -9,19 +9,13 @@ class TranslateCommand(CodExtension):
     @commands.command()
     async def translate(self, ctx, lang=None, *, args=None):
         if lang is not None and args is not None:
-            print('> 位置 -> '
-                  + str(ctx)
-                  )
-
-            print('>　用戶 -> '
-                  + ctx.message.author.name
-                  )
+            print(f'Info >　用戶請求翻譯 -> {ctx.message.author.name}')
 
             result = TranslateText.translate_text(None, lang, args)
 
             embed = discord.Embed(
                 title=result.text,
-                description=result.src + ' -> ' + result.dest,
+                description=f'{result.src} -> {result.dest}',
                 color=0x00ff00
             )
 

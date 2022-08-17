@@ -10,8 +10,8 @@ class SlashVerifyId(CodExtension):
 
     @slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
-        name="verify_id",
-        description="Link your discord to your minecraft account",
+        name='verify_id',
+        description='Link your discord to your minecraft account',
         options=[
             Option(
                 name='user_id',
@@ -34,7 +34,7 @@ class SlashVerifyId(CodExtension):
 
                     player_data.api = get_hypixel_api(user_id)
 
-                    print('> verify player user : ' + str(inter.author))
+                    print(f'Info > verify player user : {inter.author}')
 
                     # check get hypixel api is successes
                     if player_data.api['success']:
@@ -48,11 +48,11 @@ class SlashVerifyId(CodExtension):
                             if str(inter.author) == player_data.discord:
                                 set_user_id(inter.author, user_id)
 
-                                print('- Verify Id success')
+                                print('Info > Verify Id success')
 
                                 embed = discord.Embed(
                                     title='成功驗證',
-                                    description=str(inter.author) + ' ---> ' + user_id,
+                                    description=f'{inter.author} ---> {user_id}',
                                     color=0x00ff00
                                 )
 
@@ -70,11 +70,11 @@ class SlashVerifyId(CodExtension):
                                 await inter.author.add_roles(role)
 
                             else:
-                                print('> Player not found')
+                                print('Error > Player not found')
 
                                 embed = discord.Embed(
                                     title='驗證失敗，玩家id不正確',
-                                    description=str(inter.author) + ' -x-> ' + user_id,
+                                    description=f'{inter.author} -x-> {user_id}',
                                     color=0xe74c3c
                                 )
 
@@ -85,11 +85,11 @@ class SlashVerifyId(CodExtension):
 
                                 await inter.send(embed=embed, delete_after=20.0)
                         except KeyError:
-                            print('> The player do not open the social media')
+                            print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
                                 title='驗證失敗，請先打開discord api',
-                                description=str(inter.author) + ' -x-> ' + user_id,
+                                description=f'{inter.author} -x-> {user_id}',
                                 color=0xe74c3c
                             )
 
@@ -100,11 +100,11 @@ class SlashVerifyId(CodExtension):
 
                             await inter.send(embed=embed, delete_after=20.0)
                     else:
-                        print('> Please wait a little bit and try again')
+                        print('Error > Please wait a little bit and try again')
 
                         embed = discord.Embed(
                             title='驗證失敗，請稍後重試',
-                            description=str(inter.author) + ' -x-> ' + user_id,
+                            description=f'{inter.author} -x-> {user_id}',
                             color=0xe74c3c
                         )
 
@@ -116,11 +116,11 @@ class SlashVerifyId(CodExtension):
                         await inter.send(embed=embed, delete_after=20.0)
 
                 else:
-                    print('> Has already verified')
+                    print('Error > Has already verified')
 
                     embed = discord.Embed(
                         title='你已經驗證，更新請用sb?verifyidupdate',
-                        description=str(inter.author) + ' -x-> ' + user_id,
+                        description=f'{inter.author} -x-> {user_id}',
                         color=0xe74c3c
                     )
 
@@ -132,11 +132,11 @@ class SlashVerifyId(CodExtension):
                     await inter.send(embed=embed, delete_after=20.0)
 
             else:
-                print('>　Input id is incorrect')
+                print('Error >　Input id is incorrect')
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(inter.author) + ' -x-> ' + str(user_id),
+                    description=f'{inter.author} -x-> {user_id}',
                     color=0xe74c3c
                 )
 
@@ -148,7 +148,7 @@ class SlashVerifyId(CodExtension):
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
-            print('> Wrong channel')
+            print('Error > Wrong channel')
 
             embed = discord.Embed(
                 title='請在正確頻道輸入',
@@ -164,8 +164,8 @@ class SlashVerifyId(CodExtension):
 
     @slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
-        name="verify_id_update",
-        description="Update your discord to your minecraft account",
+        name='verify_id_update',
+        description='Update your discord to your minecraft account',
         options=[
             Option(
                 name='user_id',
@@ -186,7 +186,7 @@ class SlashVerifyId(CodExtension):
 
                 player_data.api = get_hypixel_api(user_id)
 
-                print('> update player user : ' + str(inter.author))
+                print(f'Info > update player user : {inter.author}')
 
                 # check is player has been verified
                 if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
@@ -202,11 +202,11 @@ class SlashVerifyId(CodExtension):
                             if str(inter.author) == player_data.discord:
                                 set_user_id(inter.author, user_id)
 
-                                print('> update Id success')
+                                print('Info > update Id success')
 
                                 embed = discord.Embed(
                                     title='成功更新',
-                                    description=str(inter.author) + ' ---> ' + user_id,
+                                    description=f'{inter.author} ---> {user_id}',
                                     color=0x00ff00
                                 )
 
@@ -218,11 +218,11 @@ class SlashVerifyId(CodExtension):
                                 await inter.send(embed=embed)
 
                             else:
-                                print('> Player not found')
+                                print('Error > Player not found')
 
                                 embed = discord.Embed(
                                     title='驗證失敗，玩家id不正確',
-                                    description=str(inter.author) + ' -x-> ' + user_id,
+                                    description=f'{inter.author} -x-> {user_id}',
                                     color=0xe74c3c
                                 )
 
@@ -233,11 +233,11 @@ class SlashVerifyId(CodExtension):
 
                                 await inter.send(embed=embed, delete_after=20.0)
                         except KeyError:
-                            print('> The player do not open the social media')
+                            print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
                                 title='驗證失敗，請先打開 hypixel discord api',
-                                description=str(inter.author) + ' -x-> ' + user_id,
+                                description=f'{inter.author} -x-> {user_id}',
                                 color=0xe74c3c
                             )
 
@@ -248,14 +248,13 @@ class SlashVerifyId(CodExtension):
 
                             await inter.send(embed=embed, delete_after=20.0)
                     else:
-                        print('>　Please wait a little bit and try again')
+                        print('Error >　Please wait a little bit and try again')
 
-                        print('> fail reason : ' + player_data.api['cause'])
+                        print(f'Error > fail reason : {player_data.api["cause"]}')
 
                         embed = discord.Embed(
                             title='驗證失敗，請稍後重試',
-                            description=str(inter.author) + ' -x-> ' + user_id + '\n\n' + '原因 : ' + player_data.api[
-                                'cause'],
+                            description=f'{inter.author} -x-> {user_id}\n\n原因 : {player_data.api["cause"]}',
                             color=0xe74c3c
                         )
 
@@ -267,11 +266,11 @@ class SlashVerifyId(CodExtension):
                         await inter.send(embed=embed, delete_after=20.0)
 
             else:
-                print('>　Input id is incorrect')
+                print('Error >　Input id is incorrect')
 
                 embed = discord.Embed(
                     title='驗證失敗，請稍後重試',
-                    description=str(inter.author) + ' -x-> ' + str(user_id),
+                    description=f'{inter.author} -x-> {user_id}',
                     color=0xe74c3c
                 )
 
@@ -283,7 +282,7 @@ class SlashVerifyId(CodExtension):
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
-            print('> Wrong channel')
+            print('Error > Wrong channel')
 
             embed = discord.Embed(
                 title='請在正確頻道輸入',

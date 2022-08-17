@@ -20,14 +20,8 @@ def translate_text(originals, targets, txt):
             dest=targets
         )
 
-    print('目標語言 -> '
-          + str(targets)
-          )
+    print(f'Info > 目標語言 -> {targets}')
 
-    print('句子 -> '
-          + str(input)
-          + ' >>> '
-          + str(result.text)
-          )
+    print(f'Info > 句子 -> {txt} >>> {result.text}')
 
     return result

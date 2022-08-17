@@ -109,8 +109,7 @@ class UserData:
 
             output = json.dumps(output, ensure_ascii=False, indent=4)
 
-            with open(os.getcwd()
-                      + '/Resources/LatestUserApi.json',
+            with open(f'{os.getcwd()}/Resources/LatestUserApi.json',
                       mode='w',
                       encoding='utf8'
                       ) as out_json:
@@ -119,8 +118,7 @@ class UserData:
             out_json.close()
 
     def try_get_latest_user_api(self):
-        with open(os.getcwd()
-                  + '/Resources/LatestUserApi.json',
+        with open(f'{os.getcwd()}/Resources/LatestUserApi.json',
                   mode='r',
                   encoding='utf8'
                   ) as verify_id_list_json:
@@ -132,7 +130,6 @@ class UserData:
             try:
                 if self.id == data['player']['displayname']:
                     self.api = data
-                    print(self.api)
 
             except KeyError:
-                print('Get latest api fail')
+                print('Error > Get latest api fail')

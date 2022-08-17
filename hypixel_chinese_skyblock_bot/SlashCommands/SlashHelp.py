@@ -7,8 +7,8 @@ from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_j
 class SlashHelp(CodExtension):
     @slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
-        name="help",
-        description="Open up the commands list"
+        name='help',
+        description='Open up the commands list'
     )
     async def help(self, inter):
         embed = discord.Embed(

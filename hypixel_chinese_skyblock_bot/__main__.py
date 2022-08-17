@@ -11,24 +11,24 @@ pybot = commands.Bot(
 
 @pybot.event
 async def on_ready():
-    print("bot is ready")
+    print('Info > bot is ready')
 
 
-for filename in os.listdir(os.getcwd() + '/Commands'):
+for filename in os.listdir(f'{os.getcwd()}/Commands'):
     if not filename.endswith('.py'):
         continue
 
-    print('Setup > Commands.' + filename[:-3])
+    print(f'Setup > Commands.{filename[:-3]}')
 
-    pybot.load_extension('Commands.' + filename[:-3])
+    pybot.load_extension(f'Commands.{filename[:-3]}')
 
-for filename in os.listdir(os.getcwd() + '/SlashCommands'):
+for filename in os.listdir(f'{os.getcwd()}/SlashCommands'):
     if not filename.endswith('.py'):
         continue
 
-    print('Setup > SlashCommands.' + filename[:-3])
+    print(f'Setup > SlashCommands.{filename[:-3]}')
 
-    pybot.load_extension('SlashCommands.' + filename[:-3])
+    pybot.load_extension(f'SlashCommands.{filename[:-3]}')
 
 
 inter_client = InteractionClient(pybot)

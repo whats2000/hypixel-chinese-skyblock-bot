@@ -22,10 +22,10 @@ class ErrorHandle(CodExtension):
         else:
             message = '運行該命令時發生未知錯誤!'
 
-        print('> 出現錯誤 : ' + message)
+        print(f'Error > 出現錯誤 : {message}')
 
         embed = discord.Embed(
-            title="錯誤狀況",
+            title='錯誤狀況',
             description=message,
             color=0xe74c3c
         )

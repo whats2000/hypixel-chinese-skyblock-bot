@@ -21,11 +21,11 @@ class VerifyId(CodExtension):
 
                     player_data.api = get_hypixel_api(args)
 
-                    print('> verify player user : ' + str(ctx.message.author))
+                    print(f'Info > verify player user : {ctx.message.author}')
 
                     # check get hypixel api is successes
                     if player_data.api['success']:
-                        print('> get hypixel api success')
+                        print('Info > get hypixel api success')
 
                         player_data.set_latest_user_api()
 
@@ -37,11 +37,11 @@ class VerifyId(CodExtension):
                             if str(ctx.message.author) == player_data.discord:
                                 set_user_id(ctx.message.author, args)
 
-                                print('- Verify Id success')
+                                print('Info > Verify Id success')
 
                                 embed = discord.Embed(
                                     title='成功驗證',
-                                    description=str(ctx.message.author) + ' ---> ' + args,
+                                    description=f'{ctx.message.author} ---> {args}',
                                     color=0x00ff00
                                 )
 
@@ -58,11 +58,11 @@ class VerifyId(CodExtension):
                                 await ctx.author.add_roles(role)
 
                             else:
-                                print('> Player not found')
+                                print('Error > Player not found')
 
                                 embed = discord.Embed(
                                     title='驗證失敗，玩家id不正確',
-                                    description=str(ctx.message.author) + ' -x-> ' + args,
+                                    description=f'{ctx.message.author} -x-> {args}',
                                     color=0xe74c3c
                                 )
 
@@ -73,11 +73,11 @@ class VerifyId(CodExtension):
 
                                 await ctx.send(embed=embed, delete_after=20.0)
                         except KeyError:
-                            print('> The player do not open the social media')
+                            print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
                                 title='驗證失敗，請先打開discord api',
-                                description=str(ctx.message.author) + ' -x-> ' + args,
+                                description=f'{ctx.message.author} -x-> {args}',
                                 color=0xe74c3c
                             )
 
@@ -88,11 +88,11 @@ class VerifyId(CodExtension):
 
                             await ctx.send(embed=embed, delete_after=20.0)
                     else:
-                        print('> Please wait a little bit and try again')
+                        print('Error > Please wait a little bit and try again')
 
                         embed = discord.Embed(
                             title='驗證失敗，請稍後重試',
-                            description=str(ctx.message.author) + ' -x-> ' + args,
+                            description=f'{ctx.message.author} -x-> {args}',
                             color=0xe74c3c
                         )
 
@@ -104,11 +104,11 @@ class VerifyId(CodExtension):
                         await ctx.send(embed=embed, delete_after=20.0)
 
                 else:
-                    print('> Has already verified')
+                    print('Error > Has already verified')
 
                     embed = discord.Embed(
                         title='你已經驗證，更新請用sb?verifyidupdate',
-                        description=str(ctx.message.author) + ' -x-> ' + args,
+                        description=f'{ctx.message.author} -x-> {args}',
                         color=0xe74c3c
                     )
 
@@ -120,11 +120,11 @@ class VerifyId(CodExtension):
                     await ctx.send(embed=embed, delete_after=20.0)
 
             else:
-                print('> Required id')
+                print('Error > Required id')
 
                 embed = discord.Embed(
                     title='你需要在指令後方加上自己的 id',
-                    description=str(ctx.message.author) + ' -x-> ?',
+                    description=f'{ctx.message.author} -x-> ?',
                     color=0xe74c3c
                 )
 
@@ -135,7 +135,7 @@ class VerifyId(CodExtension):
 
                 await ctx.send(embed=embed, delete_after=20.0)
         else:
-            print('> Wrong channel')
+            print('Error > Wrong channel')
 
             embed = discord.Embed(
                 title='請在正確頻道輸入',
@@ -163,13 +163,13 @@ class VerifyId(CodExtension):
 
                 player_data.api = get_hypixel_api(args)
 
-                print('> update player user : ' + str(ctx.message.author))
+                print(f'Info > update player user : {ctx.message.author}')
 
                 # check is player has been verified
                 if get_setting_json('VerifyIdRole') in [y.name.lower() for y in ctx.message.author.roles]:
                     # check get hypixel api is successes
                     if player_data.api['success']:
-                        print('> get hypixel api success')
+                        print('Info > get hypixel api success')
 
                         player_data.set_latest_user_api()
 
@@ -181,11 +181,11 @@ class VerifyId(CodExtension):
                             if str(ctx.message.author) == player_data.discord:
                                 set_user_id(ctx.message.author, args)
 
-                                print('> update Id success')
+                                print('Info > update Id success')
 
                                 embed = discord.Embed(
                                     title='成功更新',
-                                    description=str(ctx.message.author) + ' ---> ' + args,
+                                    description=f'{ctx.message.author} ---> {args}',
                                     color=0x00ff00
                                 )
 
@@ -197,11 +197,11 @@ class VerifyId(CodExtension):
                                 await ctx.send(embed=embed)
 
                             else:
-                                print('> Player not found')
+                                print('Error > Player not found')
 
                                 embed = discord.Embed(
                                     title='驗證失敗，玩家id不正確',
-                                    description=str(ctx.message.author) + ' -x-> ' + args,
+                                    description=f'{ctx.message.author} -x-> {args}',
                                     color=0xe74c3c
                                 )
 
@@ -212,11 +212,11 @@ class VerifyId(CodExtension):
 
                                 await ctx.send(embed=embed, delete_after=20.0)
                         except KeyError:
-                            print('> The player do not open the social media')
+                            print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
                                 title='驗證失敗，請先打開 hypixel discord api',
-                                description=str(ctx.message.author) + ' -x-> ' + args,
+                                description=f'{ctx.message.author} -x-> {args}',
                                 color=0xe74c3c
                             )
 
@@ -227,14 +227,13 @@ class VerifyId(CodExtension):
 
                             await ctx.send(embed=embed, delete_after=20.0)
                     else:
-                        print('>　Please wait a little bit and try again')
+                        print('Error >　Please wait a little bit and try again')
 
-                        print('> fail reason : ' + player_data.api['cause'])
+                        print(f'Error > fail reason : {player_data.api["cause"]}')
 
                         embed = discord.Embed(
                             title='驗證失敗，請稍後重試',
-                            description=str(ctx.message.author) + ' -x-> ' + args + '\n\n' + '原因 : ' + player_data.api[
-                                'cause'],
+                            description=f'{ctx.message.author} -x-> {args}\n\n原因 : {player_data.api["cause"]}',
                             color=0xe74c3c
                         )
 
@@ -246,11 +245,11 @@ class VerifyId(CodExtension):
                         await ctx.send(embed=embed, delete_after=20.0)
 
             else:
-                print('> Required id')
+                print('Error > Required id')
 
                 embed = discord.Embed(
                     title='你需要在指令後方加上自己的 id',
-                    description=str(ctx.message.author) + ' -x-> ?',
+                    description=f'{ctx.message.author} -x-> ?',
                     color=0xe74c3c
                 )
 
@@ -262,7 +261,7 @@ class VerifyId(CodExtension):
                 await ctx.send(embed=embed, delete_after=20.0)
 
         else:
-            print('> Wrong channel')
+            print('Error > Wrong channel')
 
             embed = discord.Embed(
                 title='請在正確頻道輸入',

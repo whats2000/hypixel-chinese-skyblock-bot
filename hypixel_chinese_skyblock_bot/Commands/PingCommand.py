@@ -7,11 +7,11 @@ class PingCommand(CodExtension):
 
     @commands.command()
     async def ping(self, ctx):
-        print('> 呼叫延遲檢測 -> ' + str(self.bot.latency))
+        print(f'Debug > 呼叫延遲檢測 -> {self.bot.latency}')
 
         embed = discord.Embed(
-            title="連線延遲 ping",
-            description=str(self.bot.latency*1000)+' ms',
+            title='連線延遲 ping',
+            description=f'{self.bot.latency * 1000} ms',
             color=0x00ff00
         )
 

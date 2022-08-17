@@ -11,7 +11,7 @@ class CopyMessage(CodExtension):
     async def cp(self, ctx, args=None):
         if args is not None:
             embed = discord.Embed(
-                title="警告",
+                title='警告',
                 description=str(args),
                 color=0xe74c3c
             )
