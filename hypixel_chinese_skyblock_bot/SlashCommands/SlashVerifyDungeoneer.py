@@ -46,8 +46,6 @@ class SlashVerifyDungeoneer(CodExtension):
                     try:
                         player_dung_max_level = player_data.api['player']['achievements']['skyblock_dungeoneer']
 
-                        print('Info > - {player_dung_max_level}')
-
                         player_data.uuid = player_data.api['player']['uuid']
 
                         player_data.profile = player_data.api['player']['stats']['SkyBlock']['profiles']
