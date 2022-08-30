@@ -136,7 +136,7 @@ class VerifyProgress(CodExtension):
 
                                                 await ctx.author.add_roles(role)
 
-                                                print(f'> Info - {skill} : {skill_level} is verified')
+                                                print(f'Info > - {skill} : {skill_level} is verified')
 
                                                 player_data.set_skill_level_is_max(skill, True)
 
