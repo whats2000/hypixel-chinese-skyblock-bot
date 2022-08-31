@@ -72,7 +72,7 @@ class VerifyId(CodExtension):
                                 )
 
                                 await ctx.send(embed=embed, delete_after=20.0)
-                        except KeyError:
+                        except (KeyError, TypeError):
                             print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
@@ -211,7 +211,7 @@ class VerifyId(CodExtension):
                                 )
 
                                 await ctx.send(embed=embed, delete_after=20.0)
-                        except KeyError or TypeError:
+                        except (KeyError, TypeError):
                             print('Error > The player do not open the social media')
 
                             embed = discord.Embed(
