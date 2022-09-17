@@ -16,6 +16,18 @@ class SlashVerifyProgress(CodExtension):
     async def verifyprog(self, inter):
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyProgressChannelId'):
+            embed = discord.Embed(
+                title='正在向 hypixel api 提出訪問請求',
+                color=0xf1c40f
+            )
+
+            embed.set_author(
+                name=inter.author.name,
+                icon_url=inter.author.avatar_url
+            )
+
+            message = await inter.send(embed=embed, ephemeral=True)
+
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
                 role = discord.utils.get(inter.author.guild.roles, name=get_setting_json('ProgressRole'))
@@ -63,7 +75,7 @@ class SlashVerifyProgress(CodExtension):
                                 icon_url=inter.author.avatar_url
                             )
 
-                            await inter.send(embed=embed, delete_after=10.0)
+                            message = await inter.send(embed=embed)
 
                             # try to get skyblock api
                             try:
@@ -124,7 +136,7 @@ class SlashVerifyProgress(CodExtension):
                                             icon_url=inter.author.avatar_url
                                         )
 
-                                        await inter.send(embed=embed, delete_after=20.0)
+                                        await message.edit(embed=embed, delete_after=20.0)
 
                                     # try to get skill level
                                     try:
@@ -167,7 +179,7 @@ class SlashVerifyProgress(CodExtension):
                                             icon_url=inter.author.avatar_url
                                         )
 
-                                        await inter.send(embed=embed, delete_after=20.0)
+                                        await message.edit(embed=embed, delete_after=20.0)
 
                                     # check if any slayer or skill achieve
                                     if is_verify_pass:
@@ -214,7 +226,7 @@ class SlashVerifyProgress(CodExtension):
                                                 icon_url=inter.author.avatar_url
                                             )
 
-                                            await inter.send(embed=embed)
+                                            await message.edit(embed=embed)
 
                                         except TypeError:
                                             print('Error > fail at create index embed')
@@ -246,7 +258,7 @@ class SlashVerifyProgress(CodExtension):
                                                     icon_url=inter.author.avatar_url
                                                 )
 
-                                                await inter.send(embed=embed)
+                                                await message.edit(embed=embed)
 
                                         except TypeError:
                                             print('Error > fail at create extra embed')
@@ -264,7 +276,7 @@ class SlashVerifyProgress(CodExtension):
                                             icon_url=inter.author.avatar_url
                                         )
 
-                                        await inter.send(embed=embed, delete_after=20.0)
+                                        await message.edit(embed=embed, delete_after=20.0)
 
                                 else:
                                     print('Error >　Please wait a little bit and try again')
@@ -280,7 +292,7 @@ class SlashVerifyProgress(CodExtension):
                                         icon_url=inter.author.avatar_url
                                     )
 
-                                    await inter.send(embed=embed, delete_after=20.0)
+                                    await message.edit(embed=embed, delete_after=20.0)
 
                             except KeyError:
                                 print(f'Error > fail to get skyblock api in '
@@ -300,7 +312,7 @@ class SlashVerifyProgress(CodExtension):
                             icon_url=inter.author.avatar_url
                         )
 
-                        await inter.send(embed=embed, delete_after=20.0)
+                        await message.edit(embed=embed, delete_after=20.0)
                 else:
                     print('Error > Please wait a little bit and try again')
 
@@ -320,7 +332,7 @@ class SlashVerifyProgress(CodExtension):
                         icon_url=inter.author.avatar_url
                     )
 
-                    await inter.send(embed=embed, delete_after=20.0)
+                    await message.edit(embed=embed, delete_after=20.0)
 
             else:
                 print('Error > Require verify id')
@@ -336,7 +348,7 @@ class SlashVerifyProgress(CodExtension):
                     icon_url=inter.author.avatar_url
                 )
 
-                await inter.send(embed=embed, delete_after=20.0)
+                await message.edit(embed=embed, delete_after=20.0)
 
         else:
             print('Error > Wrong channel')
@@ -351,7 +363,7 @@ class SlashVerifyProgress(CodExtension):
                 icon_url=inter.author.avatar_url
             )
 
-            await inter.send(embed=embed, delete_after=20.0)
+            await inter.send(embed=embed, ephemeral=True)
 
 
 def setup(pybot):

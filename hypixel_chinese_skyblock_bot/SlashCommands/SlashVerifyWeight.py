@@ -16,6 +16,18 @@ class SlashVerifyWeight(CodExtension):
     async def verifyweight(self, inter):
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyWeightChannelId'):
+            embed = discord.Embed(
+                title='正在向 hypixel api 提出訪問請求',
+                color=0xf1c40f
+            )
+
+            embed.set_author(
+                name=inter.author.name,
+                icon_url=inter.author.avatar_url
+            )
+
+            message = await inter.send(embed=embed, ephemeral=True)
+
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
                 player = get_verify_id_list(inter.author)
@@ -59,7 +71,7 @@ class SlashVerifyWeight(CodExtension):
                                 icon_url=inter.author.avatar_url
                             )
 
-                            await inter.send(embed=embed, delete_after=10.0)
+                            message = await inter.send(embed=embed)
 
                             # try to get weight api
                             try:
@@ -95,7 +107,7 @@ class SlashVerifyWeight(CodExtension):
                                         icon_url=inter.author.avatar_url
                                     )
 
-                                    await inter.send(embed=embed)
+                                    await message.edit(embed=embed)
 
                                 else:
                                     print('Error > senither weight no respond')
@@ -115,7 +127,7 @@ class SlashVerifyWeight(CodExtension):
                                         icon_url=inter.author.avatar_url
                                     )
 
-                                    await inter.send(embed=embed, delete_after=20.0)
+                                    await message.edit(embed=embed, delete_after=20.0)
 
                             except KeyError:
                                 print(f'Error > fail to get weight api in '
@@ -169,7 +181,7 @@ class SlashVerifyWeight(CodExtension):
                                 icon_url=inter.author.avatar_url
                             )
 
-                            await inter.send(embed=embed, delete_after=20.0)
+                            await message.edit(embed=embed, delete_after=20.0)
 
                     except KeyError:
                         print('Error > The player do not open the social media')
@@ -185,7 +197,7 @@ class SlashVerifyWeight(CodExtension):
                             icon_url=inter.author.avatar_url
                         )
 
-                        await inter.send(embed=embed, delete_after=20.0)
+                        await message.edit(embed=embed, delete_after=20.0)
                 else:
                     print('Error > Please wait a little bit and try again')
 
@@ -205,7 +217,7 @@ class SlashVerifyWeight(CodExtension):
                         icon_url=inter.author.avatar_url
                     )
 
-                    await inter.send(embed=embed, delete_after=20.0)
+                    await message.edit(embed=embed, delete_after=20.0)
 
             else:
                 print('Error > Require verify id')
@@ -221,7 +233,7 @@ class SlashVerifyWeight(CodExtension):
                     icon_url=inter.author.avatar_url
                 )
 
-                await inter.send(embed=embed, delete_after=20.0)
+                await message.edit(embed=embed, delete_after=20.0)
 
         else:
             print('Error > Wrong channel')
@@ -236,7 +248,7 @@ class SlashVerifyWeight(CodExtension):
                 icon_url=inter.author.avatar_url
             )
 
-            await inter.send(embed=embed, delete_after=20.0)
+            await inter.send(embed=embed, ephemeral=True)
 
 
 def setup(pybot):
