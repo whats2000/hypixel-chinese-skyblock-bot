@@ -226,7 +226,7 @@ class SlashVerifyProgress(CodExtension):
                                                 icon_url=inter.author.avatar_url
                                             )
 
-                                            await message.edit(embed=embed)
+                                            await message.edit(embed=embed, delete_after=20.0)
 
                                         except TypeError:
                                             print('Error > fail at create index embed')
@@ -258,7 +258,7 @@ class SlashVerifyProgress(CodExtension):
                                                     icon_url=inter.author.avatar_url
                                                 )
 
-                                                await message.edit(embed=embed)
+                                                await message.edit(embed=embed, delete_after=20.0)
 
                                         except TypeError:
                                             print('Error > fail at create extra embed')

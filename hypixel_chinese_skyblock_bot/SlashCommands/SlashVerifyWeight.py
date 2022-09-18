@@ -107,7 +107,7 @@ class SlashVerifyWeight(CodExtension):
                                         icon_url=inter.author.avatar_url
                                     )
 
-                                    await message.edit(embed=embed)
+                                    await message.edit(embed=embed, delete_after=30.0)
 
                                 else:
                                     print('Error > senither weight no respond')
@@ -159,7 +159,7 @@ class SlashVerifyWeight(CodExtension):
                                     icon_url=inter.author.avatar_url
                                 )
 
-                                await inter.send(embed=embed)
+                                await inter.send(embed=embed, delete_after=20.0)
 
                             except TypeError:
                                 print('Error > fail at create result embed')

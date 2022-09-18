@@ -183,7 +183,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                         icon_url=inter.author.avatar_url
                                     )
 
-                                    await message.edit(embed=embed, ephemeral=True)
+                                    await message.edit(embed=embed, delete_after=20.0)
 
                                 else:
                                     embed = discord.Embed(
