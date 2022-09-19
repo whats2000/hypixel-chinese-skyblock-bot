@@ -2,7 +2,7 @@ import discord
 from dislash import slash_command
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
-    get_verify_id_list, get_hypixel_skyblock_api
+    get_verify_id_list, get_hypixel_skyblock_api, add_role, remove_role
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -30,9 +30,7 @@ class SlashVerifyDungeoneer(CodExtension):
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
-                role = discord.utils.get(inter.author.guild.roles, name=get_setting_json('DungeoneerRole'))
-
-                await inter.author.add_roles(role)
+                await add_role(ctx=inter, get_role_id='DungeoneerRole')
 
                 player = get_verify_id_list(inter.author)
 
@@ -205,19 +203,13 @@ class SlashVerifyDungeoneer(CodExtension):
                         # give role
                         try:
                             for i in range(10):
-                                if i < 5:
-                                    role = discord.utils.get(inter.author.guild.roles, name=f'< {i}')
+                                await remove_role(ctx=inter, get_role_names=f'< {i}')
 
-                                    await inter.author.remove_roles(role)
+                                await remove_role(ctx=inter, get_role_names=f'{i} >')
 
-                                role = discord.utils.get(inter.author.guild.roles, name=f'{i} >')
-
-                                await inter.author.remove_roles(role)
-                            if player_dung_max_level >= 50:
-                                role = discord.utils.get(inter.author.guild.roles,
-                                                         name=get_setting_json('cata50'))
-
-                                await inter.author.add_roles(role)
+                            for i in range(3, 6):
+                                if player_dung_max_level >= 10 * i:
+                                    await add_role(ctx=inter, get_role_id=f'cata{i}0')
 
                             if player_dung_max_level >= 100 or player_dung_max_level < 0:
                                 print('Error > No match role can give')
@@ -236,15 +228,9 @@ class SlashVerifyDungeoneer(CodExtension):
                                 await inter.send(embed=embed, delete_after=20.0)
 
                             else:
-                                role = discord.utils.get(inter.author.guild.roles,
-                                                         name=f'< {player_dung_max_level // 10}')
+                                await add_role(ctx=inter, get_role_names=f'< {player_dung_max_level // 10}')
 
-                                await inter.author.add_roles(role)
-
-                                role = discord.utils.get(inter.author.guild.roles,
-                                                         name=f'{player_dung_max_level % 10} >')
-
-                                await inter.author.add_roles(role)
+                                await add_role(ctx=inter, get_role_names=f'{player_dung_max_level % 10} >')
 
                         except KeyError:
                             print('Error > fail at give role')

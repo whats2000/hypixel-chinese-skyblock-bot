@@ -2,7 +2,7 @@ import discord
 from dislash import slash_command
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
-    get_verify_id_list, get_senither_weight
+    get_verify_id_list, get_senither_weight, add_role
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -138,10 +138,7 @@ class SlashVerifyWeight(CodExtension):
                         if player_data.max_senither_weight >= weight_require:
                             print(f'Info > - skill weight > {weight_require}')
 
-                            role = discord.utils.get(inter.author.guild.roles,
-                                                     name=get_setting_json('SeniorPlayer'))
-
-                            await inter.author.add_roles(role)
+                            await add_role(ctx=inter, get_role_id='SeniorPlayer')
 
                             # try to create result output
                             try:

@@ -2,7 +2,7 @@ import discord
 from dislash import slash_command
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
-    get_verify_id_list, get_hypixel_skyblock_api
+    get_verify_id_list, get_hypixel_skyblock_api, add_role, get_role_name
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -30,9 +30,7 @@ class SlashVerifyProgress(CodExtension):
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
-                role = discord.utils.get(inter.author.guild.roles, name=get_setting_json('ProgressRole'))
-
-                await inter.author.add_roles(role)
+                await add_role(ctx=inter, get_role_id='ProgressRole')
 
                 player = get_verify_id_list(inter.author)
 
@@ -99,16 +97,13 @@ class SlashVerifyProgress(CodExtension):
                                         for i in range(7, 10):
                                             # check if player achieve slayer level
                                             if f'level_{i}' in \
-                                                (profile_api['slayer_bosses']['zombie']['claimed_levels'] and
-                                                 profile_api['slayer_bosses']['spider']['claimed_levels'] and
-                                                 profile_api['slayer_bosses']['wolf']['claimed_levels'] and
-                                                 profile_api['slayer_bosses']['enderman']['claimed_levels'] and
-                                                 profile_api['slayer_bosses']['blaze']['claimed_levels']):
+                                                    (profile_api['slayer_bosses']['zombie']['claimed_levels'] and
+                                                     profile_api['slayer_bosses']['spider']['claimed_levels'] and
+                                                     profile_api['slayer_bosses']['wolf']['claimed_levels'] and
+                                                     profile_api['slayer_bosses']['enderman']['claimed_levels'] and
+                                                     profile_api['slayer_bosses']['blaze']['claimed_levels']):
 
-                                                role = discord.utils.get(inter.author.guild.roles,
-                                                                         name=get_setting_json(f'AllSlayer{i}'))
-
-                                                await inter.author.add_roles(role)
+                                                await add_role(ctx=inter, get_role_id=f'AllSlayer{i}')
 
                                                 print(f'Info > - slayer {i}')
 
@@ -148,10 +143,7 @@ class SlashVerifyProgress(CodExtension):
 
                                             # check if player achieve max skill level
                                             if skill_level >= skill_list[skill]:
-                                                role = discord.utils.get(inter.author.guild.roles,
-                                                                         name=get_setting_json(f'skill_{skill}'))
-
-                                                await inter.author.add_roles(role)
+                                                await add_role(ctx=inter, get_role_id=f'skill_{skill}')
 
                                                 print(f'Info > - {skill} : {skill_level} is verified')
 
@@ -198,7 +190,8 @@ class SlashVerifyProgress(CodExtension):
                                                 else:
                                                     desc += '\u274c : '
 
-                                                desc = f'{desc}{get_setting_json(f"AllSlayer{i}")}\n\n'
+                                                desc = f'{desc}' \
+                                                       f'{get_role_name(inter, get_setting_json(f"AllSlayer{i}"))}\n\n'
 
                                             skill_list = get_setting_json('skill_list')
 
@@ -213,7 +206,8 @@ class SlashVerifyProgress(CodExtension):
                                                 else:
                                                     desc += '\u274c : '
 
-                                                desc = f'{desc}{get_setting_json(f"skill_{skill}")}\n\n'
+                                                desc = f'{desc}' \
+                                                       f'{get_role_name(inter, get_setting_json(f"skill_{skill}"))}\n\n'
 
                                             embed = discord.Embed(
                                                 title=f'{player_data.profile[profile_id]["cute_name"]} 已更新進度',
@@ -242,14 +236,12 @@ class SlashVerifyProgress(CodExtension):
                                             else:
                                                 print('Info > - all skills are max')
 
-                                                role = discord.utils.get(inter.author.guild.roles,
-                                                                         name=get_setting_json('AllSkillMax'))
-
-                                                await inter.author.add_roles(role)
+                                                await add_role(ctx=inter, get_role_id='AllSkillMax')
 
                                                 embed = discord.Embed(
                                                     title=f'{player_data.profile[profile_id]["cute_name"]} 已更新進度',
-                                                    description=f'\u2705 : {get_setting_json("AllSkillMax")}',
+                                                    description=f'\u2705 : '
+                                                    f'{get_role_name(inter, get_setting_json("AllSkillMax"))}',
                                                     color=0x00ff00
                                                 )
 

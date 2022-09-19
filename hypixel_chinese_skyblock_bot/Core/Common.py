@@ -1,6 +1,7 @@
 import json
 import os
 
+import discord
 import requests
 from discord.ext import commands
 
@@ -92,6 +93,33 @@ def get_senither_weight(profile):
     js = requests.get(f'{setting_json_data["SenitherLink"]}{profile}/weight?key={setting_json_data["ApiKey"]}')
 
     return js.json()
+
+
+def get_role_name(ctx, role_id):
+    role = discord.utils.get(ctx.author.guild.roles, id=role_id)
+    return role.name
+
+
+async def add_role(ctx, get_role_id=None, get_role_names=None):
+    if get_role_id is not None:
+        role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
+    elif get_role_names is not None:
+        role = discord.utils.get(ctx.author.guild.roles, name=get_role_names)
+    else:
+        raise ValueError
+
+    await ctx.author.add_roles(role)
+
+
+async def remove_role(ctx, get_role_id=None, get_role_names=None):
+    if get_role_id is not None:
+        role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
+    elif get_role_names is not None:
+        role = discord.utils.get(ctx.author.guild.roles, name=get_role_names)
+    else:
+        raise ValueError
+
+    await ctx.author.remove_roles(role)
 
 
 with open(f'{os.getcwd()}/Resources/Setting.json',

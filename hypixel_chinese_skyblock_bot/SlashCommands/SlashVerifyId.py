@@ -2,7 +2,7 @@ import discord
 from dislash import slash_command, OptionType
 from dislash.slash_commands import Option
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id, \
-    get_verify_id_list
+    get_verify_id_list, add_role
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -75,11 +75,7 @@ class SlashVerifyId(CodExtension):
 
                                 await inter.send(embed=embed, delete_after=20.0)
 
-                                role = discord.utils.get(inter.author.guild.roles,
-                                                         name=get_setting_json('VerifyIdRole')
-                                                         )
-
-                                await inter.author.add_roles(role)
+                                await add_role(ctx=inter, get_role_names='✔ 已驗證成員')
 
                             else:
                                 print('Error > Player not found')
@@ -131,7 +127,7 @@ class SlashVerifyId(CodExtension):
                     print('Error > Has already verified')
 
                     embed = discord.Embed(
-                        title='你已經驗證，更新請用sb?verifyidupdate',
+                        title='你已經驗證，更新請用 /verifyidupdate',
                         description=f'{inter.author} -x-> {minecraft_id}',
                         color=0xe74c3c
                     )

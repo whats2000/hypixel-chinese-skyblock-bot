@@ -123,6 +123,22 @@ class SlashVerifyIdUpdate(CodExtension):
 
                         await inter.send(embed=embed, delete_after=20.0)
 
+                else:
+                    print('Error > You have not verified')
+
+                    embed = discord.Embed(
+                        title='你未驗證，更新請用 /verifyid',
+                        description=f'{inter.author} -x-> {minecraft_id}',
+                        color=0xe74c3c
+                    )
+
+                    embed.set_author(
+                        name=inter.author.name,
+                        icon_url=inter.author.avatar_url
+                    )
+
+                    await inter.send(embed=embed, delete_after=20.0)
+
             else:
                 print('Error >　Input id is incorrect')
 
