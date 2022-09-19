@@ -26,7 +26,7 @@ class SlashVerifyDungeoneer(CodExtension):
                 icon_url=inter.author.avatar_url
             )
 
-            message = await inter.send(embed=embed, ephemeral=True)
+            await inter.send(embed=embed, ephemeral=True)
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
@@ -233,7 +233,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                     icon_url=inter.author.avatar_url
                                 )
 
-                                await message.edit(embed=embed, delete_after=20.0)
+                                await inter.send(embed=embed, delete_after=20.0)
 
                             else:
                                 role = discord.utils.get(inter.author.guild.roles,
@@ -263,7 +263,7 @@ class SlashVerifyDungeoneer(CodExtension):
                             icon_url=inter.author.avatar_url
                         )
 
-                        await message.edit(embed=embed, delete_after=20.0)
+                        await inter.send(embed=embed, delete_after=20.0)
                 else:
                     print('Error > Please wait a little bit and try again')
 
@@ -283,7 +283,7 @@ class SlashVerifyDungeoneer(CodExtension):
                         icon_url=inter.author.avatar_url
                     )
 
-                    await message.edit(embed=embed, delete_after=20.0)
+                    await inter.send(embed=embed, delete_after=20.0)
 
             else:
                 print('Error > Require verify id')
@@ -299,7 +299,7 @@ class SlashVerifyDungeoneer(CodExtension):
                     icon_url=inter.author.avatar_url
                 )
 
-                await message.edit(embed=embed, delete_after=20.0)
+                await inter.send(embed=embed, delete_after=20.0)
 
         else:
             print('Error > Wrong channel')

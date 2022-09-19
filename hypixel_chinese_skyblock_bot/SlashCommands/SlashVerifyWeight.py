@@ -26,7 +26,7 @@ class SlashVerifyWeight(CodExtension):
                 icon_url=inter.author.avatar_url
             )
 
-            message = await inter.send(embed=embed, ephemeral=True)
+            await inter.send(embed=embed, ephemeral=True)
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
@@ -181,7 +181,7 @@ class SlashVerifyWeight(CodExtension):
                                 icon_url=inter.author.avatar_url
                             )
 
-                            await message.edit(embed=embed, delete_after=20.0)
+                            await inter.send(embed=embed, delete_after=20.0)
 
                     except KeyError:
                         print('Error > The player do not open the social media')
@@ -197,7 +197,7 @@ class SlashVerifyWeight(CodExtension):
                             icon_url=inter.author.avatar_url
                         )
 
-                        await message.edit(embed=embed, delete_after=20.0)
+                        await inter.send(embed=embed, delete_after=20.0)
                 else:
                     print('Error > Please wait a little bit and try again')
 
@@ -217,7 +217,7 @@ class SlashVerifyWeight(CodExtension):
                         icon_url=inter.author.avatar_url
                     )
 
-                    await message.edit(embed=embed, delete_after=20.0)
+                    await inter.send(embed=embed, delete_after=20.0)
 
             else:
                 print('Error > Require verify id')
@@ -233,7 +233,7 @@ class SlashVerifyWeight(CodExtension):
                     icon_url=inter.author.avatar_url
                 )
 
-                await message.edit(embed=embed, delete_after=20.0)
+                await inter.send(embed=embed, delete_after=20.0)
 
         else:
             print('Error > Wrong channel')
