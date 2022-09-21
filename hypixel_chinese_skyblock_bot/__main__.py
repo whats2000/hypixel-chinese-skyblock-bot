@@ -1,12 +1,13 @@
 import os
-from discord.ext import commands
-from dislash import InteractionClient
+import disnake
+from disnake.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
 
-pybot = commands.Bot(
-    command_prefix='sb?',
-    help_command=None
-)
+intents_setting = disnake.Intents.default()
+intents_setting.message_content = True
+
+pybot = commands.Bot(command_prefix='sb?', intents=intents_setting)
+pybot.remove_command('help')
 
 
 @pybot.event
@@ -29,10 +30,6 @@ for filename in os.listdir(f'{os.getcwd()}/SlashCommands'):
     print(f'Setup > SlashCommands.{filename[:-3]}')
 
     pybot.load_extension(f'SlashCommands.{filename[:-3]}')
-
-
-inter_client = InteractionClient(pybot)
-
 
 if __name__ == '__main__':
     pybot.run((get_setting_json('Token')))

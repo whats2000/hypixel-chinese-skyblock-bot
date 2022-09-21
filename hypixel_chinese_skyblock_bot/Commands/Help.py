@@ -1,13 +1,13 @@
-import discord
-from discord.ext import commands
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
 
 class Help(CodExtension):
     @commands.command()
-    async def help(self, ctx):
-        embed = discord.Embed(
+    async def help(self, ctx: commands.Context):
+        embed = disnake.Embed(
             title='幫助列表',
             description=':scroll: 調適指令'
                         '\n\n :arrow_right: `sb?help`, `/help` : 打開本列表'
@@ -16,12 +16,12 @@ class Help(CodExtension):
                         '\n\n :arrow_right: `/embed` : 製作對話框'
                         '\n\n==============='
                         '\n\n:scroll: 驗證命令'
-                        '\n\n :arrow_right: `sb?verifyid` `玩家遊戲id`, `/verify_id` : 輸入要驗證的id，需與hypixel社群discord綁定一致'
-                        '\n\n :arrow_right: `sb?verifyidupdate` `玩家遊戲id`, `/verify_id_update` : '
+                        '\n\n :arrow_right: `/verify_id` : 輸入要驗證的id，需與hypixel社群discord綁定一致'
+                        '\n\n :arrow_right: `/verify_id_update` : '
                         '輸入要更新的id，需與hypixel社群discord綁定一致 '
-                        '\n\n :arrow_right: `sb?verifydung`, `/verify_dungeoneer` : 驗證地下城職業等級與地下城等級'
-                        '\n\n :arrow_right: `sb?verifyprog`, `/verify_progress` : 驗證玩家進度是否滿等'
-                        '\n\n :arrow_right: `sb?verifyweight`, `/verify_weight` : 驗證玩家發展階段，並確認是否符合資深玩家'
+                        '\n\n :arrow_right: `/verify_dungeoneer` : 驗證地下城職業等級與地下城等級'
+                        '\n\n :arrow_right: `/verify_progress` : 驗證玩家進度是否滿等'
+                        '\n\n :arrow_right: `/verify_weight` : 驗證玩家發展階段，並確認是否符合資深玩家'
                         '\n\n================'
                         '\n\n:question: v 如何開啟Api',
             color=0x00ff00
@@ -29,7 +29,7 @@ class Help(CodExtension):
 
         embed.set_author(
             name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar_url
+            icon_url=ctx.message.author.avatar.url
         )
 
         embed.set_image(url='https://media.giphy.com/media/e2uLbm9lZm1J4QyUvQ/giphy-downsized-large.gif')

@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
@@ -24,7 +24,7 @@ class ErrorHandle(CodExtension):
 
         print(f'Error > 出現錯誤 : {message}')
 
-        embed = discord.Embed(
+        embed = disnake.Embed(
             title='錯誤狀況',
             description=message,
             color=0xe74c3c
@@ -32,7 +32,7 @@ class ErrorHandle(CodExtension):
 
         embed.set_author(
             name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar_url
+            icon_url=ctx.message.author.avatar.url
         )
 
         await ctx.send(embed=embed, delete_after=20.0)

@@ -1,5 +1,5 @@
-import discord
-from dislash import slash_command
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_hypixel_skyblock_api, add_role, get_role_name
@@ -8,25 +8,27 @@ from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 class SlashVerifyProgress(CodExtension):
 
-    @slash_command(
+    @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name='verify_progress',
         description='Verify your slayer progress and skill level',
     )
-    async def verifyprog(self, inter):
+    async def verifyprog(self, inter: disnake.AppCommandInteraction):
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyProgressChannelId'):
-            embed = discord.Embed(
+            await inter.response.defer(ephemeral=True)
+
+            embed = disnake.Embed(
                 title='正在向 hypixel api 提出訪問請求',
                 color=0xf1c40f
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
-            await inter.send(embed=embed, ephemeral=True)
+            await inter.edit_original_message(embed=embed)
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
@@ -62,7 +64,7 @@ class SlashVerifyProgress(CodExtension):
                         for profile_id in player_data.profile:
                             print(f'Info > - 正在驗證 {player_data.profile[profile_id]["cute_name"]}')
 
-                            embed = discord.Embed(
+                            embed = disnake.Embed(
                                 title='驗證處理中',
                                 description=f'正在驗證 -> {player_data.profile[profile_id]["cute_name"]}',
                                 color=0xf1c40f
@@ -70,10 +72,10 @@ class SlashVerifyProgress(CodExtension):
 
                             embed.set_author(
                                 name=inter.author.name,
-                                icon_url=inter.author.avatar_url
+                                icon_url=inter.author.avatar.url
                             )
 
-                            message = await inter.send(embed=embed)
+                            await inter.edit_original_message(embed=embed)
 
                             # try to get skyblock api
                             try:
@@ -118,7 +120,7 @@ class SlashVerifyProgress(CodExtension):
                                     except KeyError:
                                         print('Error > fail in verify slayer')
 
-                                        embed = discord.Embed(
+                                        embed = disnake.Embed(
                                             title='驗證slayer失敗，連結API錯誤，請稍後重試',
                                             description=f'請卻保有打開skyblock中slayer訪問api\n\n'
                                                         f'{player_data.profile[profile_id]["cute_name"]}'
@@ -128,10 +130,10 @@ class SlashVerifyProgress(CodExtension):
 
                                         embed.set_author(
                                             name=inter.author.name,
-                                            icon_url=inter.author.avatar_url
+                                            icon_url=inter.author.avatar.url
                                         )
 
-                                        await message.edit(embed=embed, delete_after=20.0)
+                                        await inter.send(embed=embed, delete_after=20.0)
 
                                     # try to get skill level
                                     try:
@@ -158,7 +160,7 @@ class SlashVerifyProgress(CodExtension):
                                     except KeyError:
                                         print('Error > fail in verify skill')
 
-                                        embed = discord.Embed(
+                                        embed = disnake.Embed(
                                             title='驗證skill失敗，連結API錯誤，請稍後重試',
                                             description=f'請卻保有打開skyblock中skill訪問api\n\n'
                                                         f'{player_data.profile[profile_id]["cute_name"]}'
@@ -168,10 +170,10 @@ class SlashVerifyProgress(CodExtension):
 
                                         embed.set_author(
                                             name=inter.author.name,
-                                            icon_url=inter.author.avatar_url
+                                            icon_url=inter.author.avatar.url
                                         )
 
-                                        await message.edit(embed=embed, delete_after=20.0)
+                                        await inter.send(embed=embed, delete_after=20.0)
 
                                     # check if any slayer or skill achieve
                                     if is_verify_pass:
@@ -209,7 +211,7 @@ class SlashVerifyProgress(CodExtension):
                                                 desc = f'{desc}' \
                                                        f'{get_role_name(inter, get_setting_json(f"skill_{skill}"))}\n\n'
 
-                                            embed = discord.Embed(
+                                            embed = disnake.Embed(
                                                 title=f'{player_data.profile[profile_id]["cute_name"]} 已更新進度',
                                                 description=str(desc),
                                                 color=0x00ff00
@@ -217,10 +219,10 @@ class SlashVerifyProgress(CodExtension):
 
                                             embed.set_author(
                                                 name=inter.author.name,
-                                                icon_url=inter.author.avatar_url
+                                                icon_url=inter.author.avatar.url
                                             )
 
-                                            await message.edit(embed=embed, delete_after=20.0)
+                                            await inter.send(embed=embed, delete_after=20.0)
 
                                         except TypeError:
                                             print('Error > fail at create index embed')
@@ -238,7 +240,7 @@ class SlashVerifyProgress(CodExtension):
 
                                                 await add_role(ctx=inter, get_role_id='AllSkillMax')
 
-                                                embed = discord.Embed(
+                                                embed = disnake.Embed(
                                                     title=f'{player_data.profile[profile_id]["cute_name"]} 已更新進度',
                                                     description=f'\u2705 : '
                                                     f'{get_role_name(inter, get_setting_json("AllSkillMax"))}',
@@ -247,17 +249,17 @@ class SlashVerifyProgress(CodExtension):
 
                                                 embed.set_author(
                                                     name=inter.author.name,
-                                                    icon_url=inter.author.avatar_url
+                                                    icon_url=inter.author.avatar.url
                                                 )
 
-                                                await message.edit(embed=embed, delete_after=20.0)
+                                                await inter.send(embed=embed, delete_after=20.0)
 
                                         except TypeError:
                                             print('Error > fail at create extra embed')
                                     else:
                                         print('Info > nothing is verified')
 
-                                        embed = discord.Embed(
+                                        embed = disnake.Embed(
                                             title='你目前未有任何進度達標，請再接再厲',
                                             description=f'{player_data.profile[profile_id]["cute_name"]} -x-> Progress',
                                             color=0xe74c3c
@@ -265,15 +267,15 @@ class SlashVerifyProgress(CodExtension):
 
                                         embed.set_author(
                                             name=inter.author.name,
-                                            icon_url=inter.author.avatar_url
+                                            icon_url=inter.author.avatar.url
                                         )
 
-                                        await message.edit(embed=embed, delete_after=20.0)
+                                        await inter.edit_original_message(embed=embed)
 
                                 else:
                                     print('Error >　Please wait a little bit and try again')
 
-                                    embed = discord.Embed(
+                                    embed = disnake.Embed(
                                         title='驗證失敗，請稍後重試',
                                         description=f'{player_data.profile[profile_id]["cute_name"]} -x-> Progress',
                                         color=0xe74c3c
@@ -281,10 +283,10 @@ class SlashVerifyProgress(CodExtension):
 
                                     embed.set_author(
                                         name=inter.author.name,
-                                        icon_url=inter.author.avatar_url
+                                        icon_url=inter.author.avatar.url
                                     )
 
-                                    await message.edit(embed=embed, delete_after=20.0)
+                                    await inter.send(embed=embed, delete_after=20.0)
 
                             except KeyError:
                                 print(f'Error > fail to get skyblock api in '
@@ -293,7 +295,7 @@ class SlashVerifyProgress(CodExtension):
                     except KeyError:
                         print('Error > The player do not open the social media')
 
-                        embed = discord.Embed(
+                        embed = disnake.Embed(
                             title='驗證失敗，請先打開 hypixel discord api',
                             description=f'{inter.author} -x-> Progress',
                             color=0xe74c3c
@@ -301,7 +303,7 @@ class SlashVerifyProgress(CodExtension):
 
                         embed.set_author(
                             name=inter.author.name,
-                            icon_url=inter.author.avatar_url
+                            icon_url=inter.author.avatar.url
                         )
 
                         await inter.send(embed=embed, delete_after=20.0)
@@ -313,7 +315,7 @@ class SlashVerifyProgress(CodExtension):
 
                     print(f'Error > fail reason : {player_data.api["cause"]}')
 
-                    embed = discord.Embed(
+                    embed = disnake.Embed(
                         title='驗證失敗，請稍後重試',
                         description=f'{inter.author} -x-> Progress\n\n原因 : {player_data.api["cause"]}',
                         color=0xe74c3c
@@ -321,7 +323,7 @@ class SlashVerifyProgress(CodExtension):
 
                     embed.set_author(
                         name=inter.author.name,
-                        icon_url=inter.author.avatar_url
+                        icon_url=inter.author.avatar.url
                     )
 
                     await inter.send(embed=embed, delete_after=20.0)
@@ -329,7 +331,7 @@ class SlashVerifyProgress(CodExtension):
             else:
                 print('Error > Require verify id')
 
-                embed = discord.Embed(
+                embed = disnake.Embed(
                     title='你未登記id，請先登記id',
                     description=f'{inter.author} -x-> Progress',
                     color=0xe74c3c
@@ -337,7 +339,7 @@ class SlashVerifyProgress(CodExtension):
 
                 embed.set_author(
                     name=inter.author.name,
-                    icon_url=inter.author.avatar_url
+                    icon_url=inter.author.avatar.url
                 )
 
                 await inter.send(embed=embed, delete_after=20.0)
@@ -345,14 +347,14 @@ class SlashVerifyProgress(CodExtension):
         else:
             print('Error > Wrong channel')
 
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='請在正確頻道輸入',
                 color=0xe74c3c
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
             await inter.send(embed=embed, ephemeral=True)

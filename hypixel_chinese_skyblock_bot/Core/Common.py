@@ -3,7 +3,7 @@ import os
 
 import discord
 import requests
-from discord.ext import commands
+from disnake.ext import commands
 
 
 class CodExtension(commands.Cog):

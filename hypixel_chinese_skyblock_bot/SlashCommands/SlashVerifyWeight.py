@@ -1,5 +1,5 @@
-import discord
-from dislash import slash_command
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_senither_weight, add_role
@@ -8,25 +8,27 @@ from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 class SlashVerifyWeight(CodExtension):
 
-    @slash_command(
+    @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name='verify_weight',
         description='Verify your weight',
     )
-    async def verifyweight(self, inter):
+    async def verifyweight(self, inter: disnake.AppCommandInteraction):
+        await inter.response.defer(ephemeral=True)
+
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyWeightChannelId'):
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='正在向 hypixel api 提出訪問請求',
                 color=0xf1c40f
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
-            await inter.send(embed=embed, ephemeral=True)
+            await inter.edit_original_message(embed=embed)
 
             # check is player has been verified
             if get_setting_json('VerifyIdRole') in [y.name.lower() for y in inter.author.roles]:
@@ -60,7 +62,7 @@ class SlashVerifyWeight(CodExtension):
                         for profile_id in player_data.profile:
                             print(f'Info > - 正在驗證 {player_data.profile[profile_id]["cute_name"]}')
 
-                            embed = discord.Embed(
+                            embed = disnake.Embed(
                                 title='驗證處理中',
                                 description=f'正在驗證 -> {player_data.profile[profile_id]["cute_name"]}',
                                 color=0xf1c40f
@@ -68,10 +70,10 @@ class SlashVerifyWeight(CodExtension):
 
                             embed.set_author(
                                 name=inter.author.name,
-                                icon_url=inter.author.avatar_url
+                                icon_url=inter.author.avatar.url
                             )
 
-                            message = await inter.send(embed=embed)
+                            await inter.edit_original_message(embed=embed)
 
                             # try to get weight api
                             try:
@@ -96,7 +98,7 @@ class SlashVerifyWeight(CodExtension):
                                            f'\n\n:woman_lifting_weights:  Total Weight : ' \
                                            f'{round(player_data.max_senither_weight, 2)}'
 
-                                    embed = discord.Embed(
+                                    embed = disnake.Embed(
                                         title=f'{player_data.profile[profile_id]["cute_name"]} 的 Weight',
                                         description=str(desc),
                                         color=0x00ff00
@@ -104,17 +106,17 @@ class SlashVerifyWeight(CodExtension):
 
                                     embed.set_author(
                                         name=inter.author.name,
-                                        icon_url=inter.author.avatar_url
+                                        icon_url=inter.author.avatar.url
                                     )
 
-                                    await message.edit(embed=embed, delete_after=30.0)
+                                    await inter.send(embed=embed, delete_after=30.0)
 
                                 else:
                                     print('Error > senither weight no respond')
 
                                     print(f'Error > fail reason : {weight["reason"]}')
 
-                                    embed = discord.Embed(
+                                    embed = disnake.Embed(
                                         title='驗證失敗，請稍後重試',
                                         description=f'{inter.author} -x-> Weight\n\n'
                                                     f'原因 : {weight["reason"]}\n\n'
@@ -124,10 +126,10 @@ class SlashVerifyWeight(CodExtension):
 
                                     embed.set_author(
                                         name=inter.author.name,
-                                        icon_url=inter.author.avatar_url
+                                        icon_url=inter.author.avatar.url
                                     )
 
-                                    await message.edit(embed=embed, delete_after=20.0)
+                                    await inter.send(embed=embed, delete_after=20.0)
 
                             except KeyError:
                                 print(f'Error > fail to get weight api in '
@@ -138,6 +140,8 @@ class SlashVerifyWeight(CodExtension):
                         if player_data.max_senither_weight >= weight_require:
                             print(f'Info > - skill weight > {weight_require}')
 
+                            player_data.senither_weight_pass = True
+
                             await add_role(ctx=inter, get_role_id='SeniorPlayer')
 
                             # try to create result output
@@ -145,7 +149,7 @@ class SlashVerifyWeight(CodExtension):
                                 desc = f'你的最高 senither weight : ' \
                                        f'{player_data.max_senither_weight} >= {weight_require}, 符合申請資格'
 
-                                embed = discord.Embed(
+                                embed = disnake.Embed(
                                     title='已成功認證',
                                     description=str(desc),
                                     color=0x00ff00
@@ -153,21 +157,21 @@ class SlashVerifyWeight(CodExtension):
 
                                 embed.set_author(
                                     name=inter.author.name,
-                                    icon_url=inter.author.avatar_url
+                                    icon_url=inter.author.avatar.url
                                 )
 
-                                await inter.send(embed=embed, delete_after=20.0)
+                                await inter.edit_original_message(embed=embed)
 
                             except TypeError:
                                 print('Error > fail at create result embed')
 
-                        else:
+                        elif not player_data.senither_weight_pass:
                             print('Info > nothing is verified')
 
                             desc = f'你的最高 senither weight : ' \
                                    f'{player_data.max_senither_weight} < {weight_require} , 不符合申請資格'
 
-                            embed = discord.Embed(
+                            embed = disnake.Embed(
                                 title='你目前Weight未達標，請再接再厲',
                                 description=desc,
                                 color=0xe74c3c
@@ -175,15 +179,15 @@ class SlashVerifyWeight(CodExtension):
 
                             embed.set_author(
                                 name=inter.author.name,
-                                icon_url=inter.author.avatar_url
+                                icon_url=inter.author.avatar.url
                             )
 
-                            await inter.send(embed=embed, delete_after=20.0)
+                            await inter.edit_original_message(embed=embed)
 
                     except KeyError:
                         print('Error > The player do not open the social media')
 
-                        embed = discord.Embed(
+                        embed = disnake.Embed(
                             title='驗證失敗，請先打開 hypixel discord api',
                             description=f'{inter.author} -x-> Weight',
                             color=0xe74c3c
@@ -191,7 +195,7 @@ class SlashVerifyWeight(CodExtension):
 
                         embed.set_author(
                             name=inter.author.name,
-                            icon_url=inter.author.avatar_url
+                            icon_url=inter.author.avatar.url
                         )
 
                         await inter.send(embed=embed, delete_after=20.0)
@@ -203,7 +207,7 @@ class SlashVerifyWeight(CodExtension):
 
                     print(f'Error > fail reason : {player_data.api["cause"]}')
 
-                    embed = discord.Embed(
+                    embed = disnake.Embed(
                         title='驗證失敗，請稍後重試',
                         description=f'{inter.author} -x-> Weight\n\n原因 : {player_data.api["cause"]}',
                         color=0xe74c3c
@@ -211,7 +215,7 @@ class SlashVerifyWeight(CodExtension):
 
                     embed.set_author(
                         name=inter.author.name,
-                        icon_url=inter.author.avatar_url
+                        icon_url=inter.author.avatar.url
                     )
 
                     await inter.send(embed=embed, delete_after=20.0)
@@ -219,7 +223,7 @@ class SlashVerifyWeight(CodExtension):
             else:
                 print('Error > Require verify id')
 
-                embed = discord.Embed(
+                embed = disnake.Embed(
                     title='你未登記id，請先登記id',
                     description=f'{inter.author} -x-> Weight',
                     color=0xe74c3c
@@ -227,7 +231,7 @@ class SlashVerifyWeight(CodExtension):
 
                 embed.set_author(
                     name=inter.author.name,
-                    icon_url=inter.author.avatar_url
+                    icon_url=inter.author.avatar.url
                 )
 
                 await inter.send(embed=embed, delete_after=20.0)
@@ -235,14 +239,14 @@ class SlashVerifyWeight(CodExtension):
         else:
             print('Error > Wrong channel')
 
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='請在正確頻道輸入',
                 color=0xe74c3c
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
             await inter.send(embed=embed, ephemeral=True)

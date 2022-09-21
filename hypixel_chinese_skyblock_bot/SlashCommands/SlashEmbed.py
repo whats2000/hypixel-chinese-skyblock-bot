@@ -1,24 +1,24 @@
-import discord
-from discord.ext import commands
-from dislash import slash_command, OptionType
-from dislash.slash_commands import Option
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
 
 
 class SlashEmbed(CodExtension):
-    @slash_command(
+    @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name='embed',
-        description='Build a embed',
-        options=[
-            Option(name='title', description='Makes the title of the embed', type=OptionType.STRING),
-            Option(name='description', description='Makes the description', type=OptionType.STRING),
-            Option(name='color', description='The color of the embed', type=OptionType.STRING),
-            Option(name='picture', description='The picture of the embed', type=OptionType.STRING)
-        ]
+        description='Build a embed'
     )
-    async def embed(self, inter, title=None, description=None, color=None, picture=None):
+    async def embed(self,
+                    inter: disnake.AppCommandInteraction,
+                    title: str = commands.Param(description='Makes the title of the embed', default=None),
+                    description: str = commands.Param(description='Makes the description', default=None),
+                    color: str = commands.Param(description='Makes the description', default=None),
+                    picture: str = commands.Param(description='The picture url of the embed', default=None)
+                    ):
+        await inter.response.defer()
+
         if color is not None:
             try:
                 color = await commands.ColorConverter().convert(inter, color)
@@ -26,20 +26,20 @@ class SlashEmbed(CodExtension):
                 color = None
 
         else:
-            color = discord.Color.default()
+            color = disnake.Color.default()
 
-        emb = discord.Embed(color=color)
+        embed = disnake.Embed(color=color)
 
         if title is not None:
-            emb.title = title
+            embed.title = title
 
         if description is not None:
-            emb.description = description
+            embed.description = description
 
         if picture is not None:
-            emb.set_image(url=picture)
+            embed.set_image(url=picture)
 
-        await inter.respond(embed=emb)
+        await inter.edit_original_message(embed=embed)
 
 
 def setup(pybot):

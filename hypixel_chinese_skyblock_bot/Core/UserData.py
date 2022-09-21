@@ -54,6 +54,8 @@ class UserData:
 
         self.max_senither_weight = 0.0
 
+        self.senither_weight_pass = False
+
     def set_dung_class_level(self, dung_class, exp):
         xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 

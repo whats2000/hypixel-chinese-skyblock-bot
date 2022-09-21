@@ -1,6 +1,6 @@
-import discord
-from dislash import slash_command, OptionType
-from dislash.slash_commands import Option
+import disnake
+from disnake.ext import commands
+
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id, \
     get_verify_id_list, add_role
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
@@ -8,33 +8,31 @@ from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 class SlashVerifyId(CodExtension):
 
-    @slash_command(
+    @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name='verify_id',
-        description='Link your discord to your minecraft account',
-        options=[
-            Option(
-                name='minecraft_id',
-                description='Input your user id here. You have to open up the social media in hypixel',
-                type=OptionType.STRING,
-                required=True
-            )
-        ]
+        description='Link your discord to your minecraft account'
     )
-    async def verifyid(self, inter, minecraft_id=None):
-        # check is in the desired channel.
+    async def verify_id(self,
+                        inter: disnake.AppCommandInteraction,
+                        minecraft_id: str = commands.Param(
+                           description='Input your user id here. You have to open up the social media in hypixel'
+                        )):
+        # check is in the desired channel
+        await inter.response.defer(ephemeral=True)
+
         if inter.channel.id == get_setting_json('VerifyIdChannelId'):
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='正在向 hypixel api 提出訪問請求',
                 color=0xf1c40f
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
-            await inter.send(embed=embed, ephemeral=True)
+            await inter.edit_original_message(embed=embed)
 
             # check is user id input correctly
             if minecraft_id is not None:
@@ -62,7 +60,7 @@ class SlashVerifyId(CodExtension):
 
                                 print('Info > Verify Id success')
 
-                                embed = discord.Embed(
+                                embed = disnake.Embed(
                                     title='成功驗證',
                                     description=f'{inter.author} ---> {player_data.api["player"]["displayname"]}',
                                     color=0x00ff00
@@ -70,7 +68,7 @@ class SlashVerifyId(CodExtension):
 
                                 embed.set_author(
                                     name=inter.author.name,
-                                    icon_url=inter.author.avatar_url
+                                    icon_url=inter.author.avatar.url
                                 )
 
                                 await inter.send(embed=embed, delete_after=20.0)
@@ -80,7 +78,7 @@ class SlashVerifyId(CodExtension):
                             else:
                                 print('Error > Player not found')
 
-                                embed = discord.Embed(
+                                embed = disnake.Embed(
                                     title='驗證失敗，玩家id不正確',
                                     description=f'{inter.author} -x-> {minecraft_id}',
                                     color=0xe74c3c
@@ -88,14 +86,14 @@ class SlashVerifyId(CodExtension):
 
                                 embed.set_author(
                                     name=inter.author.name,
-                                    icon_url=inter.author.avatar_url
+                                    icon_url=inter.author.avatar.url
                                 )
 
                                 await inter.send(embed=embed, delete_after=20.0)
                         except (KeyError, TypeError):
                             print('Error > The player do not open the social media')
 
-                            embed = discord.Embed(
+                            embed = disnake.Embed(
                                 title='驗證失敗，請先打開discord api',
                                 description=f'{inter.author} -x-> {minecraft_id}',
                                 color=0xe74c3c
@@ -103,14 +101,14 @@ class SlashVerifyId(CodExtension):
 
                             embed.set_author(
                                 name=inter.author.name,
-                                icon_url=inter.author.avatar_url
+                                icon_url=inter.author.avatar.url
                             )
 
                             await inter.send(embed=embed, delete_after=20.0)
                     else:
                         print('Error > Please wait a little bit and try again')
 
-                        embed = discord.Embed(
+                        embed = disnake.Embed(
                             title='驗證失敗，請稍後重試',
                             description=f'{inter.author} -x-> {minecraft_id}',
                             color=0xe74c3c
@@ -118,7 +116,7 @@ class SlashVerifyId(CodExtension):
 
                         embed.set_author(
                             name=inter.author.name,
-                            icon_url=inter.author.avatar_url
+                            icon_url=inter.author.avatar.url
                         )
 
                         await inter.send(embed=embed, delete_after=20.0)
@@ -126,7 +124,7 @@ class SlashVerifyId(CodExtension):
                 else:
                     print('Error > Has already verified')
 
-                    embed = discord.Embed(
+                    embed = disnake.Embed(
                         title='你已經驗證，更新請用 /verifyidupdate',
                         description=f'{inter.author} -x-> {minecraft_id}',
                         color=0xe74c3c
@@ -134,7 +132,7 @@ class SlashVerifyId(CodExtension):
 
                     embed.set_author(
                         name=inter.author.name,
-                        icon_url=inter.author.avatar_url
+                        icon_url=inter.author.avatar.url
                     )
 
                     await inter.send(embed=embed, delete_after=20.0)
@@ -142,7 +140,7 @@ class SlashVerifyId(CodExtension):
             else:
                 print('Error >　Input id is incorrect')
 
-                embed = discord.Embed(
+                embed = disnake.Embed(
                     title='驗證失敗，請稍後重試',
                     description=f'{inter.author} -x-> {minecraft_id}',
                     color=0xe74c3c
@@ -150,7 +148,7 @@ class SlashVerifyId(CodExtension):
 
                 embed.set_author(
                     name=inter.author.name,
-                    icon_url=inter.author.avatar_url
+                    icon_url=inter.author.avatar.url
                 )
 
                 await inter.send(embed=embed, delete_after=20.0)
@@ -158,14 +156,14 @@ class SlashVerifyId(CodExtension):
         else:
             print('Error > Wrong channel')
 
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='請在正確頻道輸入',
                 color=0xe74c3c
             )
 
             embed.set_author(
                 name=inter.author.name,
-                icon_url=inter.author.avatar_url
+                icon_url=inter.author.avatar.url
             )
 
             await inter.send(embed=embed, ephemeral=True)

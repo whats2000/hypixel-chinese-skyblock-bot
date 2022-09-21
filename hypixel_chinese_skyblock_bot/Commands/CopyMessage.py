@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import disnake
+from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
 
@@ -8,11 +8,11 @@ class CopyMessage(CodExtension):
 
     @commands.has_any_role(get_setting_json('AdminRole'))
     @commands.command()
-    async def cp(self, ctx, args=None):
+    async def cp(self, ctx: commands.Context, args: str = None):
         if args is not None:
-            embed = discord.Embed(
+            embed = disnake.Embed(
                 title='警告',
-                description=str(args),
+                description=args,
                 color=0xe74c3c
             )
 
