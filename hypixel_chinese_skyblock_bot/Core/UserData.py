@@ -45,8 +45,12 @@ class UserData:
             'fishing': False,
             'enchanting': False,
             'alchemy': False,
-            'carpentry': False
+            'carpentry': False,
+            'runecrafting': False,
+            'social2': False
         }
+
+        self.skill_max_count = 0
 
         self.senither_weight = 0.0
 
@@ -104,6 +108,10 @@ class UserData:
 
     def get_skill_level_is_max(self, skill):
         return self.skill_is_max[skill]
+
+    def set_skill_max_count(self):
+        if self.skill_max_count < sum(self.slayer_is_max.values()) + sum(self.skill_is_max.values()):
+            self.skill_max_count = sum(self.slayer_is_max.values()) + sum(self.skill_is_max.values())
 
     def set_latest_user_api(self):
         if self.api['success']:

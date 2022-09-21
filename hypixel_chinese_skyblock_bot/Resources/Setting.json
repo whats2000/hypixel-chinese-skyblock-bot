@@ -96,7 +96,9 @@
                   "fishing" : 55172425,
                   "enchanting" : 111672425,
                   "alchemy" : 55172425,
-                  "carpentry" : 55172425
+                  "carpentry" : 55172425,
+                  "runecrafting" : 94450,
+                  "social2" : 272800
   },
 
   "skill_taming": 896307688189861929,
@@ -108,7 +110,11 @@
   "skill_enchanting": 871192356970463232,
   "skill_alchemy": 699549069135052831,
   "skill_carpentry": 896310489448071179,
+  "skill_runecrafting": 1021791173607698543,
+  "skill_social2": 1021791174652076082,
+
   "AllSkillMax": 896759649653649418,
+
   "SeniorPlayer": 887398339056918579,
 
   "VerifyIdRole": "✔ 已驗證成員",

@@ -224,6 +224,8 @@ class SlashVerifyProgress(CodExtension):
 
                                             await inter.send(embed=embed, delete_after=20.0)
 
+                                            player_data.set_skill_max_count()
+
                                         except TypeError:
                                             print('Error > fail at create index embed')
 
@@ -232,7 +234,7 @@ class SlashVerifyProgress(CodExtension):
                                             # loop for player all skill
                                             for skill in player_data.skill_is_max:
                                                 # check player all skill is max
-                                                if skill != 'carpentry' and not player_data.skill_is_max[skill]:
+                                                if skill != 'social2' and not player_data.skill_is_max[skill]:
                                                     print('Info > - all skills arent max')
                                                     break
                                             else:
@@ -256,6 +258,20 @@ class SlashVerifyProgress(CodExtension):
 
                                         except TypeError:
                                             print('Error > fail at create extra embed')
+
+                                    if player_data.skill_max_count > 0:
+                                        embed = disnake.Embed(
+                                            title=f'目前共取得進度數 : {player_data.skill_max_count}',
+                                            color=0x00ff00
+                                        )
+
+                                        embed.set_author(
+                                            name=inter.author.name,
+                                            icon_url=inter.author.avatar.url
+                                        )
+
+                                        await inter.edit_original_message(embed=embed)
+
                                     else:
                                         print('Info > nothing is verified')
 
