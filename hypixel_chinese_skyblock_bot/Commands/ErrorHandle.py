@@ -1,12 +1,19 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class ErrorHandle(CodExtension):
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
+        bot_logger = Logger(__name__)
+
+        bot_logger.log_message(logging.ERROR, f'{ctx.message.author.name} 使用 prefix command 出現錯誤 : {error}')
+
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'
 
@@ -21,8 +28,6 @@ class ErrorHandle(CodExtension):
 
         else:
             message = '運行該命令時發生未知錯誤!'
-
-        print(f'Error > prefix command 出現錯誤 : {error}')
 
         embed = disnake.Embed(
             title='錯誤狀況',

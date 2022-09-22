@@ -1,8 +1,11 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_hypixel_skyblock_api, add_role, remove_role
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -15,6 +18,8 @@ class SlashVerifyDungeoneer(CodExtension):
     )
     async def verifydung(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
+
+        bot_logger = Logger(__name__)
 
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyDungeoneerChannelId'):
@@ -44,13 +49,13 @@ class SlashVerifyDungeoneer(CodExtension):
                 if not player_data.api['success']:
                     player_data.try_get_latest_user_api()
 
-                    print('Info > 嘗試呼叫緩存')
+                    bot_logger.log_message(logging.DEBUG, '嘗試呼叫緩存 LatestUserApi.json')
 
-                print(f'Info > verify player dungeoneer : {inter.author}')
+                bot_logger.log_message(logging.INFO, f'驗證用戶 {inter.author.name} 地下城')
 
                 # check get hypixel api is successes
                 if player_data.api['success']:
-                    print('Info > get hypixel api success')
+                    bot_logger.log_message(logging.INFO, f'獲取 hypixel API 成功')
 
                     player_data.set_latest_user_api()
 
@@ -68,7 +73,8 @@ class SlashVerifyDungeoneer(CodExtension):
 
                             is_dung_level_get_success = False
 
-                            print(f'Info > - 正在驗證 {player_data.profile[profile_id]["cute_name"]}')
+                            bot_logger.log_message(logging.INFO, f'正在驗證 '
+                                                                 f'{player_data.profile[profile_id]["cute_name"]}')
 
                             embed = disnake.Embed(
                                 title='驗證處理中',
@@ -100,10 +106,10 @@ class SlashVerifyDungeoneer(CodExtension):
                             try:
                                 player_data.skyblock_api = get_hypixel_skyblock_api(profile_id)
 
-                                print('Info > get api success')
-
                                 # check get skyblock api is successes
                                 if player_data.skyblock_api['success']:
+                                    bot_logger.log_message(logging.INFO, f'獲取 hypixel skyblock API 成功')
+
                                     dung_api = \
                                         player_data.skyblock_api['profile']['members'][player_data.uuid]['dungeons']
 
@@ -112,21 +118,21 @@ class SlashVerifyDungeoneer(CodExtension):
                                         for dung_class in dung_api['player_classes']:
                                             class_exp = dung_api['player_classes'][dung_class]['experience']
 
-                                            print(f'Info > - {dung_class} : {class_exp}')
+                                            print(f' - {dung_class} : {class_exp}')
 
                                             player_data.set_dung_class_level(dung_class, class_exp)
 
                                         is_class_level_get_success = True
 
                                     except KeyError:
-                                        print('Error > fail at get class level')
+                                        bot_logger.log_message(logging.ERROR, f'獲取職業等級失敗')
 
                                     # get dungeon level
                                     try:
                                         for dung in player_data.dung_level:
                                             dung_exp = dung_api['dungeon_types'][dung]['experience']
 
-                                            print(f'Info > - {dung} : {dung_exp}')
+                                            print(f' - {dung} : {dung_exp}')
 
                                             player_data.set_dung_level(dung, dung_exp)
 
@@ -138,10 +144,10 @@ class SlashVerifyDungeoneer(CodExtension):
                                         is_dung_level_get_success = True
 
                                     except KeyError:
-                                        print('Error > fail at get dung level')
+                                        bot_logger.log_message(logging.ERROR, f'獲取地下城等級失敗')
 
                                 else:
-                                    print('Error >　Please wait a little bit and try again')
+                                    bot_logger.log_message(logging.ERROR, f'獲取 hypixel skyblock API 失敗')
 
                                     embed = disnake.Embed(
                                         title='驗證失敗，請稍後重試',
@@ -157,8 +163,9 @@ class SlashVerifyDungeoneer(CodExtension):
                                     await inter.send(embed=embed, delete_after=20.0)
 
                             except KeyError:
-                                print(f'Error > fail to get skyblock api in '
-                                      f'{player_data.profile[profile_id]["cute_name"]}')
+                                bot_logger.log_message(logging.ERROR,
+                                                       f'驗證 hypixel skyblock API '
+                                                       f'{player_data.profile[profile_id]["cute_name"]} 失敗')
 
                             # create embed
                             try:
@@ -168,7 +175,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                            f'\n\n===============\n\n:island: 島嶼職業等級 :\n\n'
 
                                     for dung_class in player_data.dung_class_level:
-                                        print(f'Info > - {dung_class} : {player_data.get_dung_class_level(dung_class)}')
+                                        print(f' - {dung_class} : {player_data.get_dung_class_level(dung_class)}')
 
                                         dung_class_list = get_setting_json('dung_class_list')
 
@@ -178,7 +185,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                     desc += '===============\n\n:classical_building: 地下城等級 : \n\n'
 
                                     for dung in player_data.dung_level:
-                                        print(f'Info > - {dung} : {player_data.get_dung_level(dung)}')
+                                        print(f' - {dung} : {player_data.get_dung_level(dung)}')
 
                                         dung_list = get_setting_json('dung_list')
 
@@ -199,6 +206,10 @@ class SlashVerifyDungeoneer(CodExtension):
                                     await inter.send(embed=embed, delete_after=20.0)
 
                                 else:
+                                    bot_logger.log_message(logging.ERROR,
+                                                           f'驗證 hypixel skyblock API '
+                                                           f'{player_data.profile[profile_id]["cute_name"]} 失敗')
+
                                     embed = disnake.Embed(
                                         title=f'驗證 {player_data.profile[profile_id]["cute_name"]} 失敗，請打開該島api',
                                         description=f'{player_data.profile[profile_id]["cute_name"]} -x-> Dungeoneer',
@@ -213,7 +224,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                     await inter.send(embed=embed, delete_after=20.0)
 
                             except TypeError:
-                                print('Error > fail at create index embed')
+                                bot_logger.log_message(logging.ERROR, f'建立 embed 失敗')
 
                         # give role
                         try:
@@ -227,7 +238,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                     await add_role(ctx=inter, get_role_id=f'cata{i}0')
 
                             if player_dung_max_level >= 100 or player_dung_max_level < 0:
-                                print('Error > No match role can give')
+                                bot_logger.log_message(logging.ERROR, f'無匹配身分組')
 
                                 embed = disnake.Embed(
                                     title='驗證失敗，目前沒有匹配身分組',
@@ -248,10 +259,10 @@ class SlashVerifyDungeoneer(CodExtension):
                                 await add_role(ctx=inter, get_role_names=f'{player_dung_max_level % 10} >')
 
                         except KeyError:
-                            print('Error > fail at give role')
+                            bot_logger.log_message(logging.ERROR, f'給予身分組失敗')
 
                     except KeyError:
-                        print('Error > The player do not open the social media')
+                        bot_logger.log_message(logging.ERROR, f'玩家未開啟 hypixel discord API')
 
                         embed = disnake.Embed(
                             title='驗證失敗，請先打開 hypixel discord api',
@@ -266,12 +277,10 @@ class SlashVerifyDungeoneer(CodExtension):
 
                         await inter.send(embed=embed, delete_after=20.0)
                 else:
-                    print('Error > Please wait a little bit and try again')
-
                     if 'cause' not in player_data.api:
                         player_data.api['cause'] = '玩家 id 綁定丟失，請更新 id (很可能是 nitro 導致編號變更)'
 
-                    print(f'Error > fail reason : {player_data.api["cause"]}')
+                    bot_logger.log_message(logging.ERROR, f'玩家獲取資料失敗: {player_data.api["cause"]}')
 
                     embed = disnake.Embed(
                         title='驗證失敗，請稍後重試',
@@ -287,7 +296,7 @@ class SlashVerifyDungeoneer(CodExtension):
                     await inter.send(embed=embed, delete_after=20.0)
 
             else:
-                print('Error > Require verify id')
+                bot_logger.log_message(logging.ERROR, f'玩家 id 缺失')
 
                 embed = disnake.Embed(
                     title='你未登記id，請先登記id',
@@ -303,7 +312,7 @@ class SlashVerifyDungeoneer(CodExtension):
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
-            print('Error > Wrong channel')
+            bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
             embed = disnake.Embed(
                 title='請在正確頻道輸入',

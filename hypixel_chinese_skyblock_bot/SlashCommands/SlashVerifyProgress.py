@@ -1,8 +1,11 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_hypixel_skyblock_api, add_role, get_role_name
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -15,6 +18,8 @@ class SlashVerifyProgress(CodExtension):
     )
     async def verify_progress(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
+
+        bot_logger = Logger(__name__)
 
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyProgressChannelId'):
@@ -45,13 +50,13 @@ class SlashVerifyProgress(CodExtension):
                 if not player_data.api['success']:
                     player_data.try_get_latest_user_api()
 
-                    print('Info > 嘗試呼叫緩存')
+                    bot_logger.log_message(logging.DEBUG, '嘗試呼叫緩存 LatestUserApi.json')
 
-                print(f'Info > verify player progress : {inter.author}')
+                bot_logger.log_message(logging.INFO, f'驗證用戶 {inter.author.name} 進度')
 
                 # check get hypixel api is successes
                 if player_data.api['success']:
-                    print('Info > get hypixel api success')
+                    bot_logger.log_message(logging.INFO, f'獲取 hypixel API 成功')
 
                     player_data.set_latest_user_api()
 
@@ -63,7 +68,8 @@ class SlashVerifyProgress(CodExtension):
 
                         # loop for checking all profile
                         for profile_id in player_data.profile:
-                            print(f'Info > - 正在驗證 {player_data.profile[profile_id]["cute_name"]}')
+                            bot_logger.log_message(logging.INFO, f'正在驗證 '
+                                                                 f'{player_data.profile[profile_id]["cute_name"]}')
 
                             embed = disnake.Embed(
                                 title='驗證處理中',
@@ -82,15 +88,14 @@ class SlashVerifyProgress(CodExtension):
                             try:
                                 player_data.skyblock_api = get_hypixel_skyblock_api(profile_id)
 
-                                print('Info > get api success')
-
                                 # check get skyblock api is successes
                                 if player_data.skyblock_api['success']:
+                                    bot_logger.log_message(logging.INFO, f'獲取 hypixel skyblock API 成功')
 
                                     profile_api \
                                         = player_data.skyblock_api['profile']['members'][player_data.uuid]
 
-                                    print('Info > get profileId success')
+                                    bot_logger.log_message(logging.INFO, f'獲取 hypixel skyblock profile id 成功')
 
                                     is_verify_pass = False
 
@@ -108,7 +113,7 @@ class SlashVerifyProgress(CodExtension):
 
                                                 await add_role(ctx=inter, get_role_id=f'AllSlayer{i}')
 
-                                                print(f'Info > - slayer {i}')
+                                                print(f' - slayer {i}')
 
                                                 player_data.set_slayer_level_is_max(i, True)
 
@@ -117,9 +122,9 @@ class SlashVerifyProgress(CodExtension):
                                                     is_verify_pass = True
 
                                             else:
-                                                print(f'Info > - no slayer archive {i}')
+                                                print(f' - no slayer archive {i}')
                                     except KeyError:
-                                        print('Error > fail in verify slayer')
+                                        bot_logger.log_message(logging.ERROR, f'驗證 slayer 等級失敗')
 
                                         embed = disnake.Embed(
                                             title='驗證slayer失敗，連結API錯誤，請稍後重試',
@@ -148,7 +153,7 @@ class SlashVerifyProgress(CodExtension):
                                             if skill_level >= skill_list[skill]:
                                                 await add_role(ctx=inter, get_role_id=f'skill_{skill}')
 
-                                                print(f'Info > - {skill} : {skill_level} is verified')
+                                                print(f' - {skill} : {skill_level} is verified')
 
                                                 player_data.set_skill_level_is_max(skill, True)
 
@@ -157,9 +162,9 @@ class SlashVerifyProgress(CodExtension):
                                                     is_verify_pass = True
 
                                             else:
-                                                print(f'Info > - {skill} : {skill_level} is not archive')
+                                                print(f' - {skill} : {skill_level} is not archive')
                                     except KeyError:
-                                        print('Error > fail in verify skill')
+                                        bot_logger.log_message(logging.ERROR, f'驗證 skill 等級失敗')
 
                                         embed = disnake.Embed(
                                             title='驗證skill失敗，連結API錯誤，請稍後重試',
@@ -228,7 +233,7 @@ class SlashVerifyProgress(CodExtension):
                                             player_data.set_skill_max_count()
 
                                         except TypeError:
-                                            print('Error > fail at create index embed')
+                                            bot_logger.log_message(logging.ERROR, f'建立 embed 失敗')
 
                                         # try to create extra index output
                                         try:
@@ -236,10 +241,10 @@ class SlashVerifyProgress(CodExtension):
                                             for skill in player_data.skill_is_max:
                                                 # check player all skill is max
                                                 if skill != 'social2' and not player_data.skill_is_max[skill]:
-                                                    print('Info > - all skills arent max')
+                                                    print(' - all skills arent max')
                                                     break
                                             else:
-                                                print('Info > - all skills are max')
+                                                print(' - all skills are max')
 
                                                 await add_role(ctx=inter, get_role_id='AllSkillMax')
 
@@ -258,7 +263,7 @@ class SlashVerifyProgress(CodExtension):
                                                 await inter.send(embed=embed, delete_after=20.0)
 
                                         except TypeError:
-                                            print('Error > fail at create extra embed')
+                                            bot_logger.log_message(logging.ERROR, f'建立 extra embed 失敗')
 
                                     if player_data.skill_max_count > 0:
                                         embed = disnake.Embed(
@@ -274,7 +279,7 @@ class SlashVerifyProgress(CodExtension):
                                         await inter.edit_original_message(embed=embed)
 
                                     else:
-                                        print('Info > nothing is verified')
+                                        bot_logger.log_message(logging.INFO, f'未有進度達標')
 
                                         embed = disnake.Embed(
                                             title='你目前未有任何進度達標，請再接再厲',
@@ -290,7 +295,9 @@ class SlashVerifyProgress(CodExtension):
                                         await inter.edit_original_message(embed=embed)
 
                                 else:
-                                    print('Error >　Please wait a little bit and try again')
+                                    bot_logger.log_message(logging.ERROR,
+                                                           f'驗證 hypixel skyblock API '
+                                                           f'{player_data.profile[profile_id]["cute_name"]} 失敗')
 
                                     embed = disnake.Embed(
                                         title='驗證失敗，請稍後重試',
@@ -306,11 +313,12 @@ class SlashVerifyProgress(CodExtension):
                                     await inter.send(embed=embed, delete_after=20.0)
 
                             except KeyError:
-                                print(f'Error > fail to get skyblock api in '
-                                      f'{player_data.profile[profile_id]["cute_name"]}')
+                                bot_logger.log_message(logging.ERROR,
+                                                       f'驗證 hypixel skyblock API '
+                                                       f'{player_data.profile[profile_id]["cute_name"]} 失敗')
 
                     except KeyError:
-                        print('Error > The player do not open the social media')
+                        bot_logger.log_message(logging.ERROR, f'玩家未開啟 hypixel discord API')
 
                         embed = disnake.Embed(
                             title='驗證失敗，請先打開 hypixel discord api',
@@ -325,12 +333,10 @@ class SlashVerifyProgress(CodExtension):
 
                         await inter.send(embed=embed, delete_after=20.0)
                 else:
-                    print('Error > Please wait a little bit and try again')
-
                     if 'cause' not in player_data.api:
                         player_data.api['cause'] = '玩家 id 綁定丟失，請更新 id (很可能是 nitro 導致編號變更)'
 
-                    print(f'Error > fail reason : {player_data.api["cause"]}')
+                    bot_logger.log_message(logging.ERROR, f'玩家獲取資料失敗: {player_data.api["cause"]}')
 
                     embed = disnake.Embed(
                         title='驗證失敗，請稍後重試',
@@ -346,7 +352,7 @@ class SlashVerifyProgress(CodExtension):
                     await inter.send(embed=embed, delete_after=20.0)
 
             else:
-                print('Error > Require verify id')
+                bot_logger.log_message(logging.ERROR, f'玩家 id 缺失')
 
                 embed = disnake.Embed(
                     title='你未登記id，請先登記id',
@@ -362,7 +368,7 @@ class SlashVerifyProgress(CodExtension):
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
-            print('Error > Wrong channel')
+            bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
             embed = disnake.Embed(
                 title='請在正確頻道輸入',

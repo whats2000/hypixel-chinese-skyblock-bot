@@ -1,12 +1,19 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class Help(CodExtension):
     @commands.command()
     async def help(self, ctx: commands.Context):
+        bot_logger = Logger(__name__)
+
+        bot_logger.log_message(logging.DEBUG, f'{ctx.message.author.name} 用戶呼叫幫助命令')
+
         embed = disnake.Embed(
             title='幫助列表',
             description=':scroll: 調適指令'

@@ -1,7 +1,10 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class SlashHelp(CodExtension):
@@ -12,6 +15,10 @@ class SlashHelp(CodExtension):
     )
     async def help(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
+
+        bot_logger = Logger(__name__)
+
+        bot_logger.log_message(logging.DEBUG, f'{inter.author.name} 用戶呼叫幫助命令')
 
         embed = disnake.Embed(
             title='幫助列表',

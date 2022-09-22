@@ -1,8 +1,11 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_senither_weight, add_role
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -15,6 +18,8 @@ class SlashVerifyWeight(CodExtension):
     )
     async def verifyweight(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
+
+        bot_logger = Logger(__name__)
 
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyWeightChannelId'):
@@ -42,13 +47,13 @@ class SlashVerifyWeight(CodExtension):
                 if not player_data.api['success']:
                     player_data.try_get_latest_user_api()
 
-                    print('Info > 嘗試呼叫緩存')
+                    bot_logger.log_message(logging.DEBUG, '嘗試呼叫緩存 LatestUserApi.json')
 
-                print(f'Info > verify player weight : {inter.author}')
+                bot_logger.log_message(logging.INFO, f'驗證用戶 {inter.author.name} 進度')
 
                 # check get hypixel api is successes
                 if player_data.api['success']:
-                    print('Info > get hypixel api success')
+                    bot_logger.log_message(logging.INFO, f'獲取 hypixel API 成功')
 
                     player_data.set_latest_user_api()
 
@@ -60,7 +65,8 @@ class SlashVerifyWeight(CodExtension):
 
                         # loop for checking all profile
                         for profile_id in player_data.profile:
-                            print(f'Info > - 正在驗證 {player_data.profile[profile_id]["cute_name"]}')
+                            bot_logger.log_message(logging.INFO, f'正在驗證 '
+                                                                 f'{player_data.profile[profile_id]["cute_name"]}')
 
                             embed = disnake.Embed(
                                 title='驗證處理中',
@@ -100,7 +106,7 @@ class SlashVerifyWeight(CodExtension):
 
                                     embed = disnake.Embed(
                                         title=f'{player_data.profile[profile_id]["cute_name"]} 的 Weight',
-                                        description=str(desc),
+                                        description=desc,
                                         color=0x00ff00
                                     )
 
@@ -112,9 +118,8 @@ class SlashVerifyWeight(CodExtension):
                                     await inter.send(embed=embed, delete_after=30.0)
 
                                 else:
-                                    print('Error > senither weight no respond')
-
-                                    print(f'Error > fail reason : {weight["reason"]}')
+                                    bot_logger.log_message(logging.ERROR, f'senither weight no respond : '
+                                                                          f'{weight["reason"]}')
 
                                     embed = disnake.Embed(
                                         title='驗證失敗，請稍後重試',
@@ -132,13 +137,14 @@ class SlashVerifyWeight(CodExtension):
                                     await inter.send(embed=embed, delete_after=20.0)
 
                             except KeyError:
-                                print(f'Error > fail to get weight api in '
-                                      f'{player_data.profile[profile_id]["cute_name"]}')
+                                bot_logger.log_message(logging.ERROR,
+                                                       f'驗證 hypixel skyblock API '
+                                                       f'{player_data.profile[profile_id]["cute_name"]} 失敗')
 
                         weight_require = get_setting_json('SkillWeightRequire')
 
                         if player_data.max_senither_weight >= weight_require:
-                            print(f'Info > - skill weight > {weight_require}')
+                            print(f' - skill weight > {weight_require}')
 
                             player_data.senither_weight_pass = True
 
@@ -163,10 +169,10 @@ class SlashVerifyWeight(CodExtension):
                                 await inter.edit_original_message(embed=embed)
 
                             except TypeError:
-                                print('Error > fail at create result embed')
+                                bot_logger.log_message(logging.ERROR, f'建立 embed 失敗')
 
                         elif not player_data.senither_weight_pass:
-                            print('Info > nothing is verified')
+                            bot_logger.log_message(logging.INFO, f'未有進度達標')
 
                             desc = f'你的最高 senither weight : ' \
                                    f'{player_data.max_senither_weight} < {weight_require} , 不符合申請資格'
@@ -185,7 +191,7 @@ class SlashVerifyWeight(CodExtension):
                             await inter.edit_original_message(embed=embed)
 
                     except KeyError:
-                        print('Error > The player do not open the social media')
+                        bot_logger.log_message(logging.ERROR, f'玩家未開啟 hypixel discord API')
 
                         embed = disnake.Embed(
                             title='驗證失敗，請先打開 hypixel discord api',
@@ -200,12 +206,10 @@ class SlashVerifyWeight(CodExtension):
 
                         await inter.send(embed=embed, delete_after=20.0)
                 else:
-                    print('Error > Please wait a little bit and try again')
-
                     if 'cause' not in player_data.api:
                         player_data.api['cause'] = '玩家 id 綁定丟失，請更新 id (很可能是 nitro 導致編號變更)'
 
-                    print(f'Error > fail reason : {player_data.api["cause"]}')
+                    bot_logger.log_message(logging.ERROR, f'玩家獲取資料失敗: {player_data.api["cause"]}')
 
                     embed = disnake.Embed(
                         title='驗證失敗，請稍後重試',
@@ -221,7 +225,7 @@ class SlashVerifyWeight(CodExtension):
                     await inter.send(embed=embed, delete_after=20.0)
 
             else:
-                print('Error > Require verify id')
+                bot_logger.log_message(logging.ERROR, f'玩家 id 缺失')
 
                 embed = disnake.Embed(
                     title='你未登記id，請先登記id',
@@ -237,7 +241,7 @@ class SlashVerifyWeight(CodExtension):
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
-            print('Error > Wrong channel')
+            bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
             embed = disnake.Embed(
                 title='請在正確頻道輸入',

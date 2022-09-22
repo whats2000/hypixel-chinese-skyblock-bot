@@ -1,7 +1,9 @@
 import json
+import logging
 import os
 
 from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class UserData:
@@ -142,4 +144,6 @@ class UserData:
                     self.api = data
 
             except KeyError:
-                print('Error > Get latest api fail')
+                bot_logger = Logger(__name__)
+
+                bot_logger.log_message(logging.ERROR, f'獲取最新 API 失敗')

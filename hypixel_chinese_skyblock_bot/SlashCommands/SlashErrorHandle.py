@@ -1,12 +1,21 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class SlashErrorHandle(CodExtension):
     @commands.Cog.listener()
     async def on_slash_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
+        await inter.response.defer()
+
+        bot_logger = Logger(__name__)
+
+        bot_logger.log_message(logging.ERROR, f'{inter.author.name} 使用 slash command 出現錯誤 : {error}')
+
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'
 
@@ -21,8 +30,6 @@ class SlashErrorHandle(CodExtension):
 
         else:
             message = '運行該命令時發生未知錯誤!'
-
-        print(f'Error > slash command 出現錯誤 : {error}')
 
         embed = disnake.Embed(
             title='錯誤狀況',

@@ -1,8 +1,11 @@
+import logging
+
 import disnake
 from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, set_user_id, \
     get_verify_id_list, add_role
+from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
 
@@ -20,6 +23,8 @@ class SlashVerifyId(CodExtension):
                         )):
         # check is in the desired channel
         await inter.response.defer(ephemeral=True)
+
+        bot_logger = Logger(__name__)
 
         if inter.channel.id == get_setting_json('VerifyIdChannelId'):
             embed = disnake.Embed(
@@ -44,7 +49,7 @@ class SlashVerifyId(CodExtension):
 
                     player_data.api = get_hypixel_api(minecraft_id)
 
-                    print(f'Info > verify player user : {inter.author}')
+                    bot_logger.log_message(logging.INFO, f'驗證用戶 : {inter.author.name}')
 
                     # check get hypixel api is successes
                     if player_data.api['success']:
@@ -58,7 +63,7 @@ class SlashVerifyId(CodExtension):
                             if str(inter.author) == player_data.discord:
                                 set_user_id(inter.author, player_data.api['player']['displayname'])
 
-                                print('Info > Verify Id success')
+                                bot_logger.log_message(logging.INFO, f'驗證 id 成功')
 
                                 embed = disnake.Embed(
                                     title='成功驗證',
@@ -71,12 +76,12 @@ class SlashVerifyId(CodExtension):
                                     icon_url=inter.author.avatar.url
                                 )
 
-                                await inter.send(embed=embed, delete_after=20.0)
+                                await inter.edit_original_message(embed=embed)
 
                                 await add_role(ctx=inter, get_role_names='✔ 已驗證成員')
 
                             else:
-                                print('Error > Player not found')
+                                bot_logger.log_message(logging.ERROR, f'找不到該名玩家 {minecraft_id}')
 
                                 embed = disnake.Embed(
                                     title='驗證失敗，玩家id不正確',
@@ -89,9 +94,9 @@ class SlashVerifyId(CodExtension):
                                     icon_url=inter.author.avatar.url
                                 )
 
-                                await inter.send(embed=embed, delete_after=20.0)
+                                await inter.edit_original_message(embed=embed)
                         except (KeyError, TypeError):
-                            print('Error > The player do not open the social media')
+                            bot_logger.log_message(logging.ERROR, f'玩家未開啟 hypixel discord API')
 
                             embed = disnake.Embed(
                                 title='驗證失敗，請先打開discord api',
@@ -104,13 +109,16 @@ class SlashVerifyId(CodExtension):
                                 icon_url=inter.author.avatar.url
                             )
 
-                            await inter.send(embed=embed, delete_after=20.0)
+                            await inter.edit_original_message(embed=embed)
                     else:
-                        print('Error > Please wait a little bit and try again')
+                        if 'cause' not in player_data.api:
+                            player_data.api['cause'] = '玩家 id 綁定丟失，請更新 id (很可能是 nitro 導致編號變更)'
+
+                        bot_logger.log_message(logging.ERROR, f'獲取 hypixel API 失敗  : {player_data.api["cause"]}')
 
                         embed = disnake.Embed(
                             title='驗證失敗，請稍後重試',
-                            description=f'{inter.author} -x-> {minecraft_id}',
+                            description=f'{inter.author} -x-> {minecraft_id}\n\n原因 : {player_data.api["cause"]}',
                             color=0xe74c3c
                         )
 
@@ -119,10 +127,10 @@ class SlashVerifyId(CodExtension):
                             icon_url=inter.author.avatar.url
                         )
 
-                        await inter.send(embed=embed, delete_after=20.0)
+                        await inter.edit_original_message(embed=embed)
 
                 else:
-                    print('Error > Has already verified')
+                    bot_logger.log_message(logging.ERROR, f'玩家已經驗證')
 
                     embed = disnake.Embed(
                         title='你已經驗證，更新請用 /verifyidupdate',
@@ -135,10 +143,10 @@ class SlashVerifyId(CodExtension):
                         icon_url=inter.author.avatar.url
                     )
 
-                    await inter.send(embed=embed, delete_after=20.0)
+                    await inter.edit_original_message(embed=embed)
 
             else:
-                print('Error >　Input id is incorrect')
+                bot_logger.log_message(logging.ERROR, f'玩家 {minecraft_id} 輸入錯誤')
 
                 embed = disnake.Embed(
                     title='驗證失敗，請稍後重試',
@@ -151,10 +159,10 @@ class SlashVerifyId(CodExtension):
                     icon_url=inter.author.avatar.url
                 )
 
-                await inter.send(embed=embed, delete_after=20.0)
+                await inter.edit_original_message(embed=embed)
 
         else:
-            print('Error > Wrong channel')
+            bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
             embed = disnake.Embed(
                 title='請在正確頻道輸入',
