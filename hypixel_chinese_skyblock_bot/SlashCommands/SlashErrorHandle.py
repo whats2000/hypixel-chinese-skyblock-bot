@@ -4,9 +4,9 @@ from disnake.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 
 
-class ErrorHandle(CodExtension):
+class SlashErrorHandle(CodExtension):
     @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
+    async def on_slash_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'
 
@@ -22,7 +22,7 @@ class ErrorHandle(CodExtension):
         else:
             message = '運行該命令時發生未知錯誤!'
 
-        print(f'Error > prefix command 出現錯誤 : {error}')
+        print(f'Error > slash command 出現錯誤 : {error}')
 
         embed = disnake.Embed(
             title='錯誤狀況',
@@ -31,14 +31,12 @@ class ErrorHandle(CodExtension):
         )
 
         embed.set_author(
-            name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar.url
+            name=inter.author.name,
+            icon_url=inter.author.avatar.url
         )
 
-        await ctx.send(embed=embed, delete_after=20.0)
-
-        await ctx.message.delete()
+        await inter.send(embed=embed, delete_after=20.0)
 
 
 def setup(pybot):
-    pybot.add_cog(ErrorHandle(pybot))
+    pybot.add_cog(SlashErrorHandle(pybot))
