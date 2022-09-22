@@ -13,10 +13,11 @@ class SlashVerifyProgress(CodExtension):
         name='verify_progress',
         description='Verify your slayer progress and skill level',
     )
-    async def verifyprog(self, inter: disnake.AppCommandInteraction):
+    async def verify_progress(self, inter: disnake.AppCommandInteraction):
+        await inter.response.defer(ephemeral=True)
+
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyProgressChannelId'):
-            await inter.response.defer(ephemeral=True)
 
             embed = disnake.Embed(
                 title='正在向 hypixel api 提出訪問請求',
