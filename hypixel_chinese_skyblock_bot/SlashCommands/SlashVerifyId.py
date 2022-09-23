@@ -8,6 +8,8 @@ from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_a
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
+bot_logger = Logger(__name__)
+
 
 class SlashVerifyId(CodExtension):
 
@@ -23,8 +25,6 @@ class SlashVerifyId(CodExtension):
                         )):
         # check is in the desired channel
         await inter.response.defer(ephemeral=True)
-
-        bot_logger = Logger(__name__)
 
         if inter.channel.id == get_setting_json('VerifyIdChannelId'):
             embed = disnake.Embed(

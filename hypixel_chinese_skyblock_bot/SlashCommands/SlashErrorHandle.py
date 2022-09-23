@@ -6,12 +6,12 @@ from disnake.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 class SlashErrorHandle(CodExtension):
     @commands.Cog.listener()
     async def on_slash_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
-        bot_logger = Logger(__name__)
-
         if inter is not None:
             user_name = inter.author.name
         else:

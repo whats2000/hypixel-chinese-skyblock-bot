@@ -6,6 +6,8 @@ from disnake.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 class SlashCopyMessage(CodExtension):
 
@@ -28,8 +30,6 @@ class SlashCopyMessage(CodExtension):
             try:
                 color = await commands.ColorConverter().convert(inter, color)
             except KeyError:
-                bot_logger = Logger(__name__)
-
                 bot_logger.log_message(logging.ERROR, f'顏色錯誤')
 
                 color = None

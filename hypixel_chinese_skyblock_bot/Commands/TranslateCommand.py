@@ -6,14 +6,14 @@ from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
 from hypixel_chinese_skyblock_bot.Core import TranslateText
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 class TranslateCommand(CodExtension):
 
     @commands.command()
     async def translate(self, ctx: commands.Context, lang: str = None, *, args: str = None):
         if lang is not None and args is not None:
-            bot_logger = Logger(__name__)
-
             bot_logger.log_message(logging.DEBUG, f'{ctx.message.author.name} 用戶呼叫翻譯命令')
 
             result = TranslateText.translate_text(None, lang, args)

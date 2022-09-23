@@ -6,6 +6,8 @@ from disnake.ext import commands
 from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_setting_json
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 class SlashPingCommand(CodExtension):
     @commands.slash_command(
@@ -15,8 +17,6 @@ class SlashPingCommand(CodExtension):
     )
     async def ping(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
-
-        bot_logger = Logger(__name__)
 
         bot_logger.log_message(logging.DEBUG, f'{inter.author.name} 用戶呼叫延遲測試命令: bot -> {self.bot.latency}')
 

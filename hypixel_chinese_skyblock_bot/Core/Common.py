@@ -10,14 +10,12 @@ from disnake.ext import commands
 
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 class CodExtension(commands.Cog):
-
     def __init__(self, bot: commands.Bot):
         self.bot: commands.Bot = bot
-
-
-bot_logger = Logger(__name__)
 
 
 def set_user_id(user: str, name: str):

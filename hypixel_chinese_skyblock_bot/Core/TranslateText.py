@@ -4,9 +4,10 @@ import googletrans
 
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
+bot_logger = Logger(__name__)
+
 
 def translate_text(originals: str, targets: str, txt: str):
-
     t = googletrans.Translator()
 
     if originals is None:
@@ -23,8 +24,6 @@ def translate_text(originals: str, targets: str, txt: str):
             src=originals,
             dest=targets
         )
-    bot_logger = Logger(__name__)
-
     bot_logger.log_message(logging.INFO, f'Translate > {txt} --> {result.text} ({targets})')
 
     return result

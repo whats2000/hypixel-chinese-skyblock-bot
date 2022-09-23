@@ -8,6 +8,8 @@ from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_a
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 from hypixel_chinese_skyblock_bot.Core.UserData import UserData
 
+bot_logger = Logger(__name__)
+
 
 class SlashVerifyProgress(CodExtension):
 
@@ -18,9 +20,6 @@ class SlashVerifyProgress(CodExtension):
     )
     async def verify_progress(self, inter: disnake.AppCommandInteraction):
         await inter.response.defer(ephemeral=True)
-
-        bot_logger = Logger(__name__)
-
         # check is in the desired channel.
         if inter.channel.id == get_setting_json('VerifyProgressChannelId'):
 
