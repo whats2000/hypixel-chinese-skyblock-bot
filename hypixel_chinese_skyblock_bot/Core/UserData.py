@@ -7,7 +7,7 @@ from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
 class UserData:
-    def __init__(self, user):
+    def __init__(self, user: str):
         self.id = user
 
         self.discord = ''
@@ -62,7 +62,7 @@ class UserData:
 
         self.senither_weight_pass = False
 
-    def set_dung_class_level(self, dung_class, exp):
+    def set_dung_class_level(self, dung_class: str, exp: float):
         xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
         for i in range(50, 0, -1):
@@ -73,10 +73,10 @@ class UserData:
         else:
             self.dung_class_level[dung_class] = -1
 
-    def get_dung_class_level(self, dung_class):
+    def get_dung_class_level(self, dung_class: str):
         return self.dung_class_level[dung_class]
 
-    def set_dung_level(self, dung, exp):
+    def set_dung_level(self, dung: str, exp: float):
         xp_to_level_list = get_setting_json('dungeon_xp_to_level')
 
         if exp - 569809640 >= 200000000:
@@ -91,24 +91,24 @@ class UserData:
             else:
                 self.dung_level[dung] = -1
 
-    def get_dung_level(self, dung):
+    def get_dung_level(self, dung: str):
         return self.dung_level[dung]
 
-    def get_dung_class_is_max(self, dung_class):
+    def get_dung_class_is_max(self, dung_class: str):
         return self.dung_class_level[dung_class] >= 50
 
-    def set_slayer_level_is_max(self, num, boolean):
+    def set_slayer_level_is_max(self, num: int, boolean: bool):
         if 7 <= num <= 9:
             self.slayer_is_max[num] = boolean
 
-    def get_slayer_level_is_max(self, num):
+    def get_slayer_level_is_max(self, num: int):
         return self.slayer_is_max[num]
 
-    def set_skill_level_is_max(self, skill, boolean):
+    def set_skill_level_is_max(self, skill: str, boolean: bool):
         if skill in self.skill_is_max:
             self.skill_is_max[skill] = boolean
 
-    def get_skill_level_is_max(self, skill):
+    def get_skill_level_is_max(self, skill: str):
         return self.skill_is_max[skill]
 
     def set_skill_max_count(self):

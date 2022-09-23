@@ -1,8 +1,10 @@
 import json
 import logging
 import os
+from typing import Union
 
 import discord
+import disnake
 import requests
 from disnake.ext import commands
 
@@ -11,14 +13,14 @@ from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 class CodExtension(commands.Cog):
 
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, bot: commands.Bot):
+        self.bot: commands.Bot = bot
 
 
 bot_logger = Logger(__name__)
 
 
-def set_user_id(user, name):
+def set_user_id(user: str, name: str):
     with open(f'{os.getcwd()}/Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
@@ -42,7 +44,7 @@ def set_user_id(user, name):
     out_json.close()
 
 
-def get_setting_json(key):
+def get_setting_json(key: str):
     key = str(key)
 
     if key in setting_json_data:
@@ -53,7 +55,7 @@ def get_setting_json(key):
         raise NameError('Invalid Key')
 
 
-def get_verify_id_list(key):
+def get_verify_id_list(key: str):
     with open(f'{os.getcwd()}/Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
@@ -73,7 +75,7 @@ def get_verify_id_list(key):
         return ''
 
 
-def get_hypixel_api(name):
+def get_hypixel_api(name: str):
     if name != '':
         bot_logger.log_message(logging.INFO, f'嘗試獲取 {name} 的 hypixel API')
 
@@ -86,7 +88,7 @@ def get_hypixel_api(name):
         return {'success': False}
 
 
-def get_hypixel_skyblock_api(profile):
+def get_hypixel_skyblock_api(profile: str):
     bot_logger.log_message(logging.INFO, f'嘗試獲取 {profile} 的 hypixel skyblock API')
 
     js = requests.get(f'{setting_json_data["SkyblockLink"]}{setting_json_data["ApiKey"]}&profile={profile}')
@@ -94,7 +96,7 @@ def get_hypixel_skyblock_api(profile):
     return js.json()
 
 
-def get_senither_weight(profile):
+def get_senither_weight(profile: str):
     bot_logger.log_message(logging.INFO, f'嘗試獲取 {profile} 的 senither weight API')
 
     js = requests.get(f'{setting_json_data["SenitherLink"]}{profile}/weight?key={setting_json_data["ApiKey"]}')
@@ -102,12 +104,14 @@ def get_senither_weight(profile):
     return js.json()
 
 
-def get_role_name(ctx, role_id):
+def get_role_name(ctx: Union[commands.Context, disnake.AppCommandInteraction], role_id: str):
     role = discord.utils.get(ctx.author.guild.roles, id=role_id)
     return role.name
 
 
-async def add_role(ctx, get_role_id=None, get_role_names=None):
+async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction],
+                   get_role_id: str = None,
+                   get_role_names: str = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
     elif get_role_names is not None:
@@ -119,7 +123,9 @@ async def add_role(ctx, get_role_id=None, get_role_names=None):
     await ctx.author.add_roles(role)
 
 
-async def remove_role(ctx, get_role_id=None, get_role_names=None):
+async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction],
+                      get_role_id: str = None,
+                      get_role_names: str = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
     elif get_role_names is not None:

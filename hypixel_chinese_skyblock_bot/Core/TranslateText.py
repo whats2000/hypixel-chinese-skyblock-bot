@@ -5,7 +5,7 @@ import googletrans
 from hypixel_chinese_skyblock_bot.Core.Logger import Logger
 
 
-def translate_text(originals, targets, txt):
+def translate_text(originals: str, targets: str, txt: str):
 
     t = googletrans.Translator()
 
