@@ -27,7 +27,8 @@ class SlashVerifyIdUpdate(CodExtension):
         await inter.response.defer(ephemeral=True)
 
         # check is in the desired channel.
-        if inter.channel.id == get_setting_json('VerifyIdChannelId'):
+        if inter.channel.id == get_setting_json('VerifyIdChannelId') \
+                or inter.channel.id == get_setting_json('DebugChannelId'):
             embed = disnake.Embed(
                 title='正在向 hypixel api 提出訪問請求',
                 color=0xf1c40f

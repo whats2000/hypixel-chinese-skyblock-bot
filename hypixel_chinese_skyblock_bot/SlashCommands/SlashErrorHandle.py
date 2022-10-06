@@ -14,12 +14,14 @@ class SlashErrorHandle(CodExtension):
     async def on_slash_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
         if inter is not None:
             user_name = inter.author.name
+
+            channel = inter.channel
         else:
             user_name = '未知使用者'
 
-        bot_logger.log_message(logging.ERROR, f'{user_name} 使用 slash command 出現錯誤 : {error}')
+            channel = self.bot.get_channel(get_setting_json('ErrorMessageChannel'))
 
-        channel = self.bot.get_channel(get_setting_json('ErrorMessageChannel'))
+        bot_logger.log_message(logging.ERROR, f'{user_name} 使用 slash command 出現錯誤 : {error}')
 
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'
@@ -42,7 +44,11 @@ class SlashErrorHandle(CodExtension):
             color=0xe74c3c
         )
 
-        await channel.send(embed=embed, delete_after=20.0)
+        if isinstance(error, commands.CommandOnCooldown):
+            await inter.send(embed=embed, delete_after=20.0)
+
+        else:
+            await channel.send(embed=embed, delete_after=20.0)
 
 
 def setup(pybot):
