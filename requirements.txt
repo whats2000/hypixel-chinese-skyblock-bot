@@ -1,0 +1,5 @@
+setuptools~=49.2.1
+discord~=1.0.1
+disnake~=2.5.2
+requests~=2.25.1
+googletrans~=4.0.0rc1

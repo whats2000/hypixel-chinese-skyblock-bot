@@ -68,7 +68,7 @@ class SlashParty(CodExtension):
                         icon_url=inter.author.avatar.url
                     )
 
-                    await inter.send(embed=embed, delete_after=20.0)
+                    await inter.edit_original_message(embed=embed)
                 else:
                     # check display type
                     if party == 'Catacombs' or party == 'Master Mode Catacombs':
@@ -163,7 +163,7 @@ class SlashParty(CodExtension):
                     icon_url=inter.author.avatar.url
                 )
 
-                await inter.send(embed=embed, delete_after=20.0)
+                await inter.edit_original_message(embed=embed)
 
         else:
             bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
@@ -178,7 +178,7 @@ class SlashParty(CodExtension):
                 icon_url=inter.author.avatar.url
             )
 
-            await inter.send(embed=embed, delete_after=20.0)
+            await inter.edit_original_message(embed=embed)
 
 
 def setup(pybot):
