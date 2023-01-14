@@ -9,9 +9,9 @@
 
   "DebugChannelId": 741680281848774666,
   "VerifyIdChannelId": 857171913650602004,
-  "VerifyProgressChannelId": 857171913650602004,
-  "VerifyDungeoneerChannelId": 857171913650602004,
-  "VerifyWeightChannelId": 857171913650602004,
+  "VerifyProgressChannelId": 1047865256170496060,
+  "VerifyDungeoneerChannelId": 1047865256170496060,
+  "VerifyWeightChannelId": 1047865256170496060,
   "PartyChannelId": 763738952196423721,
 
   "SkillWeightRequire": 20000,
@@ -156,5 +156,5 @@
 
   "ErrorMessageChannel": 857171913650602004,
 
-  "KuudraMaxTier": 2
+  "KuudraMaxTier": 5
 }
