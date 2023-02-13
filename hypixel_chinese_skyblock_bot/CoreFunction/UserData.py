@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
-from hypixel_chinese_skyblock_bot.Core.Logger import Logger
+from CoreFunction.Common import get_setting_json
+from CoreFunction.Logger import Logger
 
 bot_logger = Logger(__name__)
 

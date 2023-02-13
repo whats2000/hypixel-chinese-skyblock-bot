@@ -2,9 +2,9 @@ import logging
 
 import disnake
 from disnake.ext import commands
-from hypixel_chinese_skyblock_bot.Core.Common import CodExtension
-from hypixel_chinese_skyblock_bot.Core import TranslateText
-from hypixel_chinese_skyblock_bot.Core.Logger import Logger
+from CoreFunction.Common import CodExtension
+from CoreFunction import TranslateText
+from CoreFunction.Logger import Logger
 
 bot_logger = Logger(__name__)
 

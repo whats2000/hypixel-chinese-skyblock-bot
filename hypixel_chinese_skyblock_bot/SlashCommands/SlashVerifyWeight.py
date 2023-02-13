@@ -3,10 +3,10 @@ import logging
 import disnake
 from disnake.ext import commands
 
-from hypixel_chinese_skyblock_bot.Core.Common import CodExtension, get_hypixel_api, get_setting_json, \
+from CoreFunction.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_senither_weight, add_role
-from hypixel_chinese_skyblock_bot.Core.Logger import Logger
-from hypixel_chinese_skyblock_bot.Core.UserData import UserData
+from CoreFunction.Logger import Logger
+from CoreFunction.UserData import UserData
 
 bot_logger = Logger(__name__)
 

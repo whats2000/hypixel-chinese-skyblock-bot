@@ -4,8 +4,8 @@ import os
 import disnake
 from disnake.ext import commands
 
-from hypixel_chinese_skyblock_bot.Core.Common import get_setting_json
-from hypixel_chinese_skyblock_bot.Core.Logger import Logger
+from CoreFunction.Common import get_setting_json
+from CoreFunction.Logger import Logger
 
 intents_setting = disnake.Intents.default()
 intents_setting.message_content = True
