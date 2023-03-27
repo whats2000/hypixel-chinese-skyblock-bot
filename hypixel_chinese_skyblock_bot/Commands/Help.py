@@ -29,6 +29,10 @@ class Help(CodExtension):
                         '\n\n :arrow_right: `/verify_dungeoneer` : 驗證地下城職業等級與地下城等級'
                         '\n\n :arrow_right: `/verify_progress` : 驗證玩家進度是否滿等'
                         '\n\n :arrow_right: `/verify_weight` : 驗證玩家發展階段，並確認是否符合資深玩家'
+                        '\n\n :arrow_right: `/verify_title` : 驗證玩家並變更稱號'
+                        '\n\n==============='
+                        '\n\n:scroll: 其他命令'
+                        '\n\n :arrow_right: `/party` : 發送組隊邀請'
                         '\n\n================'
                         '\n\n:question: v 如何開啟Api',
             color=0x00ff00
