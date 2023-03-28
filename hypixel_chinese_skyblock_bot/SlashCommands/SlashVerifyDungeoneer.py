@@ -255,9 +255,9 @@ class SlashVerifyDungeoneer(CodExtension):
                                 await inter.send(embed=embed, delete_after=20.0)
 
                             else:
-                                await add_role(ctx=inter, get_role_names=f'< {player_dung_max_level // 10}')
+                                await add_role(ctx=inter, role_names=f'< {player_dung_max_level // 10}')
 
-                                await add_role(ctx=inter, get_role_names=f'{player_dung_max_level % 10} >')
+                                await add_role(ctx=inter, role_names=f'{player_dung_max_level % 10} >')
 
                         except KeyError:
                             bot_logger.log_message(logging.ERROR, f'給予身分組失敗')

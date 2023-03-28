@@ -4,7 +4,7 @@ import discord
 import disnake
 from disnake.ext import commands
 
-from CoreFunction.Common import CodExtension, get_setting_json
+from CoreFunction.Common import CodExtension, get_setting_json, remove_role, add_role
 from CoreFunction.Logger import Logger
 
 bot_logger = Logger(__name__)
@@ -68,14 +68,10 @@ class Dropdown(disnake.ui.Select):
         title_roles = get_setting_json('TitleRoleList')
 
         for role in title_roles:
-            role = discord.utils.get(inter.author.guild.roles, id=title_roles[role])
-
-            await inter.author.remove_roles(role)
+            await remove_role(ctx=inter, role_id=title_roles[role])
 
         # add the new select role
-        role = discord.utils.get(inter.author.guild.roles, id=title_roles[self.values[0]])
-
-        await inter.author.add_roles(role)
+        await add_role(ctx=inter, role_id=title_roles[self.values[0]])
 
         bot_logger.log_message(logging.INFO, f'變更稱號 "{self.values[0]}" 成功')
 
