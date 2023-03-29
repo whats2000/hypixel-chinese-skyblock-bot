@@ -79,7 +79,7 @@ class SlashVerifyId(CodExtension):
 
                                 await inter.edit_original_message(embed=embed)
 
-                                await add_role(ctx=inter, get_role_names='✔ 已驗證成員')
+                                await add_role(ctx=inter, role_names='✔ 已驗證成員')
 
                             else:
                                 bot_logger.log_message(logging.ERROR, f'找不到該名玩家 {minecraft_id}')

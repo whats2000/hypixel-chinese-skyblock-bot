@@ -107,13 +107,16 @@ def get_role_name(ctx: Union[commands.Context, disnake.AppCommandInteraction], r
     return role.name
 
 
-async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction],
+async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction, disnake.MessageInteraction],
                    get_role_id: str = None,
-                   get_role_names: str = None):
+                   role_names: str = None,
+                   role_id: str = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
-    elif get_role_names is not None:
-        role = discord.utils.get(ctx.author.guild.roles, name=get_role_names)
+    elif role_names is not None:
+        role = discord.utils.get(ctx.author.guild.roles, name=role_names)
+    elif role_id is not None:
+        role = discord.utils.get(ctx.author.guild.roles, id=role_id)
     else:
         bot_logger.log_message(logging.ERROR, f'缺失 function 變數')
         raise TypeError
@@ -121,13 +124,16 @@ async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction],
     await ctx.author.add_roles(role)
 
 
-async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction],
+async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction, disnake.MessageInteraction],
                       get_role_id: str = None,
-                      get_role_names: str = None):
+                      get_role_names: str = None,
+                      role_id: str = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
     elif get_role_names is not None:
         role = discord.utils.get(ctx.author.guild.roles, name=get_role_names)
+    elif role_id is not None:
+        role = discord.utils.get(ctx.author.guild.roles, id=role_id)
     else:
         bot_logger.log_message(logging.ERROR, f'缺失 function 變數')
         raise TypeError
