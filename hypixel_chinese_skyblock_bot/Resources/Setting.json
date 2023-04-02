@@ -1,8 +1,8 @@
 {
-  "Token" : "",
-  "AuthorName" : "whats2000_",
-  "ApiKey" : "",
-  "NameLink" : "https://api.hypixel.net/player?key=",
+  "Token": "",
+  "AuthorName": "whats2000_",
+  "ApiKey": "",
+  "NameLink": "https://api.hypixel.net/player?key=",
   "SkyblockLink": "https://api.hypixel.net/skyblock/profile?key=",
   "SenitherLink": "https://hypixel-api.senither.com/v1/profiles/",
   "ServerId": "590021862608863243",
@@ -12,6 +12,7 @@
   "VerifyProgressChannelId": 1047865256170496060,
   "VerifyDungeoneerChannelId": 1047865256170496060,
   "VerifyWeightChannelId": 1047865256170496060,
+  "VerifyTitleChannelId": 1068042509508427807,
   "PartyChannelId": 763738952196423721,
 
   "SkillWeightRequire": 20000,

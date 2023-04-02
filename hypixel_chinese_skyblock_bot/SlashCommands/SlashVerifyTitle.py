@@ -1,6 +1,5 @@
 import logging
 
-import discord
 import disnake
 from disnake.ext import commands
 
@@ -16,17 +15,17 @@ class Dropdown(disnake.ui.Select):
         # Define the options that will be presented inside the dropdown
         options = [
             disnake.SelectOption(
-                label="萬眾矚目", description=f"需取得 內容創作者 Media 身分組", emoji="🎞"
+                label="萬眾矚目", description=f"需取得 內容創作者 Media 身分組", emoji="<:creator:1089956446818545805>"
             ),
             disnake.SelectOption(
-                label="金光閃閃", description="需取得 加成者 Booster 身分組", emoji="✨"
+                label="金光閃閃", description="需取得 加成者 Booster 身分組", emoji="<:nitrobright:1089956488258261022>"
             ),
             disnake.SelectOption(
-                label="好野人", description="需取得 贊助者 Contributor 身分組", emoji="💰"
+                label="好野人", description="需取得 贊助者 Donator 身分組", emoji="<:treasure:1089956529513431190>"
             ),
             disnake.SelectOption(
-                label="新人保姆", description="需取得 新手嚮導 Guide 身分組", emoji="🎓"
-            ),
+                label="新人保姆", description="需取得 新手嚮導 Guide 身分組", emoji="<:beacon:1090630689734524978>"
+            )
         ]
 
         super().__init__(
@@ -113,8 +112,9 @@ class SlashVerifyTitle(CodExtension):
         description='Verify your title and change it',
     )
     async def verify_title(self, inter: disnake.AppCommandInteraction):
-        await inter.response.defer(ephemeral=True)
-        if inter.channel.id != get_setting_json('VerifyProgressChannelId') and \
+        await inter.response.defer()
+
+        if inter.channel.id != get_setting_json('VerifyTitleChannelId') and \
                 inter.channel.id != get_setting_json('DebugChannelId'):
             bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
@@ -134,7 +134,25 @@ class SlashVerifyTitle(CodExtension):
 
         view = DropdownView()
 
-        await inter.send("選擇你要切換的稱號 :", view=view)
+        description = f'稱號徽章需有相應的身分組才能進行切換。\n' \
+                      f'更多關於身分組的介紹可以前往 <#1018500627380318208> 查看。\n\n' \
+                      f'**遊戲進度徽章 : **\n' \
+                      f'**Not Coming Soon**\n\n' \
+                      f'**須具備身分組〡可切換徽章**\n'
+
+        require_roles = get_setting_json('TitleRequireRoleList')
+        title_roles = get_setting_json('TitleRoleList')
+
+        for role in title_roles:
+            description += f'<@&{require_roles[role]}>〡<@&{title_roles[role]}>\n'
+
+        embed = disnake.Embed(
+            title=f'Skyblock Taiwan — 稱號徽章切換',
+            description=description,
+            color=16776960
+        )
+
+        await inter.send(embed=embed, view=view)
 
 
 def setup(pybot):
