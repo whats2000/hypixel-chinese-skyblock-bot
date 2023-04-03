@@ -10,7 +10,7 @@ bot_logger = Logger(__name__)
 
 
 # defines a custom selection containing title options that the user can choose.
-class Dropdown(disnake.ui.Select):
+class TitleDropdown(disnake.ui.Select):
     def __init__(self):
         # Define the options that will be presented inside the dropdown
         options = [
@@ -96,12 +96,12 @@ class Dropdown(disnake.ui.Select):
         await inter.send(embed=embed, ephemeral=True)
 
 
-class DropdownView(disnake.ui.View):
+class TitleDropdownView(disnake.ui.View):
     def __init__(self):
-        super().__init__()
+        super().__init__(timeout=None)
 
         # Add the dropdown to our view object.
-        self.add_item(Dropdown())
+        self.add_item(TitleDropdown())
 
 
 class SlashVerifyTitle(CodExtension):
@@ -132,7 +132,7 @@ class SlashVerifyTitle(CodExtension):
 
             return
 
-        view = DropdownView()
+        view = TitleDropdownView()
 
         description = f'稱號徽章需有相應的身分組才能進行切換。\n' \
                       f'更多關於身分組的介紹可以前往 <#1018500627380318208> 查看。\n\n' \
