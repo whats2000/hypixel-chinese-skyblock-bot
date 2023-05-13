@@ -22,14 +22,17 @@ class SlashParty(CodExtension):
                     party: str = commands.Param(choices=['Catacombs',
                                                          'Master Mode Catacombs',
                                                          'Kuudra',
-                                                         'Dragon'],
+                                                         'Dragon',
+                                                         'Vanquisher',
+                                                         'Flare Trade',
+                                                         'Diana'],
                                                 description='Choose party type'
                                                 ),
                     tier: int = commands.Param(ge=1, le=7,
                                                description=f'Dungeon : 1 ~ 7 | '
                                                            f'Kuudra : '
                                                            f'1 ~ {get_setting_json("KuudraMaxTier")} | '
-                                                           f'Dragon : 1'),
+                                                           f'Others : 1'),
                     cata_need: int = commands.Param(name='catacombs_level_need',
                                                     ge=1, le=50,
                                                     description='Input the lowest level require.',
@@ -112,10 +115,10 @@ class SlashParty(CodExtension):
 
                         mention_role = disnake.utils.get(inter.guild.roles, id=role)
 
-                        desc = f'**尋找 :** {party}\n' \
+                        desc = f'**尋找 :** {party} Party\n' \
                                f'> {mention_role.mention}\n\n'
 
-                        thread_name = f'{party} Hunt'
+                        thread_name = f'{party} Party'
 
                     # check if voice chat link is provide
                     if voice_channel is not None:
