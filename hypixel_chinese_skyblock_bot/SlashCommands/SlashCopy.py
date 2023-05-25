@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 import disnake
 from disnake.ext import commands
@@ -24,7 +25,7 @@ class SlashCopyMessage(CodExtension):
                          color: str = commands.Param(description='Makes the description', default=None),
                          picture: str = commands.Param(description='The picture url of the embed', default=None)
                          ):
-        await inter.response.defer(ephemeral=True)
+        sleep(5)
 
         if color is not None:
             try:

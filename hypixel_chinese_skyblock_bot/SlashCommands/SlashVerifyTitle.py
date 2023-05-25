@@ -5,6 +5,7 @@ from disnake.ext import commands
 
 from CoreFunction.Common import CodExtension, get_setting_json, remove_role, add_role
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import inter_build_embed, set_inter_embed_author
 
 bot_logger = Logger(__name__)
 
@@ -54,10 +55,7 @@ class TitleDropdown(disnake.ui.Select):
                     color=0xe74c3c
                 )
 
-                embed.set_author(
-                    name=inter.author.name,
-                    icon_url=inter.author.avatar.url
-                )
+                set_inter_embed_author(embed, inter)
 
                 await inter.send(embed=embed, ephemeral=True)
 
@@ -88,10 +86,7 @@ class TitleDropdown(disnake.ui.Select):
             color=0x00ff00
         )
 
-        embed.set_author(
-            name=inter.author.name,
-            icon_url=inter.author.avatar.url
-        )
+        set_inter_embed_author(embed, inter)
 
         await inter.send(embed=embed, ephemeral=True)
 
@@ -118,15 +113,7 @@ class SlashVerifyTitle(CodExtension):
                 inter.channel.id != get_setting_json('DebugChannelId'):
             bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
-            embed = disnake.Embed(
-                title='請在正確頻道輸入',
-                color=0xe74c3c
-            )
-
-            embed.set_author(
-                name=inter.author.name,
-                icon_url=inter.author.avatar.url
-            )
+            embed = inter_build_embed('Wrong Channel', inter)
 
             await inter.send(embed=embed, ephemeral=True)
 

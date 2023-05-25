@@ -5,6 +5,7 @@ from disnake.ext import commands
 
 from CoreFunction.Common import CodExtension
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import set_ctx_embed_author
 
 bot_logger = Logger(__name__)
 
@@ -38,10 +39,7 @@ class Help(CodExtension):
             color=0x00ff00
         )
 
-        embed.set_author(
-            name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar.url
-        )
+        set_ctx_embed_author(embed, ctx)
 
         embed.set_image(url='https://media.giphy.com/media/e2uLbm9lZm1J4QyUvQ/giphy-downsized-large.gif')
 

@@ -1,4 +1,5 @@
 import logging
+# import traceback
 
 import disnake
 from disnake.ext import commands
@@ -21,7 +22,10 @@ class SlashErrorHandle(CodExtension):
 
             channel = self.bot.get_channel(get_setting_json('ErrorMessageChannel'))
 
-        bot_logger.log_message(logging.ERROR, f'{user_name} 使用 slash command 出現錯誤 : {error}')
+        bot_logger.log_message(logging.ERROR, f'{user_name} 使用 slash command 出現錯誤 : [{type(error).__name__}] {error}')
+
+        # 顯示程式錯誤位置
+        # bot_logger.log_message(logging.ERROR, f'追朔位置 : '.join(traceback.format_tb(error.__traceback__)))
 
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'
@@ -34,6 +38,9 @@ class SlashErrorHandle(CodExtension):
 
         elif isinstance(error, commands.UserInputError):
             message = '你的輸入內容有誤, 請檢查你的輸入內容!'
+
+        elif isinstance(error, commands.CommandInvokeError):
+            message = '網路壅塞中，請稍等後再嘗試'
 
         else:
             message = '運行該命令時發生未知錯誤!'

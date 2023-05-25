@@ -1,4 +1,5 @@
 import logging
+import traceback
 
 import disnake
 from disnake.ext import commands
@@ -12,7 +13,11 @@ bot_logger = Logger(__name__)
 class ErrorHandle(CodExtension):
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
-        bot_logger.log_message(logging.ERROR, f'{ctx.message.author.name} 使用 prefix command 出現錯誤 : {error}')
+        bot_logger.log_message(logging.ERROR, f'{ctx.message.author.name} 使用 prefix command 出現錯誤 : '
+                                              f'[{type(error).__name__}] {error}')
+
+        # 顯示程式錯誤位置
+        # bot_logger.log_message(logging.ERROR, f'追朔位置 : '.join(traceback.format_tb(error.__traceback__)))
 
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'

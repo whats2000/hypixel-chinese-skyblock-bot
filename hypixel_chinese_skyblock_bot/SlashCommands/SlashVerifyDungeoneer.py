@@ -6,6 +6,7 @@ from disnake.ext import commands
 from CoreFunction.Common import CodExtension, get_hypixel_api, get_setting_json, \
     get_verify_id_list, get_hypixel_skyblock_api, add_role, remove_role
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import inter_build_embed, set_inter_embed_author
 from CoreFunction.UserData import UserData
 
 bot_logger = Logger(__name__)
@@ -29,10 +30,7 @@ class SlashVerifyDungeoneer(CodExtension):
                 color=0xf1c40f
             )
 
-            embed.set_author(
-                name=inter.author.name,
-                icon_url=inter.author.avatar.url
-            )
+            set_inter_embed_author(embed, inter)
 
             await inter.edit_original_message(embed=embed)
 
@@ -83,10 +81,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                 color=0xf1c40f
                             )
 
-                            embed.set_author(
-                                name=inter.author.name,
-                                icon_url=inter.author.avatar.url
-                            )
+                            set_inter_embed_author(embed, inter)
 
                             await inter.edit_original_message(embed=embed)
 
@@ -96,10 +91,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                 color=0xf1c40f
                             )
 
-                            embed.set_author(
-                                name=inter.author.name,
-                                icon_url=inter.author.avatar.url
-                            )
+                            set_inter_embed_author(embed, inter)
 
                             await inter.edit_original_message(embed=embed)
 
@@ -156,10 +148,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                         color=0xe74c3c
                                     )
 
-                                    embed.set_author(
-                                        name=inter.author.name,
-                                        icon_url=inter.author.avatar.url
-                                    )
+                                    set_inter_embed_author(embed, inter)
 
                                     await inter.send(embed=embed, delete_after=20.0)
 
@@ -199,10 +188,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                         color=0x00ff00
                                     )
 
-                                    embed.set_author(
-                                        name=inter.author.name,
-                                        icon_url=inter.author.avatar.url
-                                    )
+                                    set_inter_embed_author(embed, inter)
 
                                     await inter.send(embed=embed, delete_after=20.0)
 
@@ -217,10 +203,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                         color=0xe74c3c
                                     )
 
-                                    embed.set_author(
-                                        name=inter.author.name,
-                                        icon_url=inter.author.avatar.url
-                                    )
+                                    set_inter_embed_author(embed, inter)
 
                                     await inter.send(embed=embed, delete_after=20.0)
 
@@ -247,10 +230,7 @@ class SlashVerifyDungeoneer(CodExtension):
                                     color=0xe74c3c
                                 )
 
-                                embed.set_author(
-                                    name=inter.author.name,
-                                    icon_url=inter.author.avatar.url
-                                )
+                                set_inter_embed_author(embed, inter)
 
                                 await inter.send(embed=embed, delete_after=20.0)
 
@@ -265,16 +245,7 @@ class SlashVerifyDungeoneer(CodExtension):
                     except KeyError:
                         bot_logger.log_message(logging.ERROR, f'玩家未開啟 hypixel discord API')
 
-                        embed = disnake.Embed(
-                            title='驗證失敗，請先打開 hypixel discord api',
-                            description=f'{inter.author} -x-> Dungeoneer',
-                            color=0xe74c3c
-                        )
-
-                        embed.set_author(
-                            name=inter.author.name,
-                            icon_url=inter.author.avatar.url
-                        )
+                        embed = inter_build_embed('Missing Api', inter)
 
                         await inter.send(embed=embed, delete_after=20.0)
                 else:
@@ -289,41 +260,21 @@ class SlashVerifyDungeoneer(CodExtension):
                         color=0xe74c3c
                     )
 
-                    embed.set_author(
-                        name=inter.author.name,
-                        icon_url=inter.author.avatar.url
-                    )
+                    set_inter_embed_author(embed, inter)
 
                     await inter.send(embed=embed, delete_after=20.0)
 
             else:
                 bot_logger.log_message(logging.ERROR, f'玩家 id 缺失')
 
-                embed = disnake.Embed(
-                    title='你未登記id，請先登記id',
-                    description=f'{inter.author} -x-> Dungeoneer',
-                    color=0xe74c3c
-                )
-
-                embed.set_author(
-                    name=inter.author.name,
-                    icon_url=inter.author.avatar.url
-                )
+                embed = inter_build_embed('Missing Id', inter)
 
                 await inter.send(embed=embed, delete_after=20.0)
 
         else:
             bot_logger.log_message(logging.ERROR, f'錯誤頻道輸入')
 
-            embed = disnake.Embed(
-                title='請在正確頻道輸入',
-                color=0xe74c3c
-            )
-
-            embed.set_author(
-                name=inter.author.name,
-                icon_url=inter.author.avatar.url
-            )
+            embed = inter_build_embed('Wrong Channel', inter)
 
             await inter.send(embed=embed, ephemeral=True)
 

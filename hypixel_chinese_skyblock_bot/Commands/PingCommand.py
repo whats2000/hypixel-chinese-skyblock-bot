@@ -4,6 +4,7 @@ import disnake
 from disnake.ext import commands
 from CoreFunction.Common import CodExtension
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import set_ctx_embed_author
 
 bot_logger = Logger(__name__)
 
@@ -20,10 +21,7 @@ class PingCommand(CodExtension):
             color=0x00ff00
         )
 
-        embed.set_author(
-            name=ctx.message.author.name,
-            icon_url=ctx.message.author.avatar.url
-        )
+        set_ctx_embed_author(embed, ctx)
 
         await ctx.send(embed=embed)
 

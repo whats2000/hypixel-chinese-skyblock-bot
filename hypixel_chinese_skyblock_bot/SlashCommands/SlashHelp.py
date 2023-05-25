@@ -5,6 +5,7 @@ from disnake.ext import commands
 
 from CoreFunction.Common import CodExtension, get_setting_json
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import set_inter_embed_author
 
 bot_logger = Logger(__name__)
 
@@ -44,10 +45,7 @@ class SlashHelp(CodExtension):
             color=0x00ff00
         )
 
-        embed.set_author(
-            name=inter.author.name,
-            icon_url=inter.author.avatar.url
-        )
+        set_inter_embed_author(embed, inter)
 
         embed.set_image(url='https://media.giphy.com/media/e2uLbm9lZm1J4QyUvQ/giphy-downsized-large.gif')
 
