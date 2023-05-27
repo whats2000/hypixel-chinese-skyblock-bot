@@ -1,4 +1,5 @@
 import disnake
+from disnake.ext import commands
 
 from CoreFunction.Common import get_setting_json
 
@@ -44,8 +45,8 @@ def inter_build_embed(case: str, inter: disnake.AppCommandInteraction) -> disnak
     return embed
 
 
-def set_inter_embed_author(embed, inter):
-    if inter.author.avatar.url is not None:
+def set_inter_embed_author(embed: disnake.Embed, inter: disnake.AppCommandInteraction) -> None:
+    if inter.author.avatar is not None:
         embed.set_author(
             name=inter.author.name,
             icon_url=inter.author.avatar.url
@@ -56,8 +57,8 @@ def set_inter_embed_author(embed, inter):
         )
 
 
-def set_ctx_embed_author(embed, ctx):
-    if ctx.message.author.avatar.url is not None:
+def set_ctx_embed_author(embed: disnake.Embed, ctx: commands.Context) -> None:
+    if ctx.message.author.avatar is not None:
         embed.set_author(
             name=ctx.message.author.name,
             icon_url=ctx.message.author.avatar.url
