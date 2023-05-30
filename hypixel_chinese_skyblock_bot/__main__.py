@@ -6,6 +6,7 @@ from disnake.ext import commands
 
 from CoreFunction.Common import get_setting_json
 from CoreFunction.Logger import Logger
+from SlashCommands.SlashVerifyTitle import TitleDropdownView
 
 intents_setting = disnake.Intents.default()
 intents_setting.message_content = True
@@ -18,6 +19,12 @@ bot_logger = Logger(__name__)
 
 @pybot.event
 async def on_ready():
+    view = TitleDropdownView()
+
+    message = await pybot.get_channel(1068042509508427807).fetch_message(1113127365971808277)
+
+    await message.edit(view=view)
+
     bot_logger.log_message(logging.INFO, 'Bot is ready')
 
 

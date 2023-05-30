@@ -37,7 +37,7 @@ class TitleDropdown(disnake.ui.Select):
         )
 
     # define how to respond to the selection
-    async def callback(self, inter: disnake.MessageInteraction):
+    async def callback(self, inter: disnake.ApplicationCommandInteraction):
         await inter.response.defer(ephemeral=True)
 
         bot_logger.log_message(logging.INFO, f'變更稱號 : {inter.author.name}')
