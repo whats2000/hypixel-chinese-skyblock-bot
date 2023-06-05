@@ -13,6 +13,7 @@
   "VerifyDungeoneerChannelId": 1047865256170496060,
   "VerifyWeightChannelId": 1047865256170496060,
   "VerifyTitleChannelId": 1068042509508427807,
+  "VerifyTitleChannelMessageId": 1113127365971808277,
   "PartyChannelId": 763738952196423721,
 
   "SkillWeightRequire": 20000,
@@ -156,7 +157,7 @@
   "VerifyIdRole": "✔ 已驗證成員",
   "DungeoneerRole": 857443276830539776,
   "ProgressRole": 759383542919725086,
-  "AdminRole": "⚙️工作人員",
+  "AdminRole": "⚙️ 工作人員",
 
   "ErrorMessageChannel": 857171913650602004,
 

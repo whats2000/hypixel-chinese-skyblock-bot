@@ -1,4 +1,6 @@
 import logging
+import traceback
+
 # import traceback
 
 import disnake
@@ -25,7 +27,7 @@ class SlashErrorHandle(CodExtension):
         bot_logger.log_message(logging.ERROR, f'{user_name} 使用 slash command 出現錯誤 : [{type(error).__name__}] {error}')
 
         # 顯示程式錯誤位置
-        # bot_logger.log_message(logging.ERROR, f'追朔位置 : '.join(traceback.format_tb(error.__traceback__)))
+        bot_logger.log_message(logging.ERROR, f'追朔位置 : '.join(traceback.format_tb(error.__traceback__)))
 
         if isinstance(error, commands.CommandNotFound):
             message = '未知指令!'

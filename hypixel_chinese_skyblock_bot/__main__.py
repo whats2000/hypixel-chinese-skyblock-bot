@@ -6,7 +6,8 @@ from disnake.ext import commands
 
 from CoreFunction.Common import get_setting_json
 from CoreFunction.Logger import Logger
-from SlashCommands.SlashVerifyTitle import TitleDropdownView
+from SlashCommands.SlashBuildReactionRole import SlashBuildReactionRole
+from SlashCommands.SlashVerifyTitle import SlashVerifyTitle
 
 intents_setting = disnake.Intents.default()
 intents_setting.message_content = True
@@ -19,16 +20,13 @@ bot_logger = Logger(__name__)
 
 @pybot.event
 async def on_ready():
-    view = TitleDropdownView()
-
-    message = await pybot.get_channel(1068042509508427807).fetch_message(1113127365971808277)
-
-    await message.edit(view=view)
+    await SlashVerifyTitle(pybot).reload_verify_title()
+    await SlashBuildReactionRole(pybot).reload_reaction_roles()
 
     bot_logger.log_message(logging.INFO, 'Bot is ready')
 
 
-for filename in os.listdir(f'{os.getcwd()}/Commands'):
+for filename in os.listdir('Commands'):
     if not filename.endswith('.py'):
         continue
 
@@ -36,7 +34,7 @@ for filename in os.listdir(f'{os.getcwd()}/Commands'):
 
     pybot.load_extension(f'Commands.{filename[:-3]}')
 
-for filename in os.listdir(f'{os.getcwd()}/SlashCommands'):
+for filename in os.listdir('SlashCommands'):
     if not filename.endswith('.py'):
         continue
 

@@ -110,7 +110,7 @@ def get_role_name(ctx: Union[commands.Context, disnake.AppCommandInteraction], r
 async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction, disnake.MessageInteraction],
                    get_role_id: str = None,
                    role_names: str = None,
-                   role_id: str = None):
+                   role_id: int = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
     elif role_names is not None:
@@ -127,7 +127,7 @@ async def add_role(ctx: Union[commands.Context, disnake.AppCommandInteraction, d
 async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction, disnake.MessageInteraction],
                       get_role_id: str = None,
                       get_role_names: str = None,
-                      role_id: str = None):
+                      role_id: int = None):
     if get_role_id is not None:
         role = discord.utils.get(ctx.author.guild.roles, id=get_setting_json(get_role_id))
     elif get_role_names is not None:

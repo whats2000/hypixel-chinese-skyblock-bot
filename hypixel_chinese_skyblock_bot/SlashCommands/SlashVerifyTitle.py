@@ -61,7 +61,7 @@ class TitleDropdown(disnake.ui.Select):
 
                 return
 
-        # remove other role as only one role is allow
+        # remove other role as only one role is allowed
         title_roles = get_setting_json('TitleRoleList')
 
         for role in title_roles:
@@ -141,6 +141,15 @@ class SlashVerifyTitle(CodExtension):
 
         await inter.send(embed=embed, view=view)
 
+    async def reload_verify_title(self):
+        bot_logger.log_message(logging.DEBUG, f'Setup > SlashVerifyTitle')
+
+        view = TitleDropdownView()
+        channel = get_setting_json('VerifyTitleChannelId')
+        message_id = get_setting_json('VerifyTitleChannelMessageId')
+        message = await self.bot.get_channel(channel).fetch_message(message_id)
+
+        await message.edit(view=view)
 
 def setup(pybot):
     pybot.add_cog(SlashVerifyTitle(pybot))
