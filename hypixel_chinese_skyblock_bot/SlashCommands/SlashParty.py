@@ -25,7 +25,7 @@ class SlashParty(CodExtension):
                                                          'Kuudra',
                                                          'Dragon',
                                                          'Vanquisher',
-                                                         'Flare Trade',
+                                                         'Fishing',
                                                          'Diana'],
                                                 description='Choose party type'
                                                 ),
