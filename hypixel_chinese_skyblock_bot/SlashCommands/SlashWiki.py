@@ -122,7 +122,7 @@ class SlashWiki(CodExtension):
                     for heading in headings:
                         title = heading.text.strip()
 
-                        if title == 'Loot':
+                        if title in ['Loot', 'Upgrading']:
                             continue
 
                         next_element = heading.find_next_sibling()
