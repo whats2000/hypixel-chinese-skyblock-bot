@@ -44,7 +44,7 @@ class SlashWiki(CodExtension):
                        description='The search input'
                    ),
                    translate: str = commands.Param(
-                       description='[!]Warning[!] this is using google translate will not 100% correct]',
+                       description='[!]Warning[!] This is using google translate will not 100% correct]',
                        autocomplete=autocomplete_langs,
                        default=None
                    )):
