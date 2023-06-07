@@ -28,6 +28,8 @@ class SlashHelp(CodExtension):
                         '\n\n :arrow_right: `sb?ping`, `/ping` : 查看與 bot 連線延遲'
                         '\n\n :arrow_right: `sb?translate` `語言 id` `文字` : 翻譯語言'
                         '\n\n :arrow_right: `/embed` : 製作對話框'
+                        '\n\n :arrow_right: `/send_embed` : 發送交互身分組選單'
+                        '\n\n :arrow_right: `/verify_title` : 發送切換身分組選單'
                         '\n\n==============='
                         '\n\n:scroll: 驗證命令'
                         '\n\n :arrow_right: `/verify_id` : 輸入要驗證的 id，需與 hypixel 社群 discord 綁定一致'
@@ -40,6 +42,7 @@ class SlashHelp(CodExtension):
                         '\n\n==============='
                         '\n\n:scroll: 其他命令'
                         '\n\n :arrow_right: `/party` : 發送組隊邀請'
+                        '\n\n :arrow_right: `/wiki` : 查詢 skyblock wiki'
                         '\n\n================'
                         '\n\n:question: v 如何開啟Api',
             color=0x00ff00
