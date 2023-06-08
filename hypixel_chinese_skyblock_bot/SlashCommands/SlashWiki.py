@@ -1,3 +1,5 @@
+import json
+
 import disnake
 import requests
 from bs4 import BeautifulSoup
@@ -11,9 +13,17 @@ from CoreFunction.TranslateText import translate_text
 
 bot_logger = Logger(__name__)
 
+with open('Resources/SkyblockName.json', 'r') as json_file:
+    data = json.load(json_file)
+
+names = data['unique_names']
 
 async def autocomplete_langs(inter: disnake.ApplicationCommandInteraction, user_input: str):
     results = [lang for code, lang in zip(LANGCODES, LANGUAGES) if user_input.lower() in lang]
+    return results[:25]
+
+async def autocomplete_names(inter: disnake.ApplicationCommandInteraction, user_input: str):
+    results = [name for name in names if user_input.lower() in name.lower()]
     return results[:25]
 
 
@@ -41,7 +51,8 @@ class SlashWiki(CodExtension):
     )
     async def wiki(self, inter: disnake.AppCommandInteraction,
                    query: str = commands.Param(
-                       description='The search input'
+                       description='The search input',
+                       autocomplete=autocomplete_names
                    ),
                    translate: str = commands.Param(
                        description='[!]Warning[!] This is using google translate will not 100% correct]',
