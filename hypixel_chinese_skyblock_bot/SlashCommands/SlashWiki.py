@@ -7,25 +7,23 @@ from bs4 import BeautifulSoup, Tag
 from disnake.ext import commands
 from googletrans.constants import LANGCODES, LANGUAGES
 
-from CoreFunction.Common import CodExtension, get_setting_json
+from CoreFunction.Common import CodExtension, get_setting_json, get_skyblock_name
 from CoreFunction.Logger import Logger
 from CoreFunction.SendEmbed import set_inter_embed_author
 from CoreFunction.TranslateText import translate_text
 
 bot_logger = Logger(__name__)
 
-with open('Resources/SkyblockName.json', 'r') as json_file:
-    data = json.load(json_file)
-
-names = data['unique_names']
-
 async def autocomplete_langs(inter: disnake.ApplicationCommandInteraction, user_input: str):
     results = [lang for code, lang in zip(LANGCODES, LANGUAGES) if user_input.lower() in lang]
     return results[:25]
 
 async def autocomplete_names(inter: disnake.ApplicationCommandInteraction, user_input: str):
-    results = [name for name in names if user_input.lower() in name.lower()]
-    return results[:25]
+    unique_names = get_skyblock_name()
+
+    results = [name for name in unique_names if user_input.lower() in name.lower()]
+    sorted_results = sorted(results)[:25]
+    return sorted_results
 
 
 def get_translate(text: str = None, translate: str = None):

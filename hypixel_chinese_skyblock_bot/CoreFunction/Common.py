@@ -1,6 +1,8 @@
 import json
 import logging
 import os
+import re
+from collections import OrderedDict
 from typing import Union
 
 import discord
@@ -12,6 +14,7 @@ from CoreFunction.Logger import Logger
 
 bot_logger = Logger(__name__)
 
+unique_names = set()
 
 class CodExtension(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -41,6 +44,30 @@ def set_user_id(user: str, name: str):
 
     out_json.close()
 
+def remove_minecraft_color_codes(text):
+    text = re.sub(r'%%light_purple%%', '', text)
+    return re.sub(r'\u00a7[a-fA-F0-9rR]', '', text)
+
+def get_skyblock_name():
+    return unique_names
+
+def update_skyblock_name():
+    with open('Resources/SkyblockName.json', 'r') as json_file:
+        data = json.load(json_file)
+
+        for item_id, item in data.items():
+            if isinstance(item, dict):
+                unique_names.add(item.get('name', ''))
+
+    json_file.close()
+
+    with open('Resources/SkyblockNameExtra.json', 'r') as json_file:
+        data = json.load(json_file)
+
+        for item in data['unique_names']:
+            unique_names.add(item)
+
+    json_file.close()
 
 def get_setting_json(key: str):
     key = str(key)
@@ -72,6 +99,33 @@ def get_verify_id_list(key: str):
 
         return ''
 
+
+def get_hypixel_skyblock_items():
+    url = "https://api.hypixel.net/resources/skyblock/items"
+    response = requests.get(url)
+    data = response.json()
+
+    if data["success"]:
+        item_list = {}
+        for item in data["items"]:
+            item_id = item["id"]
+
+            item_name = item["name"]
+
+            item_name = remove_minecraft_color_codes(item_name)
+
+            item_list[item_id] = {"name": item_name}
+
+        sorted_items = OrderedDict(sorted(item_list.items(), key=lambda x: x[0]))
+
+        with open("Resources/SkyblockName.json", "w") as file:
+            json.dump(sorted_items, file, indent=4)
+
+        update_skyblock_name()
+        
+        return True
+    else:
+        return False
 
 def get_hypixel_api(name: str):
     if name != '':
@@ -148,3 +202,6 @@ with open(f'{os.getcwd()}/Resources/Setting.json',
     setting_json_data = json.load(setting_json)
 
 setting_json.close()
+
+update_skyblock_name()
+
