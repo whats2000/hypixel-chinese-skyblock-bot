@@ -1,8 +1,9 @@
 import json
+import re
 
 import disnake
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from disnake.ext import commands
 from googletrans.constants import LANGCODES, LANGUAGES
 
@@ -180,19 +181,32 @@ class SlashWiki(CodExtension):
                     for heading in headings:
                         title = heading.text.strip()
 
-                        if title in ['Loot', 'Upgrading']:
+                        if title in ['Upgrading']:
                             continue
 
                         next_element = heading.find_next_sibling()
 
                         while next_element and next_element.name in ['p', 'ul', 'blockquote']:
                             if next_element.name in ['p', 'ul', 'blockquote']:
-                                description_text = next_element.text.strip()
+                                text = ''
+                                formatted_formula = ''
+                                for element in next_element:
+                                    if isinstance(element, Tag):
+                                        string = element.get_text(strip=True)
 
-                                if description_text is not None:
+                                        if '{' in string and '}' in string:
+                                            formula = re.sub(r'\{.*$', '', string)
+                                            formatted_formula = f'\n> ```\n> {formula}\n> ```\n'
+                                            continue
+                                        text += string
+                                    else:
+                                        text += str(element)
+                                text = text.strip()
+
+                                if text is not None:
                                     embed.add_field(
                                         name=get_translate(title, translate),
-                                        value=get_translate(description_text, translate),
+                                        value=get_translate(text, translate) + formatted_formula,
                                         inline=False
                                     )
                                     title = ' '
