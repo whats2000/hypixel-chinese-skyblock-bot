@@ -1,4 +1,4 @@
-import json
+import logging
 import re
 
 import disnake
@@ -14,9 +14,11 @@ from CoreFunction.TranslateText import translate_text
 
 bot_logger = Logger(__name__)
 
+
 async def autocomplete_langs(inter: disnake.ApplicationCommandInteraction, user_input: str):
     results = [lang for code, lang in zip(LANGCODES, LANGUAGES) if user_input.lower() in lang]
     return results[:25]
+
 
 async def autocomplete_names(inter: disnake.ApplicationCommandInteraction, user_input: str):
     unique_names = get_skyblock_name()
@@ -41,7 +43,6 @@ def get_translate(text: str = None, translate: str = None):
         return result.text + f' [{text}]'
 
 
-
 class SlashWiki(CodExtension):
     @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
@@ -58,6 +59,7 @@ class SlashWiki(CodExtension):
                        autocomplete=autocomplete_langs,
                        default=None
                    )):
+        bot_logger.log_message(logging.DEBUG, f'{inter.author.name} 查詢 {query} [{translate}]')
         await inter.response.defer()
 
         if translate is not None and translate not in [lang for code, lang in zip(LANGCODES, LANGUAGES)]:
@@ -190,10 +192,10 @@ class SlashWiki(CodExtension):
                                 formatted_formula = ''
                                 for element in next_element:
                                     if isinstance(element, Tag):
-                                        string = element.get_text(strip=True)
+                                        string = element.get_text(strip=True, separator=' ')
 
                                         if '{' in string and '}' in string:
-                                            formula = re.sub(r'\{.*$', '', string)
+                                            formula = re.sub(r'\{.*$', '', element.get_text(strip=True))
                                             formatted_formula = f'\n> ```\n> {formula}\n> ```\n'
                                             continue
                                         text += string
@@ -201,7 +203,7 @@ class SlashWiki(CodExtension):
                                         text += str(element)
                                 text = text.strip()
 
-                                if text is not None:
+                                if text is not None and text != '':
                                     embed.add_field(
                                         name=get_translate(title, translate),
                                         value=get_translate(text, translate) + formatted_formula,
