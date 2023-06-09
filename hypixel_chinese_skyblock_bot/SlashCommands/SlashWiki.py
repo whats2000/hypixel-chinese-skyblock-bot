@@ -119,7 +119,6 @@ class SlashWiki(CodExtension):
 
                     for link in links:
                         link_title = link.text.strip()
-                        link_title += get_translate(link_title, translate)
 
                         link_url = 'https://wiki.hypixel.net' + link['href']
                         embed.add_field(name=get_translate(link_title, translate), value=link_url, inline=False)
