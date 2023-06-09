@@ -59,7 +59,7 @@ class SlashWiki(CodExtension):
                        autocomplete=autocomplete_langs,
                        default=None
                    )):
-        bot_logger.log_message(logging.DEBUG, f'{inter.author.name} 查詢 {query} [{translate}]')
+        bot_logger.log_message(logging.INFO, f'{inter.author.name} 查詢 {query} [{translate}]')
         await inter.response.defer()
 
         if translate is not None and translate not in [lang for code, lang in zip(LANGCODES, LANGUAGES)]:
