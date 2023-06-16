@@ -135,11 +135,18 @@ def get_hypixel_skyblock_items():
 
 def get_hypixel_api(name: str):
     if name != '':
-        bot_logger.log_message(logging.INFO, f'嘗試獲取 {name} 的 hypixel API')
+        if re.match(r'^[a-zA-Z0-9_]+$', name):
+            url = f'{setting_json_data["NameLink"]}?name={name}'
+            headers = {
+                'API-Key': setting_json_data["ApiKey"]
+            }
 
-        js = requests.get(f'{setting_json_data["NameLink"]}{setting_json_data["ApiKey"]}&name={name}')
+            js = requests.get(url, headers=headers)
 
-        return js.json()
+            return js.json()
+        else:
+            bot_logger.log_message(logging.ERROR, '無效的玩家 ID')
+            return {'success': False}
     else:
         bot_logger.log_message(logging.ERROR, f'缺失玩家 id')
 
@@ -149,7 +156,12 @@ def get_hypixel_api(name: str):
 def get_hypixel_skyblock_api(profile: str):
     bot_logger.log_message(logging.INFO, f'嘗試獲取 {profile} 的 hypixel skyblock API')
 
-    js = requests.get(f'{setting_json_data["SkyblockLink"]}{setting_json_data["ApiKey"]}&profile={profile}')
+    url = f'{setting_json_data["SkyblockLink"]}?profile={profile}'
+    headers = {
+        'API-Key': setting_json_data["ApiKey"]
+    }
+
+    js = requests.get(url, headers=headers)
 
     return js.json()
 

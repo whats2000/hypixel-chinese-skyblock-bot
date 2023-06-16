@@ -2,8 +2,8 @@
   "Token": "",
   "AuthorName": "whats2000_",
   "ApiKey": "",
-  "NameLink": "https://api.hypixel.net/player?key=",
-  "SkyblockLink": "https://api.hypixel.net/skyblock/profile?key=",
+  "NameLink": "https://api.hypixel.net/player",
+  "SkyblockLink": "https://api.hypixel.net/skyblock/profile",
   "SenitherLink": "https://hypixel-api.senither.com/v1/profiles/",
   "ServerId": "590021862608863243",
 

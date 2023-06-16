@@ -42,6 +42,9 @@ def get_translate(text: str = None, translate: str = None):
     else:
         return result.text + f' [{text}]'
 
+def is_valid_query(query: str) -> bool:
+    pattern = r'^[^:/?=&\\]+$'
+    return bool(re.match(pattern, query))
 
 class SlashWiki(CodExtension):
     @commands.slash_command(
@@ -72,6 +75,18 @@ class SlashWiki(CodExtension):
             set_inter_embed_author(embed, inter)
 
             await inter.send(embed=embed, ephemeral=True)
+
+        if not is_valid_query(query):
+            embed = disnake.Embed(
+                title='查詢失敗',
+                description='你輸入的查詢包含不允許的字符，請重新輸入',
+                color=0xe74c3c
+            )
+
+            set_inter_embed_author(embed, inter)
+
+            await inter.send(embed=embed, ephemeral=True)
+            return
 
         url = f'https://wiki.hypixel.net/index.php?search={query}&title=Special%3ASearch'
 
