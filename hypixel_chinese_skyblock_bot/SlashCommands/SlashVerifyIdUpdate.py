@@ -72,7 +72,8 @@ class SlashVerifyIdUpdate(CodExtension):
                             player_data.discord = player_data.api['player']['socialMedia']['links']['DISCORD']
 
                             # check user name is correct in api
-                            if str(inter.author) == player_data.discord:
+                            if str(inter.author) == player_data.discord or \
+                                    str(inter.author) == f'{player_data.discord}#0':
                                 set_user_id(inter.author, player_data.api['player']['displayname'])
 
                                 bot_logger.log_message(logging.INFO, f'更新 id 成功')
