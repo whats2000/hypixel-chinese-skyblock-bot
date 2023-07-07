@@ -23,6 +23,8 @@ class SlashParty(CodExtension):
                     party: str = commands.Param(choices=['Catacombs',
                                                          'Master Mode Catacombs',
                                                          'Kuudra',
+                                                         'Leech',
+                                                         'Bacte',
                                                          'Dragon',
                                                          'Vanquisher',
                                                          'Fishing',
