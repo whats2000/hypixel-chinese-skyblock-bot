@@ -48,6 +48,8 @@ def set_user_id(user: str, name: str):
 
 def remove_minecraft_color_codes(text):
     text = re.sub(r'%%light_purple%%', '', text)
+    text = re.sub(r'%%aqua%%', '', text)
+    text = re.sub(r'%%yellow%%', '', text)
     return re.sub(r'\u00a7[a-fA-F0-9rR]', '', text)
 
 

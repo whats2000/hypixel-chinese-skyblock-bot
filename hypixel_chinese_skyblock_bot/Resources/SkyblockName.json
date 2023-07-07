@@ -1,4 +1,7 @@
 {
+    "AATROX_BADPHONE": {
+        "name": "Maddox Badphone"
+    },
     "AATROX_BATPHONE": {
         "name": "Maddox Batphone"
     },
@@ -116,6 +119,33 @@
     "ADVENT_CALENDAR_DISPLAY": {
         "name": "Advent Calendar Display"
     },
+    "AGARICUS_CAP": {
+        "name": "Agaricus Cap"
+    },
+    "AGARICUS_CAP_BUNCH": {
+        "name": "Agaricus Cap Bunch"
+    },
+    "AGARICUS_CAP_CAP": {
+        "name": "Agaricus Cap Cap"
+    },
+    "AGARICUS_CHUM_CAP": {
+        "name": "Agaricus Chumcap"
+    },
+    "AGARICUS_SOUP": {
+        "name": "Agaricus Soup"
+    },
+    "AGARIMOO_ARTIFACT": {
+        "name": "Agarimoo Artifact"
+    },
+    "AGARIMOO_RING": {
+        "name": "Agarimoo Ring"
+    },
+    "AGARIMOO_TALISMAN": {
+        "name": "Agarimoo Talisman"
+    },
+    "AGARIMOO_TONGUE": {
+        "name": "Agarimoo Tongue"
+    },
     "AIMING_BOW": {
         "name": "Aiming Bow"
     },
@@ -232,6 +262,15 @@
     },
     "ANTIQUE_REMEDIES": {
         "name": "Antique Remedies"
+    },
+    "ANTI_BITE_SCARF": {
+        "name": "Anti-Bite Scarf"
+    },
+    "ANTI_BITE_SCARF_2": {
+        "name": "Anti-Bite Scarf"
+    },
+    "ANTI_MORPH_POTION": {
+        "name": "Anti-Morph Potion"
     },
     "ANUBIS": {
         "name": "Anubis"
@@ -452,6 +491,9 @@
     "AXE_OF_THE_SHREDDED": {
         "name": "Axe of the Shredded"
     },
+    "BACTE_FRAGMENT": {
+        "name": "Bacte Fragment"
+    },
     "BAG_OF_CASH": {
         "name": "Bag of Cash"
     },
@@ -517,6 +559,9 @@
     },
     "BARN_ISLAND": {
         "name": "Barn Island"
+    },
+    "BARRY_PEN": {
+        "name": "Barry's Montgray Pen"
     },
     "BASE_GRIFFIN_UPGRADE_STONE": {
         "name": "Base Griffin Upgrade Stone"
@@ -635,6 +680,9 @@
     "BEDROCK": {
         "name": "Bedrock"
     },
+    "BEDWARS_WOOL": {
+        "name": "Tree-like Wool"
+    },
     "BEE_HIVE": {
         "name": "Bee Hive"
     },
@@ -646,6 +694,12 @@
     },
     "BEJEWELED_HANDLE": {
         "name": "Bejeweled Handle"
+    },
+    "BERBERIS_BLOWGUN": {
+        "name": "Berberis Blowgun"
+    },
+    "BERBERIS_FUEL_INJECTOR": {
+        "name": "Berberis Fuel Injector"
     },
     "BERSERKER_BOOTS": {
         "name": "Berserker Boots"
@@ -670,6 +724,9 @@
     },
     "BIGGER_TEETH": {
         "name": "Bigger Teeth"
+    },
+    "BIG_BRAIN_TALISMAN": {
+        "name": "Big Brain Talisman"
     },
     "BIG_SPRING_BOOTS": {
         "name": "Big Spring Boots"
@@ -872,8 +929,23 @@
     "BLOCK_ZAPPER": {
         "name": "Block Zapper"
     },
+    "BLOODBADGE": {
+        "name": "Bloodbadge"
+    },
+    "BLOOD_DONOR_ARTIFACT": {
+        "name": "Blood Donor Artifact"
+    },
+    "BLOOD_DONOR_RING": {
+        "name": "Blood Donor Ring"
+    },
+    "BLOOD_DONOR_TALISMAN": {
+        "name": "Blood Donor Talisman"
+    },
     "BLOOD_GOD_CREST": {
         "name": "Blood God Crest"
+    },
+    "BLUETOOTH_RING": {
+        "name": "Bluetooth Ring"
     },
     "BLUE_CANDY": {
         "name": "Blue Candy"
@@ -962,9 +1034,6 @@
     "BOSS_SPIRIT_BOW": {
         "name": "Spirit Bow"
     },
-    "BOTTLED_INSPIRATION": {
-        "name": "Bottled Inspiration"
-    },
     "BOTTLED_ODONATA": {
         "name": "Bottled Odonata"
     },
@@ -997,9 +1066,6 @@
     },
     "BOX_OF_SEEDS": {
         "name": "Box of Seeds"
-    },
-    "BRACELET_OF_THE_GLYPHS": {
-        "name": "Bracelet of the Glyphs"
     },
     "BRAIDED_GRIFFIN_FEATHER": {
         "name": "Braided Griffin Feather"
@@ -1057,6 +1123,9 @@
     },
     "BROWN_SMALL_BACKPACK": {
         "name": "Small Backpack"
+    },
+    "BUBBA_BLISTER": {
+        "name": "Bubba Blister"
     },
     "BUCKET": {
         "name": "Bucket"
@@ -1285,6 +1354,21 @@
     },
     "CACTUS_LEGGINGS": {
         "name": "Cactus Leggings"
+    },
+    "CADUCOUS_EXTRACT": {
+        "name": "Caducous Extract"
+    },
+    "CADUCOUS_FEEDER": {
+        "name": "Caducous Feeder"
+    },
+    "CADUCOUS_LEGUME": {
+        "name": "Caducous Legume"
+    },
+    "CADUCOUS_STEM": {
+        "name": "Caducous Stem"
+    },
+    "CADUCOUS_STEM_BUNCH": {
+        "name": "Caducous Stem Bunch"
     },
     "CAKE": {
         "name": "Cake"
@@ -1718,6 +1802,9 @@
     "CHICKEN_HEAD": {
         "name": "Chicken Head"
     },
+    "CHICKEN_LEGGS": {
+        "name": "Chicken Leggs"
+    },
     "CHICK_NEST": {
         "name": "Chick Nest"
     },
@@ -1729,6 +1816,9 @@
     },
     "CHILL_THE_FISH_2": {
         "name": "Chill the Fish"
+    },
+    "CHOCOLATE_CHIP": {
+        "name": "Fang-tastic Chocolate Chip"
     },
     "CHRISTMAS_TREE": {
         "name": "Christmas Tree"
@@ -2024,6 +2114,9 @@
     "CORRUPT_SOIL": {
         "name": "Corrupt Soil"
     },
+    "COVEN_SEAL": {
+        "name": "Coven Seal"
+    },
     "COW_AXE": {
         "name": "Cow Axe"
     },
@@ -2161,6 +2254,27 @@
     },
     "CRUDE_GABAGOOL_DISTILLATE": {
         "name": "Gabagool Distillate"
+    },
+    "CRUXMOTION": {
+        "name": "Cruxmotion"
+    },
+    "CRUX_TALISMAN_1": {
+        "name": "Crux Talisman"
+    },
+    "CRUX_TALISMAN_2": {
+        "name": "Crux Ring"
+    },
+    "CRUX_TALISMAN_3": {
+        "name": "Crux Artifact"
+    },
+    "CRUX_TALISMAN_4": {
+        "name": "Crux Relic"
+    },
+    "CRUX_TALISMAN_5": {
+        "name": "Crux Heirloom"
+    },
+    "CRUX_TALISMAN_6": {
+        "name": "Crux Chronomicon"
     },
     "CRYOPOWDER_SHARD": {
         "name": "Cryopowder Shard"
@@ -2372,6 +2486,9 @@
     "DEAD_CAT_DETECTOR": {
         "name": "Cat Detector"
     },
+    "DEAD_CAT_FOOD": {
+        "name": "Dead Cat Food"
+    },
     "DEAN_LETTER_OF_RECOMMENDATION": {
         "name": "Letter of Recommendation"
     },
@@ -2429,8 +2546,14 @@
     "DESTRUCTION_CLOAK": {
         "name": "Destruction Cloak"
     },
+    "DETECTIVE_SCANNER": {
+        "name": "Detective Scanner"
+    },
     "DETECTOR_RAIL": {
         "name": "Detector Rail"
+    },
+    "DETRANSFIGURED_MASK": {
+        "name": "Used Detransfigured Face"
     },
     "DEVOUR_RING": {
         "name": "Devour Ring"
@@ -2597,11 +2720,14 @@
     "DIRT_ROD": {
         "name": "Dirt Rod"
     },
-    "DISINFESTOR_CHESTPLATE": {
-        "name": "Disinfestor Chestplate"
+    "DISINFESTOR_GLOVES": {
+        "name": "Disinfestor Gloves"
     },
     "DISPENSER": {
         "name": "Dispenser"
+    },
+    "DISPLACED_LEECH": {
+        "name": "Displaced Leech"
     },
     "DITTO_BLOB": {
         "name": "Ditto Blob"
@@ -3080,6 +3206,9 @@
     "EMPEROR_SHOES": {
         "name": "Emperor Shoes"
     },
+    "EMPTY_CHUMCAP_BUCKET": {
+        "name": "Empty Chumcap Bucket"
+    },
     "EMPTY_CHUM_BUCKET": {
         "name": "Empty Chum Bucket"
     },
@@ -3131,7 +3260,16 @@
     "ENCHANTED_BOOK_BUNDLE_COUNTER_STRIKE": {
         "name": "Enchanted Book Bundle"
     },
+    "ENCHANTED_BOOK_BUNDLE_QUANTUM": {
+        "name": "Enchanted Book Bundle"
+    },
     "ENCHANTED_BOOK_BUNDLE_REFLECTION": {
+        "name": "Enchanted Book Bundle"
+    },
+    "ENCHANTED_BOOK_BUNDLE_THE_ONE": {
+        "name": "Enchanted Book Bundle"
+    },
+    "ENCHANTED_BOOK_BUNDLE_TRANSYLVANIAN": {
         "name": "Enchanted Book Bundle"
     },
     "ENCHANTED_BOOK_BUNDLE_VICIOUS": {
@@ -3323,6 +3461,9 @@
     "ENCHANTED_LEATHER": {
         "name": "Enchanted Leather"
     },
+    "ENCHANTED_LUSH_BERBERIS": {
+        "name": "Enchanted Lush Berberis"
+    },
     "ENCHANTED_MAGMA_CREAM": {
         "name": "Enchanted Magma Cream"
     },
@@ -3481,6 +3622,9 @@
     },
     "ENCHANTED_TITANIUM": {
         "name": "Enchanted Titanium"
+    },
+    "ENCHANTED_VAMPIRIC_MELON": {
+        "name": "Enchanted Vampiric Melon"
     },
     "ENCHANTED_WATER_LILY": {
         "name": "Enchanted Lily Pad"
@@ -3722,6 +3866,9 @@
     "EVERBURNING_FLAME": {
         "name": "Everburning Flame"
     },
+    "EXCEEDINGLY_COMFY_SNEAKERS": {
+        "name": "Exceedingly Comfy Sneakers"
+    },
     "EXCEEDINGLY_RARE_ENDER_ARTIFACT_UPGRADER": {
         "name": "Exceedingly Rare Ender Artifact Upgrader"
     },
@@ -3745,6 +3892,9 @@
     },
     "EXPLOSIVE_SHOT_ABILITY": {
         "name": "Explosive Shot"
+    },
+    "EXPORTABLE_CARROTS": {
+        "name": "Exportable Carrots"
     },
     "EXP_BOTTLE": {
         "name": "Experience Bottle"
@@ -3806,6 +3956,9 @@
     "FAMILY_DOUBLOON": {
         "name": "Doubloon of the Family"
     },
+    "FANCY_BEACH_CHAIR": {
+        "name": "Fancy Beach Chair"
+    },
     "FANCY_FLOWER_POT": {
         "name": "Flower Pot"
     },
@@ -3851,6 +4004,9 @@
     "FARMING_TALISMAN": {
         "name": "Farming Talisman"
     },
+    "FARMING_WAND": {
+        "name": "Wand of Farming"
+    },
     "FARM_ARMOR_BOOTS": {
         "name": "Farm Armor Boots"
     },
@@ -3895,6 +4051,9 @@
     },
     "FEL_SWORD": {
         "name": "Fel Sword"
+    },
+    "FEMURGROWTH_LEGGINGS": {
+        "name": "Femurgrowth Leggings"
     },
     "FENCE": {
         "name": "Oak Fence"
@@ -4106,6 +4265,9 @@
     "FIRST_MASTER_STAR": {
         "name": "First Master Star"
     },
+    "FISHERMAN_COOLER": {
+        "name": "Fisherman's Cooler"
+    },
     "FISHING_CRYSTAL": {
         "name": "Fishing Crystal"
     },
@@ -4184,6 +4346,9 @@
     "FLAME_BREAKER_LEGGINGS": {
         "name": "Flamebreaker Leggings"
     },
+    "FLAMINGO": {
+        "name": "Flamingo Float"
+    },
     "FLAMING_CHESTPLATE": {
         "name": "Flaming Chestplate"
     },
@@ -4243,6 +4408,9 @@
     },
     "FLAWLESS_TOPAZ_GEM": {
         "name": "Flawless Topaz Gemstone"
+    },
+    "FLEX_HELMET": {
+        "name": "Flex Helmet"
     },
     "FLINT": {
         "name": "Flint"
@@ -4361,6 +4529,9 @@
     "FOURTH_MASTER_STAR": {
         "name": "Fourth Master Star"
     },
+    "FOUR_EYED_FISH": {
+        "name": "Four-Eyed Fish"
+    },
     "FRACTURED_MITHRIL_PICKAXE": {
         "name": "Fractured Mithril Pickaxe"
     },
@@ -4375,6 +4546,9 @@
     },
     "FRESH_SPRING_WATER": {
         "name": "Fresh Spring Water"
+    },
+    "FROSTY_CRUX": {
+        "name": "Frosty Crux"
     },
     "FROSTY_SNOW_BALL": {
         "name": "Frosty Snowball"
@@ -4403,6 +4577,12 @@
     "FROZEN_SCYTHE": {
         "name": "Frozen Scythe"
     },
+    "FROZEN_WATER": {
+        "name": "Frozen Water"
+    },
+    "FROZEN_WATER_PUNGI": {
+        "name": "Frozen Water Pungi"
+    },
     "FTX_3070": {
         "name": "FTX 3070"
     },
@@ -4418,6 +4598,9 @@
     "FULL_FAIRY_CONTROL": {
         "name": "Full Fairy Control"
     },
+    "FULL_JAW_FANGING_KIT": {
+        "name": "Full-Jaw Fanging Kit"
+    },
     "FUMING_POTATO_BOOK": {
         "name": "Fuming Potato Book"
     },
@@ -4432,6 +4615,9 @@
     },
     "FURNACE_PLUS": {
         "name": "Furnace+"
+    },
+    "FUTURE_CALORIES": {
+        "name": "Future Calories Talisman"
     },
     "GABAGOEY_MIXIN": {
         "name": "Gabagoey Mixin"
@@ -4453,6 +4639,9 @@
     },
     "GARLAND": {
         "name": "Garland"
+    },
+    "GARLIC_FLAVORED_GUMMY_BEAR": {
+        "name": "Perma-Jelled Garlic-Flavored Re-Heated Gummy Polar Bear"
     },
     "GATEWAY_WAND": {
         "name": "Gateway Wand"
@@ -4669,9 +4858,6 @@
     },
     "GLASS_BOTTLE": {
         "name": "Glass Bottle"
-    },
-    "GLASS_HONEY_AEROSOL": {
-        "name": "Glass Honey Aerosol"
     },
     "GLOOMLOCK_GRIMOIRE": {
         "name": "Gloomlock Grimoire"
@@ -5069,6 +5255,9 @@
     "GREAT_WHITE_TOOTH_MEAL": {
         "name": "Great White Tooth Meal"
     },
+    "GREENHOUSE": {
+        "name": "Greenhouse Planter"
+    },
     "GREEN_CANDY": {
         "name": "Green Candy"
     },
@@ -5150,6 +5339,9 @@
     "GUARDIAN_CHESTPLATE": {
         "name": "Guardian Chestplate"
     },
+    "GUARDIAN_LUCKY_BLOCK": {
+        "name": "Guardian Lucky Block"
+    },
     "GUNTHER_SNEAKERS": {
         "name": "Gunther's Sneakers"
     },
@@ -5158,6 +5350,9 @@
     },
     "GYROKINETIC_WAND": {
         "name": "Gyrokinetic Wand"
+    },
+    "HALF_EATEN_CARROT": {
+        "name": "Half-Eaten Carrot"
     },
     "HALLOWED_SKULL": {
         "name": "Hallowed Skull"
@@ -5249,8 +5444,8 @@
     "HARD_STONE_GENERATOR_9": {
         "name": "Hard Stone Minion IX"
     },
-    "HARMONIOUS_SURGERY_TOOLBELT": {
-        "name": "Harmonious Surgery Toolbelt"
+    "HARMONIOUS_SURGERY_TOOLKIT": {
+        "name": "Harmonious Surgery Toolkit"
     },
     "HARP": {
         "name": "Personal Harp"
@@ -5293,6 +5488,9 @@
     },
     "HEALING_CIRCLE_ITEM": {
         "name": "Healing Circle"
+    },
+    "HEALING_MELON": {
+        "name": "Healing Melon"
     },
     "HEALING_RING": {
         "name": "Healing Ring"
@@ -5360,6 +5558,15 @@
     "HELMET_OF_THE_PACK": {
         "name": "Helmet of the Pack"
     },
+    "HEMOBOMB": {
+        "name": "Hemobomb"
+    },
+    "HEMOGLASS": {
+        "name": "Hemoglass"
+    },
+    "HEMOVIBE": {
+        "name": "Hemovibe"
+    },
     "HERMIT_CRAB_PERSONALITY": {
         "name": "Hermit Crab Minion Skin"
     },
@@ -5420,6 +5627,9 @@
     "HOLY_FRAGMENT": {
         "name": "Holy Dragon Fragment"
     },
+    "HOLY_ICE": {
+        "name": "Holy Ice"
+    },
     "HOLY_SHIMMER": {
         "name": "Shimmer Skin"
     },
@@ -5446,6 +5656,9 @@
     },
     "HORSEMAN_SCYTHE": {
         "name": "Horseman's Scythe"
+    },
+    "HORSEZOOKA": {
+        "name": "Horsezooka"
     },
     "HOSTAGE_COMPASS": {
         "name": "Hostage Compass"
@@ -5482,6 +5695,9 @@
     },
     "HOT_CRIMSON_LEGGINGS": {
         "name": "Hot Crimson Leggings"
+    },
+    "HOT_DOG": {
+        "name": "Hot Dog"
     },
     "HOT_FERVOR_BOOTS": {
         "name": "Hot Fervor Boots"
@@ -5545,6 +5761,9 @@
     },
     "HUB_PORTAL": {
         "name": "Portal to the Hub"
+    },
+    "HUB_WIZARD_TOWER_TRAVEL_SCROLL": {
+        "name": "Travel Scroll to the Wizard Tower"
     },
     "HUGE_MUSHROOM_1": {
         "name": "Brown Mushroom Block"
@@ -5864,9 +6083,6 @@
     "INK_WAND": {
         "name": "Ink Wand"
     },
-    "INSPIRED_CHESTPLATE": {
-        "name": "Inspired Chestplate"
-    },
     "INTIMIDATION_ARTIFACT": {
         "name": "Intimidation Artifact"
     },
@@ -6052,6 +6268,9 @@
     },
     "JUDGEMENT_CORE": {
         "name": "Judgement Core"
+    },
+    "JUICY_HEALING_MELON": {
+        "name": "Juicy Healing Melon"
     },
     "JUJU_SHORTBOW": {
         "name": "Juju Shortbow"
@@ -6512,6 +6731,9 @@
     "LEGEND_ROD": {
         "name": "Rod of Legends"
     },
+    "LEGGINGS_OF_THE_COVEN": {
+        "name": "Leggings of the Coven"
+    },
     "LEGGINGS_OF_THE_PACK": {
         "name": "Leggings of the Pack"
     },
@@ -6523,6 +6745,9 @@
     },
     "LEVER": {
         "name": "Lever"
+    },
+    "LIFEGUARD_CHAIR": {
+        "name": "Lifeguard Chair"
     },
     "LIFE_PRESERVER": {
         "name": "Life Preserver"
@@ -6569,11 +6794,32 @@
     "LIME_SMALL_BACKPACK": {
         "name": "Small Backpack"
     },
+    "LIVELY_SEPULTURE_CHESTPLATE": {
+        "name": "Lively Sepulture Chestplate"
+    },
     "LIVID_DAGGER": {
         "name": "Livid Dagger"
     },
     "LIVID_FRAGMENT": {
         "name": "Livid Fragment"
+    },
+    "LIVING_METAL": {
+        "name": "Living Metal"
+    },
+    "LIVING_METAL_ANVIL": {
+        "name": "Living Metal Anchor"
+    },
+    "LM_EGG_BOOTS": {
+        "name": "Living Metal Bootspawn"
+    },
+    "LM_EGG_CAP": {
+        "name": "Living Metal Capspawn"
+    },
+    "LM_EGG_CHEST": {
+        "name": "Living Metal Chestspawn"
+    },
+    "LM_EGG_LEGS": {
+        "name": "Living Metal Pantspawn"
     },
     "LOG": {
         "name": "Oak Wood"
@@ -6628,6 +6874,21 @@
     },
     "LUMP_OF_MAGMA": {
         "name": "Lump of Magma"
+    },
+    "LUSCIOUS_HEALING_MELON": {
+        "name": "Luscious Healing Melon"
+    },
+    "LUSH_ARTIFACT": {
+        "name": "Lush Artifact"
+    },
+    "LUSH_BERBERIS": {
+        "name": "Lush Berberis"
+    },
+    "LUSH_RING": {
+        "name": "Lush Ring"
+    },
+    "LUSH_TALISMAN": {
+        "name": "Lush Talisman"
     },
     "LUXURIOUS_SPOOL": {
         "name": "Luxurious Spool"
@@ -6890,6 +7151,9 @@
     "MAXOR_THE_FISH": {
         "name": "Maxor the Fish"
     },
+    "MCGRUBBER_BURGER": {
+        "name": "McGrubber's Burger"
+    },
     "MEDIUM_AGRONOMY_SACK": {
         "name": "Medium Agronomy Sack"
     },
@@ -7048,6 +7312,12 @@
     },
     "METAL_CHESTPLATE": {
         "name": "Metal Chestplate"
+    },
+    "METAL_HEART": {
+        "name": "Living Metal Heart"
+    },
+    "METAPHORIC_EGG": {
+        "name": "Metaphoric Egg"
     },
     "METEOR_SHARD": {
         "name": "Meteor Shard"
@@ -7409,6 +7679,9 @@
     "MUTATED_BLAZE_ASHES": {
         "name": "Mutated Blaze Ashes"
     },
+    "MUTED_BARK": {
+        "name": "Muted Bark"
+    },
     "MUTTON": {
         "name": "Mutton"
     },
@@ -7465,6 +7738,12 @@
     },
     "NANSORB_ARROW": {
         "name": "Nansorb Arrow"
+    },
+    "NEARLY_COHERENT_ROD": {
+        "name": "Nearly Coherent doR gnihsiF"
+    },
+    "NEARLY_WHOLE_CARROT": {
+        "name": "Nearly-Whole Carrot"
     },
     "NECROMANCER_BROOCH": {
         "name": "Necromancer's Brooch"
@@ -7601,8 +7880,14 @@
     "NOTE_BLOCK": {
         "name": "Noteblock"
     },
+    "NOT_DEADGEHOG_MASK": {
+        "name": "Not-Dead-Gehog Mask"
+    },
     "NOVA_SWORD": {
         "name": "Sword of the Universe"
+    },
+    "NULLIFIED_METAL": {
+        "name": "Nullified Metal"
     },
     "NULL_ATOM": {
         "name": "Null Atom"
@@ -7768,6 +8053,9 @@
     },
     "OPTICAL_LENS": {
         "name": "Optical Lens"
+    },
+    "ORANGE_CHESTPLATE": {
+        "name": "Orange Chestplate"
     },
     "ORANGE_GREATER_BACKPACK": {
         "name": "Greater Backpack"
@@ -8579,6 +8867,9 @@
     "PITCHIN_KOI": {
         "name": "Pitchin' Koi"
     },
+    "PLACEABLE_FAIRY_SOUL_RIFT": {
+        "name": "Placeable Fairy Soul"
+    },
     "PLASMA": {
         "name": "Plasma"
     },
@@ -8611,6 +8902,9 @@
     },
     "POISON_SAMPLE": {
         "name": "Poison Sample"
+    },
+    "POLARVOID_BOOK": {
+        "name": "Polarvoid Book"
     },
     "POLISHED_PEBBLE": {
         "name": "Polished Pebble"
@@ -8753,6 +9047,12 @@
     "PRESENT_PERSONALITY": {
         "name": "Present Minion Skin"
     },
+    "PRESUMED_GALLON_OF_RED_PAINT": {
+        "name": "Presumed Gallon of Red Paint"
+    },
+    "PRE_DIGESTION_FISH": {
+        "name": "Pre-Digestion Fish"
+    },
     "PRICELESS_THE_FISH": {
         "name": "Priceless the Fish"
     },
@@ -8818,6 +9118,9 @@
     },
     "PROTEIN_BAR": {
         "name": "Half-eaten Protein Bar"
+    },
+    "PROTOCHICKEN": {
+        "name": "Proto-Chicken"
     },
     "PUFFERFISH_HAT": {
         "name": "Pufferfish Hat"
@@ -8911,6 +9214,9 @@
     },
     "PUMPKIN_SEEDS": {
         "name": "Pumpkin Seeds"
+    },
+    "PUNCHCARD_ARTIFACT": {
+        "name": "Punchcard Artifact"
     },
     "PURE_MITHRIL": {
         "name": "Pure Mithril"
@@ -9431,9 +9737,6 @@
     "REINFORCED_IRON_ARROW": {
         "name": "Reinforced Iron Arrow"
     },
-    "REINFORCED_MULTI_SHEARS": {
-        "name": "Reinforced Multi-Shears"
-    },
     "REINFORCED_SCALES": {
         "name": "Reinforced Scales"
     },
@@ -9536,20 +9839,23 @@
     "REVIVE_STONE_ORB": {
         "name": "Revive Stone"
     },
+    "RIFTWART_ROOTS": {
+        "name": "Riftwart Roots"
+    },
+    "RIFT_BUCKET": {
+        "name": "Plumber's Bucket"
+    },
     "RIFT_JUMP_ELIXIR": {
         "name": "Jump Elixir"
     },
-    "RIFT_NECKLACE_INSIDE_1": {
-        "name": "Rift Necklace"
-    },
-    "RIFT_NECKLACE_INSIDE_2": {
-        "name": "Rift Necklace"
-    },
-    "RIFT_NECKLACE_INSIDE_3": {
+    "RIFT_NECKLACE_INSIDE": {
         "name": "Rift Necklace"
     },
     "RIFT_NECKLACE_OUTSIDE": {
         "name": "Rift Necklace"
+    },
+    "RIFT_PRISM": {
+        "name": "Rift Prism"
     },
     "RIFT_SPEED_ELIXIR": {
         "name": "Speed Elixir"
@@ -9560,8 +9866,8 @@
     "RIFT_STRENGTH_ELIXIR": {
         "name": "Strength Elixir"
     },
-    "RIFT_TEST_SWORD": {
-        "name": "Rift Test Sword"
+    "RING_OF_BROKEN_LOVE": {
+        "name": "Ring of Broken Love"
     },
     "RING_OF_SPACE": {
         "name": "Ring of Space"
@@ -9887,6 +10193,9 @@
     "SCOVILLE_BELT": {
         "name": "Scoville Belt"
     },
+    "SCRIBE_CRUX": {
+        "name": "Scribe Crux"
+    },
     "SCULPTORS_AXE": {
         "name": "Sculptor's Axe"
     },
@@ -9944,11 +10253,11 @@
     "SEISMIC_WAVE_STICK": {
         "name": "Seismic Wave"
     },
+    "SELF_RECURSIVE_PICKAXE": {
+        "name": "Self-Recursive Pickaxe"
+    },
     "SERRATED_CLAWS": {
         "name": "Serrated Claws"
-    },
-    "SGNIGGEL_NORI": {
-        "name": "sgniggeL norI"
     },
     "SHADOW_ASSASSIN_ADMIRAL": {
         "name": "Admiral Skin"
@@ -10127,6 +10436,9 @@
     "SILK_EDGE_SWORD": {
         "name": "Silk-Edge Sword"
     },
+    "SILVERTWIST_KARAMBIT": {
+        "name": "Silver-Twist Karambit"
+    },
     "SILVER_FANG": {
         "name": "Silver Fang"
     },
@@ -10141,6 +10453,9 @@
     },
     "SILVER_HUNTER_LEGGINGS": {
         "name": "Silver Hunter Leggings"
+    },
+    "SILVER_LACED_KARAMBIT": {
+        "name": "Silver-Laced Karambit"
     },
     "SILVER_TROPHY_FISHING_SACK": {
         "name": "Silver Trophy Fishing Sack"
@@ -10442,6 +10757,9 @@
     "SMOOTH_STAIRS": {
         "name": "Stone Brick Stairs"
     },
+    "SNAKE_IN_A_BOOT": {
+        "name": "Snake-in-a-Boot"
+    },
     "SNIPER_BOW": {
         "name": "Sniper Bow"
     },
@@ -10709,9 +11027,6 @@
     "SPIDER_QUEENS_STINGER": {
         "name": "Spider Queen's Stinger"
     },
-    "SPIDER_RECEPTACLE": {
-        "name": "Spider Receptacle (Plastic)"
-    },
     "SPIDER_RING": {
         "name": "Spider Ring"
     },
@@ -10744,6 +11059,9 @@
     },
     "SPIRIT_WING": {
         "name": "Spirit Wing"
+    },
+    "SPLATTER_CRUX": {
+        "name": "Splatter Crux"
     },
     "SPONGE": {
         "name": "Sponge"
@@ -11129,6 +11447,9 @@
     "STAR_SWORD_9000": {
         "name": "Sword of the Stars 9000"
     },
+    "STEAK_STAKE": {
+        "name": "Steak Stake"
+    },
     "STEEL_CHESTPLATE": {
         "name": "Steel Chestplate"
     },
@@ -11411,6 +11732,9 @@
     "SWORD_OF_REVELATIONS": {
         "name": "Sword of Revelations"
     },
+    "SWORD_OF_THE_MULTIVERSE": {
+        "name": "Sword of the Multiverse"
+    },
     "SYNTHESIZER_V1": {
         "name": "Synthesizer v1"
     },
@@ -11425,6 +11749,9 @@
     },
     "TACTICAL_INSERTION": {
         "name": "Tactical Insertion"
+    },
+    "TACTICIAN_MURDER_WEAPON": {
+        "name": "Tactician's Murder Weapon"
     },
     "TACTICIAN_SWORD": {
         "name": "Tactician's Sword"
@@ -11603,6 +11930,9 @@
     "TEST_BUCKET_PLEASE_IGNORE": {
         "name": "Test Bucket Please Ignore"
     },
+    "TEST_VAMPIRE_CHESTPLATE": {
+        "name": "Test Vampire Chestplate"
+    },
     "TEST_WAND_WEAPON": {
         "name": "Test Rift Wand"
     },
@@ -11671,9 +12001,6 @@
     },
     "THIN_GLASS": {
         "name": "Glass Pane"
-    },
-    "THIN_WOODLET": {
-        "name": "Thin Woodlet"
     },
     "THIRD_MASTER_STAR": {
         "name": "Third Master Star"
@@ -11915,6 +12242,12 @@
     "UNDEAD_SWORD": {
         "name": "Undead Sword"
     },
+    "UNFANGED_VAMPIRE_PART": {
+        "name": "Unfanged Vampire Part"
+    },
+    "UNIQUE_RUNE": {
+        "name": "Rune"
+    },
     "UNKNOWN_ITEM": {
         "name": "Unknown Item"
     },
@@ -11960,11 +12293,50 @@
     "VALKYRIE": {
         "name": "Valkyrie"
     },
+    "VAMPIRE_DENTIST_RELIC": {
+        "name": "Vampire Dentist Relic"
+    },
+    "VAMPIRE_GENERATOR_1": {
+        "name": "Vampire Minion I"
+    },
+    "VAMPIRE_GENERATOR_10": {
+        "name": "Vampire Minion X"
+    },
+    "VAMPIRE_GENERATOR_11": {
+        "name": "Vampire Minion XI"
+    },
+    "VAMPIRE_GENERATOR_2": {
+        "name": "Vampire Minion II"
+    },
+    "VAMPIRE_GENERATOR_3": {
+        "name": "Vampire Minion III"
+    },
+    "VAMPIRE_GENERATOR_4": {
+        "name": "Vampire Minion IV"
+    },
+    "VAMPIRE_GENERATOR_5": {
+        "name": "Vampire Minion V"
+    },
+    "VAMPIRE_GENERATOR_6": {
+        "name": "Vampire Minion VI"
+    },
+    "VAMPIRE_GENERATOR_7": {
+        "name": "Vampire Minion VII"
+    },
+    "VAMPIRE_GENERATOR_8": {
+        "name": "Vampire Minion VIII"
+    },
+    "VAMPIRE_GENERATOR_9": {
+        "name": "Vampire Minion IX"
+    },
     "VAMPIRE_MASK": {
         "name": "Vampire Mask"
     },
     "VAMPIRE_WITCH_MASK": {
         "name": "Vampire Witch Mask"
+    },
+    "VAMPIRIC_MELON": {
+        "name": "Vampiric Melon"
     },
     "VANQUISHED_BLAZE_BELT": {
         "name": "Vanquished Blaze Belt"
@@ -12062,11 +12434,17 @@
     "VOLTA": {
         "name": "Volta"
     },
+    "VOLT_CRUX": {
+        "name": "Volt Crux"
+    },
     "VOODOO": {
         "name": "Voodoo"
     },
     "VOODOO_DOLL": {
         "name": "Voodoo Doll"
+    },
+    "VOODOO_DOLL_WILTED": {
+        "name": "Jinxed Voodoo Doll"
     },
     "VORPAL_KATANA": {
         "name": "Vorpal Katana"
@@ -12093,13 +12471,16 @@
         "name": "Wand of Strength"
     },
     "WAND_OF_WARDING": {
-        "name": "Wand of Warding"
+        "name": "Warding Diamathame"
     },
     "WARDEN_HEART": {
         "name": "Warden Heart"
     },
     "WARDEN_HELMET": {
         "name": "Warden Helmet"
+    },
+    "WARDING_TRINKET": {
+        "name": "Warding Trinket"
     },
     "WARNING_FLARE": {
         "name": "Warning Flare"
@@ -12193,6 +12574,9 @@
     },
     "WEDDING_RING_9": {
         "name": "Legendary Ring of Love"
+    },
+    "WEIRDER_TUBA": {
+        "name": "Weirder Tuba"
     },
     "WEIRD_TUBA": {
         "name": "Weird Tuba"
@@ -12292,6 +12676,12 @@
     },
     "WILSON_ENGINEERING_PLANS": {
         "name": "Wilson's Engineering Plans"
+    },
+    "WILTED_BERBERIS": {
+        "name": "Wilted Berberis"
+    },
+    "WILTED_BERBERIS_BUNCH": {
+        "name": "Wilted Berberis Bunch"
     },
     "WIND_CHIMES": {
         "name": "Wind Chimes"
@@ -12401,8 +12791,14 @@
     "WITHER_SOUL": {
         "name": "Wither Soul"
     },
+    "WIZARD_BREADCRUMBS": {
+        "name": "Wizard's Breadcrumbs"
+    },
     "WIZARD_PORTAL_MEMENTO": {
         "name": "Piece of Wizard Portal"
+    },
+    "WIZARD_TOWER_PORTAL": {
+        "name": "Portal to The Wizard Tower"
     },
     "WIZARD_WAND": {
         "name": "Wizard Wand"
@@ -12571,6 +12967,9 @@
     },
     "WYLD_LEGGINGS": {
         "name": "Wyld Leggings"
+    },
+    "WYLD_SWORD": {
+        "name": "Wyld Sword"
     },
     "X": {
         "name": "X"
