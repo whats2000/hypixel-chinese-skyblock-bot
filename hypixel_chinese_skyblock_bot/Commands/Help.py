@@ -44,7 +44,7 @@ class Help(CodExtension):
 
         set_ctx_embed_author(embed, ctx)
 
-        embed.set_image(url='https://media.giphy.com/media/e2uLbm9lZm1J4QyUvQ/giphy-downsized-large.gif')
+        embed.set_image(url='https://cdn.discordapp.com/attachments/1107091685315444817/1119566032365957171/TurnOnAPI.gif')
 
         await ctx.send(embed=embed)
 
