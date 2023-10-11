@@ -30,6 +30,8 @@ class SlashClearMessage(CodExtension):
 
         await inter.response.defer(ephemeral=True)
 
+        bot_logger.log_message(logging.INFO, f'刪除信息 : {inter.channel.name} | {inter.author.name}')
+
         try:
             message_id = int(message_id)
             channel = inter.channel
