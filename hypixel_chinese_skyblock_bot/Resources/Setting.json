@@ -160,6 +160,8 @@
   "DungeoneerRole": 857443276830539776,
   "ProgressRole": 759383542919725086,
   "AdminRole": "⚙️ 工作人員",
+  "LockDownAllowRole": [1015869682357653514],
+  "LockDownDisallowedRole": [590449213045735435],
 
   "ErrorMessageChannel": 857171913650602004,
 
