@@ -29,5 +29,6 @@ class SlashUpdateSkyblockName(CodExtension):
         else:
             await inter.edit_original_message('Fail to update !')
 
+
 def setup(pybot):
     pybot.add_cog(SlashUpdateSkyblockName(pybot))
