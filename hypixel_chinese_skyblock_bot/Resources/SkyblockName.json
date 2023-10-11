@@ -11,6 +11,9 @@
     "ABICASE": {
         "name": "Abicase"
     },
+    "ABINGOPHONE": {
+        "name": "A\u24b7iphone"
+    },
     "ABIPHONE_XIII_PRO": {
         "name": "Abiphone XIII Pro"
     },
@@ -27,10 +30,10 @@
         "name": "Abiphone XIV Enormous"
     },
     "ABIPHONE_XIV_ENORMOUS_BLACK": {
-        "name": "Abiphone XIV Enormous"
+        "name": "Abiphone XIV Enormous Black"
     },
     "ABIPHONE_XIV_ENORMOUS_PURPLE": {
-        "name": "Abiphone XIV Enormous"
+        "name": "Abiphone XIV Enormous Purple"
     },
     "ABIPHONE_XI_ULTRA": {
         "name": "Abiphone XI Ultra"
@@ -97,6 +100,9 @@
     },
     "ACTIVATOR_RAIL": {
         "name": "Activator Rail"
+    },
+    "ADAPTIVE_BELT": {
+        "name": "Adaptive Belt"
     },
     "ADAPTIVE_BOOTS": {
         "name": "Adaptive Boots"
@@ -431,6 +437,9 @@
     "ASPECT_OF_THE_JERRY": {
         "name": "Aspect of the Jerry"
     },
+    "ASPECT_OF_THE_JERRY_SIGNATURE": {
+        "name": "Aspect of the Jerry, Signature Edition"
+    },
     "ASPECT_OF_THE_LEECH_1": {
         "name": "Aspect of the Leech"
     },
@@ -505,6 +514,9 @@
     },
     "BAKED_POTATO": {
         "name": "Baked Potato"
+    },
+    "BALLOON_SNAKE": {
+        "name": "Balloon Snake"
     },
     "BANDAGED_MITHRIL_PICKAXE": {
         "name": "Bandaged Mithril Pickaxe"
@@ -736,6 +748,9 @@
     },
     "BINGO_ARTIFACT": {
         "name": "Bingo Artifact"
+    },
+    "BINGO_BLASTER": {
+        "name": "Bingo Blaster"
     },
     "BINGO_CARD": {
         "name": "Bingo Card"
@@ -992,6 +1007,12 @@
     "BONE_MEAL": {
         "name": "Bone Meal"
     },
+    "BONE_NECKLACE": {
+        "name": "Bone Necklace"
+    },
+    "BONE_REAVER": {
+        "name": "Bone Reaver"
+    },
     "BONZO_FRAGMENT": {
         "name": "Bonzo Fragment"
     },
@@ -1016,8 +1037,14 @@
     "BOOK_AND_QUILL": {
         "name": "Book and Quill"
     },
+    "BOOK_OF_PROGRESSION": {
+        "name": "Book of Progression"
+    },
     "BOOK_OF_STATS": {
         "name": "Book of Stats"
+    },
+    "BOOPFISH_HELMET": {
+        "name": "Boopfish Helmet"
     },
     "BOOSTER_COOKIE": {
         "name": "Booster Cookie"
@@ -1057,6 +1084,9 @@
     },
     "BOUNCY_LEGGINGS": {
         "name": "Bouncy Leggings"
+    },
+    "BOUQUET_OF_LIES": {
+        "name": "Bouquet of Lies"
     },
     "BOW": {
         "name": "Bow"
@@ -1372,6 +1402,9 @@
     },
     "CAKE": {
         "name": "Cake"
+    },
+    "CAKE_COUNTER": {
+        "name": "Cake Counter"
     },
     "CAKE_SOUL": {
         "name": "Cake Soul"
@@ -1702,6 +1735,27 @@
     },
     "CELESTE_WAND": {
         "name": "Celeste Wand"
+    },
+    "CENTURY_MEMENTO_BLUE": {
+        "name": "Cake Slice of the Century"
+    },
+    "CENTURY_MEMENTO_GREEN": {
+        "name": "Cake Slice of the Century"
+    },
+    "CENTURY_MEMENTO_PINK": {
+        "name": "Cake Slice of the Century"
+    },
+    "CENTURY_MEMENTO_RED": {
+        "name": "Cake Slice of the Century"
+    },
+    "CENTURY_MEMENTO_YELLOW": {
+        "name": "Cake Slice of the Century"
+    },
+    "CENTURY_TALISMAN": {
+        "name": "Talisman of the Century"
+    },
+    "CENTURY_THE_FISH": {
+        "name": "Century the Fish"
     },
     "CHAINMAIL_BOOTS": {
         "name": "Chainmail Boots"
@@ -2742,10 +2796,10 @@
         "name": "Divan's Alloy"
     },
     "DIVAN_BOOTS": {
-        "name": "Boots Of Divan"
+        "name": "Boots of Divan"
     },
     "DIVAN_CHESTPLATE": {
-        "name": "Chestplate Of Divan"
+        "name": "Chestplate of Divan"
     },
     "DIVAN_DRILL": {
         "name": "Divan's Drill"
@@ -2754,10 +2808,10 @@
         "name": "Divan Fragment"
     },
     "DIVAN_HELMET": {
-        "name": "Helmet Of Divan"
+        "name": "Helmet of Divan"
     },
     "DIVAN_LEGGINGS": {
-        "name": "Leggings Of Divan"
+        "name": "Leggings of Divan"
     },
     "DIVER_BOOTS": {
         "name": "Diver's Boots"
@@ -3261,6 +3315,9 @@
         "name": "Enchanted Book Bundle"
     },
     "ENCHANTED_BOOK_BUNDLE_QUANTUM": {
+        "name": "Enchanted Book Bundle"
+    },
+    "ENCHANTED_BOOK_BUNDLE_RAINBOW": {
         "name": "Enchanted Book Bundle"
     },
     "ENCHANTED_BOOK_BUNDLE_REFLECTION": {
@@ -3824,6 +3881,12 @@
     "EPOCH_CAKE_CYAN": {
         "name": "Century Cake of Hype"
     },
+    "EPOCH_CAKE_DARK_GREEN": {
+        "name": "Undead \u0f15 Century Cake"
+    },
+    "EPOCH_CAKE_GRAY": {
+        "name": "Not-a-lie Century Cake"
+    },
     "EPOCH_CAKE_GREEN": {
         "name": "Pet Rock Century Cake"
     },
@@ -4046,8 +4109,17 @@
     "FEATHER_TALISMAN": {
         "name": "Feather Talisman"
     },
+    "FELTHORN_REAPER": {
+        "name": "Felthorn Reaper"
+    },
     "FEL_PEARL": {
         "name": "Fel Pearl"
+    },
+    "FEL_ROSE": {
+        "name": "Fel Rose"
+    },
+    "FEL_SKULL": {
+        "name": "Fel Skull"
     },
     "FEL_SWORD": {
         "name": "Fel Sword"
@@ -4102,6 +4174,9 @@
     },
     "FERVOR_LEGGINGS": {
         "name": "Fervor Leggings"
+    },
+    "FESTIVE_FRISBEE": {
+        "name": "Festive Frisbee"
     },
     "FESTIVE_JERRY_PERSONALITY": {
         "name": "Festive Jerry Minion Skin"
@@ -4583,6 +4658,9 @@
     "FROZEN_WATER_PUNGI": {
         "name": "Frozen Water Pungi"
     },
+    "FRUIT_BOWL": {
+        "name": "Fruit Bowl"
+    },
     "FTX_3070": {
         "name": "FTX 3070"
     },
@@ -4591,6 +4669,9 @@
     },
     "FUEL_TANK": {
         "name": "Fuel Tank"
+    },
+    "FULL_CENTURY_CAKE_PACK": {
+        "name": "Complete Century Cake Bundle"
     },
     "FULL_CHUM_BUCKET": {
         "name": "Full Chum Bucket"
@@ -4703,6 +4784,9 @@
     "GENERALS_HOPE_OF_THE_RESISTANCE": {
         "name": "Staff of the Rising Sun"
     },
+    "GENERAL_MEDALLION": {
+        "name": "General's Medallion"
+    },
     "GHAST_BOOTS": {
         "name": "Ghast Boots"
     },
@@ -4771,6 +4855,9 @@
     },
     "GHOUL_BUSTER": {
         "name": "Ghoul Buster"
+    },
+    "GIANTS_EYE_SWORD": {
+        "name": "Giant's Eye Sword"
     },
     "GIANTS_SWORD": {
         "name": "Giant's Sword"
@@ -5319,7 +5406,7 @@
         "name": "Grinch Minion Skin"
     },
     "GRIZZLY_BAIT": {
-        "name": "Grizzly Bait"
+        "name": "Grizzly Salmon"
     },
     "GRIZZLY_PAW": {
         "name": "Grizzly Paw"
@@ -6192,7 +6279,7 @@
         "name": "Item Frame"
     },
     "ITEM_SPIRIT_BOW": {
-        "name": "Spirit Bow"
+        "name": "Spirit Shortbow"
     },
     "JACK_O_LANTERN": {
         "name": "Jack o' Lantern"
@@ -6425,6 +6512,9 @@
     "KUUDRA_TEETH": {
         "name": "Kuudra Teeth"
     },
+    "KUUDRA_WASHING_MACHINE": {
+        "name": "Kuudra Washing Machine"
+    },
     "LADDER": {
         "name": "Ladder"
     },
@@ -6547,6 +6637,9 @@
     },
     "LAPIS_ORE": {
         "name": "Lapis Lazuli Ore"
+    },
+    "LAPIS_PICKAXE": {
+        "name": "Lapis Pickaxe"
     },
     "LARGE_AGRONOMY_SACK": {
         "name": "Large Agronomy Sack"
@@ -6897,7 +6990,7 @@
         "name": "Lynx Talisman"
     },
     "MACHINE_GUN_BOW": {
-        "name": "Machine Gun Bow"
+        "name": "Machine Gun Shortbow"
     },
     "MAGENTA_GREATER_BACKPACK": {
         "name": "Greater Backpack"
@@ -7318,6 +7411,9 @@
     },
     "METAPHORIC_EGG": {
         "name": "Metaphoric Egg"
+    },
+    "METAPHYSICAL_SERUM": {
+        "name": "Metaphysical Serum"
     },
     "METEOR_SHARD": {
         "name": "Meteor Shard"
@@ -7762,6 +7858,9 @@
     },
     "NECROMANCER_SWORD": {
         "name": "Necromancer Sword"
+    },
+    "NECRONS_LADDER": {
+        "name": "Necron's Ladder"
     },
     "NECRON_BLADE": {
         "name": "Necron's Blade (Unrefined)"
@@ -9407,6 +9506,9 @@
     "RANDOM_BOOK": {
         "name": "Random Book"
     },
+    "RANDOM_CENTURY_CAKE_PACK": {
+        "name": "Random Century Cake Bundle"
+    },
     "RANDOM_FIREWORK": {
         "name": "Random Firework"
     },
@@ -9717,7 +9819,7 @@
         "name": "Refined Titanium"
     },
     "REFINED_TITANIUM_PICKAXE": {
-        "name": "Refined Titanium Pickaxe"
+        "name": "Polished Titanium Pickaxe"
     },
     "REFORGE_ANVIL": {
         "name": "Reforge Anvil"
@@ -10133,6 +10235,9 @@
     "SATIN_TROUSERS": {
         "name": "Satin Trousers"
     },
+    "SAULS_RECOMMENDATION": {
+        "name": "Saul's Recommendation"
+    },
     "SAVANA_BIOME_STICK": {
         "name": "Savanna Biome Stick"
     },
@@ -10267,6 +10372,9 @@
     },
     "SHADOW_ASSASSIN_CHESTPLATE": {
         "name": "Shadow Assassin Chestplate"
+    },
+    "SHADOW_ASSASSIN_CLOAK": {
+        "name": "Shadow Assassin Cloak"
     },
     "SHADOW_ASSASSIN_CRIMSON": {
         "name": "Crimson Skin"
@@ -10904,6 +11012,9 @@
     "SOULS_REBOUND": {
         "name": "Souls Rebound"
     },
+    "SOULWEAVER_GLOVES": {
+        "name": "Soulweaver Gloves"
+    },
     "SOUL_ESOWARD": {
         "name": "Soul Esoward"
     },
@@ -11375,6 +11486,9 @@
     "STARLIGHT_WAND": {
         "name": "Starlight Wand"
     },
+    "STARRED_ADAPTIVE_BELT": {
+        "name": "Adaptive Belt"
+    },
     "STARRED_ADAPTIVE_BOOTS": {
         "name": "Adaptive Boots"
     },
@@ -11387,11 +11501,23 @@
     "STARRED_ADAPTIVE_LEGGINGS": {
         "name": "Adaptive Leggings"
     },
+    "STARRED_BAT_WAND": {
+        "name": "Spirit Sceptre"
+    },
+    "STARRED_BONE_BOOMERANG": {
+        "name": "Bonemerang"
+    },
     "STARRED_BONZO_MASK": {
         "name": "Bonzo's Mask"
     },
     "STARRED_BONZO_STAFF": {
         "name": "Bonzo's Staff"
+    },
+    "STARRED_FELTHORN_REAPER": {
+        "name": "Felthorn Reaper"
+    },
+    "STARRED_ITEM_SPIRIT_BOW": {
+        "name": "Spirit Shortbow"
     },
     "STARRED_LAST_BREATH": {
         "name": "Last Breath"
@@ -11401,6 +11527,9 @@
     },
     "STARRED_SHADOW_ASSASSIN_CHESTPLATE": {
         "name": "Shadow Assassin Chestplate"
+    },
+    "STARRED_SHADOW_ASSASSIN_CLOAK": {
+        "name": "Shadow Assassin Cloak"
     },
     "STARRED_SHADOW_ASSASSIN_HELMET": {
         "name": "Shadow Assassin Helmet"
@@ -11414,8 +11543,14 @@
     "STARRED_SPIDER_QUEENS_STINGER": {
         "name": "Spider Queen's Stinger"
     },
+    "STARRED_SPIRIT_MASK": {
+        "name": "Spirit Mask"
+    },
     "STARRED_STONE_BLADE": {
         "name": "Adaptive Blade"
+    },
+    "STARRED_THORNS_BOOTS": {
+        "name": "Spirit Boots"
     },
     "STARRED_VENOMS_TOUCH": {
         "name": "Venom's Touch"
@@ -12010,6 +12145,9 @@
     },
     "THORNS_BOOTS": {
         "name": "Spirit Boots"
+    },
+    "THORN_FRAGMENT": {
+        "name": "Thorn Fragment"
     },
     "THROWING_AXE": {
         "name": "Throwing Axe"
