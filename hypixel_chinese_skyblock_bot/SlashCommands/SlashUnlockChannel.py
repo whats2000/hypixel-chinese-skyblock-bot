@@ -33,14 +33,14 @@ class SlashUnlockChannel(CodExtension):
 
         # Reset channel permissions to allow @everyone to send messages and members with the disallowed role
         overwrites = channel.overwrites_for(channel.guild.default_role)
-        overwrites.send_messages = True
+        overwrites.send_messages = None
         await channel.set_permissions(channel.guild.default_role, overwrite=overwrites)
 
         # Allow members with the disallowed role to send messages
         for role in channel.guild.roles:
             if role.name in disallowed_role or role.id in disallowed_role:
                 overwrites = channel.overwrites_for(role)
-                overwrites.send_messages = True
+                overwrites.send_messages = None
                 await channel.set_permissions(role, overwrite=overwrites)
 
         await inter.edit_original_message("Done!")

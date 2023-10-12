@@ -1,7 +1,9 @@
+import asyncio
 import logging
 
 import disnake
 from disnake.ext import commands
+
 from CoreFunction.Common import CodExtension, get_setting_json, update_setting_json
 from CoreFunction.Logger import Logger
 
@@ -23,6 +25,10 @@ class SlashAutoCleanUpChannel(CodExtension):
         if message.channel.id not in self.cleanup_channels:
             return
 
+        # Check if the author is the bot itself (your bot)
+        if message.author == self.bot.user:
+            return  # Skip processing messages sent by the bot
+
         # Check if the author has any allowed roles, if so, skip deletion
         if any(role.id in [allowed_role_id for allowed_role_id in self.allowed_roles] for role in
                message.author.roles):
@@ -32,13 +38,40 @@ class SlashAutoCleanUpChannel(CodExtension):
         # Retrieve the cleanup time for the specific channel
         cleanup_time = self.clean_time.get(f'{message.channel.id}', 10)
 
-        # Ensure negative cleanup times are not processed
-        if cleanup_time < 0:
-            return
-
         bot_logger.log_message(logging.INFO, f'Delete Message : {message.content} | {message.author}')
 
-        await message.delete(delay=cleanup_time)
+        # Ensure negative cleanup times are not processed
+        if cleanup_time >= 0:
+            await message.delete(delay=cleanup_time)
+
+        # Check if the message mentions another player
+        if any(mention.id != message.author.id for mention in message.mentions):
+            bot_logger.log_message(logging.INFO, f'Publish for mention others : {message.content} | {message.author}')
+
+            embed = disnake.Embed(
+                title='Warning',
+                description=f'你不可在該頻道提及他人 (反惡意 mention)',
+                color=0xe74c3c
+            )
+
+            if message.author.avatar is not None:
+                embed.set_author(
+                    name=message.author.name,
+                    icon_url=message.author.avatar.url
+                )
+            else:
+                embed.set_author(
+                    name=message.author.name
+                )
+
+            await message.channel.send(embed=embed, delete_after=20)
+
+            role = disnake.utils.get(message.author.guild.roles, id=get_setting_json('MutedRole'))
+
+            # Mute the player for 60 seconds
+            await message.author.add_roles(role)
+            await asyncio.sleep(180)  # Wait for 180 seconds
+            await message.author.remove_roles(role)
 
     @commands.has_any_role(get_setting_json('AdminRole'))
     @commands.slash_command(
