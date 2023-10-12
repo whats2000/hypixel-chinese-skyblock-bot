@@ -43,10 +43,10 @@ class RoleButton(disnake.ui.Button):
                 color=0xe74c3c
             )
 
-
         set_inter_embed_author(embed, inter)
 
         await inter.send(embed=embed, ephemeral=True)
+
 
 class RoleButtonView(disnake.ui.View):
     def __init__(self):
@@ -135,6 +135,7 @@ class SlashBuildReactionRole(CodExtension):
                             view.add_item(button)
 
                 await message.edit(view=view)
+
 
 def setup(pybot):
     pybot.add_cog(SlashBuildReactionRole(pybot))
