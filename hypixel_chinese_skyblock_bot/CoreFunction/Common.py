@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import re
 from collections import OrderedDict
 from typing import Union
@@ -23,7 +22,7 @@ class CodExtension(commands.Cog):
 
 
 def set_user_id(user: str, name: str):
-    with open(f'{os.getcwd()}/Resources/VerifyIdList.json',
+    with open(f'Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
               ) as verify_id_list_json:
@@ -37,7 +36,7 @@ def set_user_id(user: str, name: str):
 
     output = json.dumps(output, ensure_ascii=False, indent=4)
 
-    with open(f'{os.getcwd()}/Resources/VerifyIdList.json',
+    with open(f'Resources/VerifyIdList.json',
               mode='w',
               encoding='utf8'
               ) as out_json:
@@ -87,8 +86,23 @@ def get_setting_json(key: str):
         raise NameError('Invalid Key')
 
 
+def update_setting_json(key: str, value):
+    key = str(key)
+
+    # Check if the key already exists in the setting_json_data
+    if key in setting_json_data:
+        setting_json_data[key] = value
+        # Optionally, save the updated JSON data to a file or database here if needed.
+        # Save the updated JSON data to the file
+        with open('Resources/Setting.json', 'w') as json_file:
+            json.dump(setting_json_data, json_file, indent=2)
+    else:
+        bot_logger.log_message(logging.ERROR, '無效的 json key 名稱')
+        raise NameError('Invalid Key')
+
+
 def get_verify_id_list(key: str):
-    with open(f'{os.getcwd()}/Resources/VerifyIdList.json',
+    with open(f'Resources/VerifyIdList.json',
               mode='r',
               encoding='utf8'
               ) as verify_id_list_json:
@@ -215,7 +229,7 @@ async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction
     await ctx.author.remove_roles(role)
 
 
-with open(f'{os.getcwd()}/Resources/Setting.json',
+with open(f'Resources/Setting.json',
           mode='r',
           encoding='utf8'
           ) as setting_json:
