@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 import re
 from collections import OrderedDict
 from typing import Union
@@ -227,6 +228,25 @@ async def remove_role(ctx: Union[commands.Context, disnake.AppCommandInteraction
         raise TypeError
 
     await ctx.author.remove_roles(role)
+
+
+def read_json(filename):
+    if not os.path.exists(filename):
+        return {}
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        bot_logger.log_message(logging.ERROR, f"File not found: {filename}")
+        return {}
+    except json.JSONDecodeError as e:
+        bot_logger.log_message(logging.ERROR, f"JSON decode error: {e}")
+        return {}
+
+
+def write_json(data, filename):
+    with open(filename, 'w') as file:
+        json.dump(data, file, indent=4)
 
 
 with open(f'Resources/Setting.json',
