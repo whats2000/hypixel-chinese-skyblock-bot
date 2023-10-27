@@ -1,10 +1,12 @@
+from typing import Union
+
 import disnake
 from disnake.ext import commands
 
 from CoreFunction.Common import get_setting_json
 
 
-def inter_build_embed(case: str, inter: disnake.AppCommandInteraction) -> disnake.Embed:
+def inter_build_embed(case: str, inter: Union[disnake.AppCommandInteraction, disnake.MessageInteraction]) -> disnake.Embed:
     if case == 'Wrong Channel':
         embed = disnake.Embed(
             title='請在正確頻道輸入',

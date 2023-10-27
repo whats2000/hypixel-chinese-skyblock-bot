@@ -10,6 +10,7 @@ from disnake.ext import commands, tasks
 
 from CoreFunction.Common import CodExtension, get_setting_json, read_json, write_json
 from CoreFunction.Logger import Logger
+from CoreFunction.SendEmbed import inter_build_embed
 
 bot_logger = Logger(__name__)
 
@@ -30,6 +31,7 @@ class EnterGiveawayButton(disnake.ui.Button):
 
         # Read the current state of giveaways
         giveaways = read_json('Resources/Giveaway.json')
+        required_chat_role_id = giveaways.get(self.message_id, {}).get("ChatLevelRequired", None)
 
         # Check if already entered
         giveaway_data = giveaways.get(self.message_id, {}).get("Entry", {})
@@ -37,13 +39,42 @@ class EnterGiveawayButton(disnake.ui.Button):
             await interaction.response.send_message("You have already entered this giveaway!", ephemeral=True)
             return
 
+        # Check for verification if required
+        if giveaways.get(self.message_id, {}).get("RequiredVerify", False):
+            verify_role = get_setting_json('VerifyIdRole').lower()
+            if verify_role not in [y.name.lower() for y in interaction.user.roles]:
+                bot_logger.log_message(logging.ERROR, f'玩家 id 缺失')
+
+                embed = inter_build_embed('Missing Id', interaction)
+
+                await interaction.response.send_message(embed=embed, ephemeral=True)
+                return
+
+        # Get role levels from settings
+        role_levels = get_setting_json('RoleLevel')
+
+        # Check if user has the required role or a higher-level role
+        user_role_ids = [str(role.id) for role in interaction.user.roles]
+
+        if required_chat_role_id and required_chat_role_id not in user_role_ids:
+            # Check if the user has a higher-level role
+            required_role_level = role_levels.get(str(required_chat_role_id), 0)
+            if not any(role_levels.get(role_id, 0) >= required_role_level for role_id in user_role_ids):
+                await interaction.response.send_message(
+                    "You do not have the required chat level to enter this giveaway!", ephemeral=True)
+                return
+
         # Determine bonus and add entry
         bonus = 2 if any(
             role.id in get_setting_json('TitleRequireRoleList').values() for role in interaction.user.roles) else 1
         giveaway_data[user_id] = bonus
 
-        # Update the entry in the giveaways dictionary
-        giveaways[self.message_id]["Entry"] = giveaway_data
+        try:
+            # Update the entry in the giveaways dictionary
+            giveaways[self.message_id]["Entry"] = giveaway_data
+        except KeyError:
+            await interaction.response.send_message("The giveaway was ended!", ephemeral=True)
+            return
 
         # Write updated data back to file
         await asyncio.to_thread(write_json, giveaways, 'Resources/Giveaway.json')
@@ -85,6 +116,8 @@ class SlashGiveaway(CodExtension):
                        host: disnake.User = commands.Param(description='Host of the giveaway', default=None),
                        chat_level: disnake.Role = commands.Param(description='The min required chat level role',
                                                                  default=None),
+                       required_verify: bool = commands.Param(description='If the user need verify',
+                                                              default=False),
                        color: str = commands.Param(description='Makes the description', default=None),
                        picture: str = commands.Param(description='The picture url of the embed', default=None),
                        thumbnail: str = commands.Param(description='The thumbnail url for the embed', default=None)):
@@ -138,6 +171,7 @@ class SlashGiveaway(CodExtension):
             "EndTime": unix_timestamp,
             "Winner": winner,
             "ChatLevelRequired": chat_level.id if chat_level else 0,
+            "RequiredVerify": required_verify,
             "ChannelID": inter.channel.id,
             "Entry": {}
         }
@@ -233,9 +267,19 @@ class SlashGiveaway(CodExtension):
         # Flatten the entries considering the bonus
         user_ids = [user_id for user_id, bonus in entries.items() for _ in range(bonus)]
 
-        # Select winners
-        winners = random.sample(user_ids, min(len(user_ids), giveaway["Winner"]))
+        # Shuffle the list to randomize it
+        random.shuffle(user_ids)
+
+        # Select unique winners
+        winners = []
+        for user_id in user_ids:
+            if user_id not in winners:
+                winners.append(user_id)
+            if len(winners) >= giveaway["Winner"]:
+                break
+
         winner_mentions = " ".join([f"<@{winner_id}>" for winner_id in winners])
+
         if channel:
             try:
                 message = await channel.fetch_message(int(message_id))
