@@ -234,8 +234,13 @@ def read_json(filename):
     if not os.path.exists(filename):
         return {}
     try:
-        with open(filename, 'r') as file:
-            return json.load(file)
+        with open('Resources/Giveaway.json', 'r') as file:
+            content = file.read()
+            if not content:
+                return {}
+            else:
+                return json.loads(content)
+
     except FileNotFoundError:
         bot_logger.log_message(logging.ERROR, f"File not found: {filename}")
         return {}
