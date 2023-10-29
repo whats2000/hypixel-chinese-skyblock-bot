@@ -17,7 +17,7 @@ bot_logger = Logger(__name__)
 
 class GiveawayView(disnake.ui.View):
     def __init__(self, message_id):
-        super().__init__()
+        super().__init__(timeout=None)
         self.add_item(EnterGiveawayButton(message_id))
 
 
@@ -179,6 +179,11 @@ class SlashGiveaway(CodExtension):
         # Write initial data to JSON
         await asyncio.to_thread(write_json, giveaways, 'Resources/Giveaway.json')
 
+        # Check if the task is not running, then start it
+        if not self.check_giveaways.is_running():
+            bot_logger.log_message(logging.INFO, 'Starting the giveaway check task.')
+            self.check_giveaways.start()
+
         # Creating the view with the button
         view = GiveawayView(message_id)
 
@@ -222,6 +227,11 @@ class SlashGiveaway(CodExtension):
     @tasks.loop(seconds=10)
     async def check_giveaways(self):
         giveaways = read_json('Resources/Giveaway.json')
+        if not giveaways:
+            bot_logger.log_message(logging.INFO, 'No active giveaways. Stopping the task.')
+            self.check_giveaways.cancel()
+            return
+
         current_time = int(time.time())
 
         ended_giveaways = []  # List to store message IDs of ended giveaways
