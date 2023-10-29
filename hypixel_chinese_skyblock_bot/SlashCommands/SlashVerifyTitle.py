@@ -101,6 +101,16 @@ class TitleDropdownView(disnake.ui.View):
 
 class SlashVerifyTitle(CodExtension):
 
+    def __init__(self, bot):
+        super().__init__(bot)
+        self.has_run_startup = False
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        if not self.has_run_startup:
+            self.has_run_startup = True
+            await self.reload_verify_title()
+
     @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
         name='verify_title',
@@ -142,7 +152,7 @@ class SlashVerifyTitle(CodExtension):
         await inter.send(embed=embed, view=view)
 
     async def reload_verify_title(self):
-        bot_logger.log_message(logging.DEBUG, f'Setup > SlashVerifyTitle')
+        bot_logger.log_message(logging.INFO, f'Reactivating title embed: System')
 
         view = TitleDropdownView()
         channel = get_setting_json('VerifyTitleChannelId')

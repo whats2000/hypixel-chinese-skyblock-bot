@@ -54,6 +54,17 @@ class RoleButtonView(disnake.ui.View):
 
 
 class SlashBuildReactionRole(CodExtension):
+
+    def __init__(self, bot):
+        super().__init__(bot)
+        self.has_run_startup = False
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        if not self.has_run_startup:
+            self.has_run_startup = True
+            await self.reload_reaction_roles()
+
     @commands.has_any_role(get_setting_json('AdminRole'))
     @commands.slash_command(
         guild_ids=[int(get_setting_json('ServerId'))],
@@ -96,6 +107,8 @@ class SlashBuildReactionRole(CodExtension):
         await inter.edit_original_message('Done!')
 
     async def reload_reaction_roles(self):
+        bot_logger.log_message(logging.INFO, f'Reactivating reaction role embed: System')
+
         folder_path = 'ReactionRoleEmbed/'
 
         file_names = [file_name for file_name in os.listdir(folder_path) if file_name.endswith('.json')]

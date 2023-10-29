@@ -6,9 +6,6 @@ from disnake.ext import commands
 
 from CoreFunction.Common import get_setting_json
 from CoreFunction.Logger import Logger
-from SlashCommands.SlashBuildReactionRole import SlashBuildReactionRole
-from SlashCommands.SlashGiveaway import SlashGiveaway
-from SlashCommands.SlashVerifyTitle import SlashVerifyTitle
 
 intents_setting = disnake.Intents.default()
 intents_setting.message_content = True
@@ -21,10 +18,6 @@ bot_logger = Logger(__name__)
 
 @pybot.event
 async def on_ready():
-    await SlashVerifyTitle(pybot).reload_verify_title()
-    await SlashBuildReactionRole(pybot).reload_reaction_roles()
-    await SlashGiveaway(pybot).reactivate_giveaway_buttons()
-
     bot_logger.log_message(logging.INFO, 'Bot is ready')
 
 

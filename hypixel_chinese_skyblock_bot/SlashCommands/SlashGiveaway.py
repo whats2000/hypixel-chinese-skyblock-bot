@@ -98,8 +98,14 @@ class SlashGiveaway(CodExtension):
 
     def __init__(self, bot):
         super().__init__(bot)
-        self.bot = bot
-        self.check_giveaways.start()
+        self.has_run_startup = False
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        if not self.has_run_startup:
+            self.has_run_startup = True
+            self.check_giveaways.start()
+            await self.reactivate_giveaway_buttons()
 
     @commands.has_any_role(get_setting_json('AdminRole'))
     @commands.slash_command(
@@ -191,6 +197,7 @@ class SlashGiveaway(CodExtension):
         await message.edit(embed=embed, view=view)
 
     async def reactivate_giveaway_buttons(self):
+        bot_logger.log_message(logging.INFO, f'Reactivating giveaway: System')
         try:
             with open('Resources/Giveaway.json', 'r') as file:
                 giveaways = json.load(file)
