@@ -3,7 +3,7 @@ import json
 import logging
 import random
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import disnake
 from disnake.ext import commands, tasks
@@ -131,9 +131,23 @@ class SlashGiveaway(CodExtension):
 
         bot_logger.log_message(logging.INFO, f'建立 Giveaway : {inter.author.name}')
 
-        # Calculate the remaining time and convert to Unix timestamp
+        # Parse the input time (assumed to be in UTC+8)
         end_time_obj = datetime.strptime(end_time, "%Y/%m/%d/%H:%M")
-        unix_timestamp = int(time.mktime(end_time_obj.timetuple()))
+
+        # Convert input time from UTC+8 to UTC by subtracting 8 hours
+        end_time_obj_utc = end_time_obj - timedelta(hours=8)
+
+        # Get the server's local time offset in seconds
+        local_offset_sec = time.timezone if time.localtime().tm_isdst == 0 else time.altzone
+
+        # Convert the offset to hours
+        local_offset_hours = local_offset_sec / -3600
+
+        # Adjust the UTC time to the server's local time
+        end_time_obj_local = end_time_obj_utc + timedelta(hours=local_offset_hours)
+
+        # Convert to Unix timestamp
+        unix_timestamp = int(time.mktime(end_time_obj_local.timetuple()))
 
         # Fetch the special roles with 2x entry chances
         title_role_list = get_setting_json('TitleRequireRoleList')
@@ -151,7 +165,8 @@ class SlashGiveaway(CodExtension):
             f"### 加倍機率: \n"
             f"{special_roles}\n"
             f"\n"
-            f"最低聊天等級需要 : {chat_level.mention if chat_level else '無'}"
+            f"最低聊天等級需要 : {chat_level.mention if chat_level else '無'}\n"
+            f"是否需要驗證 : {'是' if required_verify else '否'}"
         )
 
         # Creating embed
