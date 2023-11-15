@@ -215,6 +215,15 @@
     "ANGLER_LEGGINGS": {
         "name": "Angler Leggings"
     },
+    "ANITA_ARTIFACT": {
+        "name": "Anita's Artifact"
+    },
+    "ANITA_RING": {
+        "name": "Anita's Ring"
+    },
+    "ANITA_TALISMAN": {
+        "name": "Anita's Talisman"
+    },
     "ANNIHILATION_CLOAK": {
         "name": "Annihilation Cloak"
     },
@@ -425,9 +434,6 @@
     "ASCENSION_ROPE": {
         "name": "Ascension Rope"
     },
-    "ASPECT_OF_THE_DRACONIC": {
-        "name": "Aspect of the Draconic"
-    },
     "ASPECT_OF_THE_DRAGON": {
         "name": "Aspect of the Dragons"
     },
@@ -457,6 +463,9 @@
     },
     "ASTRAEA": {
         "name": "Astraea"
+    },
+    "ATMOSPHERIC_FILTER": {
+        "name": "Atmospheric Filter"
     },
     "ATOMINIZER": {
         "name": "Atominizer"
@@ -497,6 +506,9 @@
     "AUTO_SMELTER": {
         "name": "Auto Smelter"
     },
+    "AUTUMN_HUT_BARN_SKIN": {
+        "name": "Autumn Hut Barn Skin"
+    },
     "AXE_OF_THE_SHREDDED": {
         "name": "Axe of the Shredded"
     },
@@ -517,6 +529,9 @@
     },
     "BALLOON_SNAKE": {
         "name": "Balloon Snake"
+    },
+    "BAMBOO_BARN_SKIN": {
+        "name": "Bamboo Barn Skin"
     },
     "BANDAGED_MITHRIL_PICKAXE": {
         "name": "Bandaged Mithril Pickaxe"
@@ -667,6 +682,9 @@
     },
     "BEACON_SKULL": {
         "name": "Beacon"
+    },
+    "BEADY_EYES": {
+        "name": "Beady Eyes"
     },
     "BEASTMASTER_CREST_COMMON": {
         "name": "Beastmaster Crest"
@@ -851,6 +869,9 @@
     "BLACK_SMALL_BACKPACK": {
         "name": "Small Backpack"
     },
+    "BLACK_WOOLEN_YARN": {
+        "name": "Black Woolen Yarn"
+    },
     "BLADE_OF_THE_VOLCANO": {
         "name": "Blade of the Volcano"
     },
@@ -1033,6 +1054,9 @@
     },
     "BOOKSHELF": {
         "name": "Bookshelf"
+    },
+    "BOOKWORM_BOOK": {
+        "name": "Bookworm's Favorite Book"
     },
     "BOOK_AND_QUILL": {
         "name": "Book and Quill"
@@ -1535,6 +1559,9 @@
     "CAPSAICIN_EYEDROPS": {
         "name": "Capsaicin Eyedrops"
     },
+    "CAPSAICIN_EYEDROPS_NO_CHARGES": {
+        "name": "Capsaicin Eyedrops"
+    },
     "CARPENTRY_BENCH": {
         "name": "Carpentry Table"
     },
@@ -1636,6 +1663,9 @@
     },
     "CASHMERE_JACKET": {
         "name": "Cashmere Jacket"
+    },
+    "CASTLE_BARN_SKIN": {
+        "name": "Castle Barn Skin"
     },
     "CASTLE_OF_STONE": {
         "name": "Castle of Stone"
@@ -1871,6 +1901,9 @@
     "CHILL_THE_FISH_2": {
         "name": "Chill the Fish"
     },
+    "CHIRPING_STEREO": {
+        "name": "Chirping Stereo"
+    },
     "CHOCOLATE_CHIP": {
         "name": "Fang-tastic Chocolate Chip"
     },
@@ -1933,6 +1966,9 @@
     },
     "CLEAVER": {
         "name": "Cleaver"
+    },
+    "CLIPPED_WINGS": {
+        "name": "Clipped Wings"
     },
     "CLOVER_HELMET": {
         "name": "Clover Helmet"
@@ -2168,6 +2204,9 @@
     "CORRUPT_SOIL": {
         "name": "Corrupt Soil"
     },
+    "COUNTS_MANOR_BARN_SKIN": {
+        "name": "Count's Manor Barn Skin"
+    },
     "COVEN_SEAL": {
         "name": "Coven Seal"
     },
@@ -2212,6 +2251,9 @@
     },
     "COW_HEAD": {
         "name": "Cow Head"
+    },
+    "COZY_COTTAGE_BARN_SKIN": {
+        "name": "Cozy Cottage Barn Skin"
     },
     "CRAB": {
         "name": "Crab"
@@ -2393,6 +2435,9 @@
     "CRYSTAL_NUCLEUS_TRAVEL_SCROLL": {
         "name": "Travel Scroll to the Crystal Nucleus"
     },
+    "CUBE_BARN_SKIN": {
+        "name": "Cube Barn Skin"
+    },
     "CUP_OF_BLOOD": {
         "name": "Cup of Blood"
     },
@@ -2449,6 +2494,9 @@
     },
     "DARK_BAIT": {
         "name": "Dark Bait"
+    },
+    "DARK_CANDY": {
+        "name": "Dark Candy"
     },
     "DARK_CLAYMORE": {
         "name": "Dark Claymore"
@@ -2927,6 +2975,9 @@
     "DULL_SHARK_TOOTH_NECKLACE": {
         "name": "Dull Shark Tooth Necklace"
     },
+    "DUNG": {
+        "name": "Dung"
+    },
     "DUNGEON_BLUE_SUPPORT_ORB": {
         "name": "Support Orb"
     },
@@ -3157,6 +3208,12 @@
     },
     "ELLES_PICKAXE": {
         "name": "Elle's Pickaxe"
+    },
+    "ELLE_FUEL_CELL": {
+        "name": "%%green%%Ballista Fuel Cell"
+    },
+    "ELLE_SUPPLIES": {
+        "name": "%%green%%Elle's Supplies"
     },
     "EMBER_BOOTS": {
         "name": "Ember Boots"
@@ -3944,6 +4001,9 @@
     "EXPERIMENT_THE_FISH": {
         "name": "Experiment the Fish"
     },
+    "EXPIRED_PUMPKIN": {
+        "name": "Expired Pumpkin"
+    },
     "EXPLOSIVE_ARROW": {
         "name": "Explosive Arrow"
     },
@@ -4622,6 +4682,9 @@
     "FRESH_SPRING_WATER": {
         "name": "Fresh Spring Water"
     },
+    "FROG_BARN_SKIN": {
+        "name": "Frog Barn Skin"
+    },
     "FROSTY_CRUX": {
         "name": "Frosty Crux"
     },
@@ -4714,6 +4777,9 @@
     },
     "GAME_FIXER": {
         "name": "Game Fixer"
+    },
+    "GARDEN_SACK": {
+        "name": "Garden Sack"
     },
     "GARDEN_SCYTHE": {
         "name": "Garden Scythe"
@@ -5663,6 +5729,9 @@
     "HILT_OF_TRUE_ICE": {
         "name": "Hilt of True Ice"
     },
+    "HIVE_BARN_SKIN": {
+        "name": "Hive Barn Skin"
+    },
     "HOCUS_POCUS_CIPHER": {
         "name": "Hocus-Pocus Cipher"
     },
@@ -5722,6 +5791,9 @@
     },
     "HONED_SHARK_TOOTH_NECKLACE": {
         "name": "Honed Shark Tooth Necklace"
+    },
+    "HONEY_JAR": {
+        "name": "Honey Jar"
     },
     "HOPE_OF_THE_RESISTANCE": {
         "name": "Staff of the Rising Sun"
@@ -6119,6 +6191,12 @@
     "INFINI_TORCH": {
         "name": "InfiniTorch\u2122"
     },
+    "INFINI_VACUUM": {
+        "name": "InfiniVacuum\u2122"
+    },
+    "INFINI_VACUUM_HOOVERIUS": {
+        "name": "InfiniVacuum\u2122 Hooverius"
+    },
     "INFLATABLE_JERRY": {
         "name": "Inflatable Jerry"
     },
@@ -6172,6 +6250,9 @@
     },
     "INTIMIDATION_ARTIFACT": {
         "name": "Intimidation Artifact"
+    },
+    "INTIMIDATION_RELIC": {
+        "name": "Intimidation Relic"
     },
     "INTIMIDATION_RING": {
         "name": "Intimidation Ring"
@@ -6313,6 +6394,9 @@
     },
     "JASPER_POWER_SCROLL": {
         "name": "Jasper Power Scroll"
+    },
+    "JERRY_BARN_SKIN": {
+        "name": "Jerry Barn Skin"
     },
     "JERRY_BOX_BLUE": {
         "name": "Blue Jerry Box"
@@ -7436,6 +7520,9 @@
     "MILLENIA_OLD_BLAZE_ASHES": {
         "name": "Millenia-Old Blaze Ashes"
     },
+    "MIMIC_CHEST": {
+        "name": "Mimic Chest"
+    },
     "MIMIC_FRAGMENT": {
         "name": "Mimic Fragment"
     },
@@ -7703,6 +7790,9 @@
     "MUSEUM_TRAVEL_SCROLL": {
         "name": "Travel Scroll to Museum"
     },
+    "MUSHROOM_BARN_SKIN": {
+        "name": "Mushroom Barn Skin"
+    },
     "MUSHROOM_BIOME_STICK": {
         "name": "Mushroom Biome Stick"
     },
@@ -7963,6 +8053,9 @@
     },
     "NEW_YEAR_CAKE_BAG": {
         "name": "New Year Cake Bag"
+    },
+    "NIGHTMARE_NULLIFIER": {
+        "name": "Nightmare Nullifier"
     },
     "NIGHT_CRYSTAL": {
         "name": "Night Crystal"
@@ -8279,6 +8372,9 @@
     "PENGUIN_PERSONALITY": {
         "name": "Penguin Minion Skin"
     },
+    "PERFECTLY_CUT_DIAMOND": {
+        "name": "Perfectly Cut Diamond"
+    },
     "PERFECTLY_CUT_FUEL_TANK": {
         "name": "Perfectly-Cut Fuel Tank"
     },
@@ -8299,6 +8395,9 @@
     },
     "PERFECT_BOOTS_12": {
         "name": "Perfect Boots - Tier XII"
+    },
+    "PERFECT_BOOTS_13": {
+        "name": "Perfect Boots - Tier XIII"
     },
     "PERFECT_BOOTS_2": {
         "name": "Perfect Boots - Tier II"
@@ -8335,6 +8434,9 @@
     },
     "PERFECT_CHESTPLATE_12": {
         "name": "Perfect Chestplate - Tier XII"
+    },
+    "PERFECT_CHESTPLATE_13": {
+        "name": "Perfect Chestplate - Tier XIII"
     },
     "PERFECT_CHESTPLATE_2": {
         "name": "Perfect Chestplate - Tier II"
@@ -8374,6 +8476,9 @@
     },
     "PERFECT_HELMET_12": {
         "name": "Perfect Helmet - Tier XII"
+    },
+    "PERFECT_HELMET_13": {
+        "name": "Perfect Helmet - Tier XIII"
     },
     "PERFECT_HELMET_2": {
         "name": "Perfect Helmet - Tier II"
@@ -8419,6 +8524,9 @@
     },
     "PERFECT_LEGGINGS_12": {
         "name": "Perfect Leggings - Tier XII"
+    },
+    "PERFECT_LEGGINGS_13": {
+        "name": "Perfect Leggings - Tier XIII"
     },
     "PERFECT_LEGGINGS_2": {
         "name": "Perfect Leggings - Tier II"
@@ -8482,6 +8590,21 @@
     },
     "PERSONAL_DELETOR_7000": {
         "name": "Personal Deletor 7000"
+    },
+    "PESTHUNTER_ARTIFACT": {
+        "name": "Pesthunter Artifact"
+    },
+    "PESTHUNTER_BADGE": {
+        "name": "Pesthunter Badge"
+    },
+    "PESTHUNTER_RING": {
+        "name": "Pesthunter Ring"
+    },
+    "PEST_REPELLENT": {
+        "name": "Pest Repellent"
+    },
+    "PEST_REPELLENT_MAX": {
+        "name": "Pest Repellent MAX"
     },
     "PET": {
         "name": "Pet"
@@ -8644,6 +8767,9 @@
     },
     "PET_ITEM_MINING_SKILL_BOOST_UNCOMMON": {
         "name": "Mining Exp Boost"
+    },
+    "PET_ITEM_PURE_MITHRIL_GEM": {
+        "name": "Pure Mithril Gem"
     },
     "PET_ITEM_QUICK_CLAW": {
         "name": "Quick Claw"
@@ -8957,6 +9083,12 @@
     "PINK_SMALL_BACKPACK": {
         "name": "Small Backpack"
     },
+    "PINWHEEL_HOUSE_BARN_SKIN": {
+        "name": "Pinwheel House Barn Skin"
+    },
+    "PIRATE_CUTOUT": {
+        "name": "Pirate Cutout"
+    },
     "PISTON_BASE": {
         "name": "Piston"
     },
@@ -8968,6 +9100,9 @@
     },
     "PLACEABLE_FAIRY_SOUL_RIFT": {
         "name": "Placeable Fairy Soul"
+    },
+    "PLANT_MATTER": {
+        "name": "Plant Matter"
     },
     "PLASMA": {
         "name": "Plasma"
@@ -9241,6 +9376,9 @@
     },
     "PUMPKIN_BOOTS": {
         "name": "Pumpkin Boots"
+    },
+    "PUMPKIN_CANDY_HANDOUT": {
+        "name": "Pumpkin Candy Handout"
     },
     "PUMPKIN_CHESTPLATE": {
         "name": "Pumpkin Chestplate"
@@ -9547,6 +9685,9 @@
     },
     "RAZOR_SHARP_SHARK_TOOTH_NECKLACE": {
         "name": "Razor-sharp Shark Tooth Necklace"
+    },
+    "REANIMATED_PAINTING": {
+        "name": "Reanimated Painting"
     },
     "REAPER_BOOTS": {
         "name": "Reaper Boots"
@@ -10253,6 +10394,9 @@
     "SCARECROW_PERSONALITY": {
         "name": "Scarecrow Minion Skin"
     },
+    "SCARE_FRAGMENT": {
+        "name": "Scare Fragment"
+    },
     "SCARF_FRAGMENT": {
         "name": "Scarf Fragment"
     },
@@ -10363,6 +10507,9 @@
     },
     "SERRATED_CLAWS": {
         "name": "Serrated Claws"
+    },
+    "SEWER_FISH": {
+        "name": "Sewer Fish"
     },
     "SHADOW_ASSASSIN_ADMIRAL": {
         "name": "Admiral Skin"
@@ -10580,6 +10727,9 @@
     "SINSEEKER_SCYTHE": {
         "name": "Sinseeker Scythe"
     },
+    "SKELETON_CHAIR": {
+        "name": "Skeleton Chair"
+    },
     "SKELETON_GENERATOR_1": {
         "name": "Skeleton Minion I"
     },
@@ -10723,6 +10873,15 @@
     },
     "SKYMART_BROCHURE": {
         "name": "SkyMart Brochure"
+    },
+    "SKYMART_HYPER_VACUUM": {
+        "name": "SkyMart Hyper Vacuum"
+    },
+    "SKYMART_TURBO_VACUUM": {
+        "name": "SkyMart Turbo Vacuum"
+    },
+    "SKYMART_VACUUM": {
+        "name": "SkyMart Vacuum"
     },
     "SLAYER_ENERGY_DRINK": {
         "name": "Slayer\u00a9 Energy Drink"
@@ -11227,6 +11386,9 @@
     },
     "SPORE_HARVESTER": {
         "name": "Spore Harvester"
+    },
+    "SPRAYONATOR": {
+        "name": "Sprayonator"
     },
     "SPRAY_CAN": {
         "name": "Spray Can"
@@ -12026,6 +12188,9 @@
     "TAURUS_HELMET": {
         "name": "Taurus Helmet"
     },
+    "TAVERN_BARN_SKIN": {
+        "name": "Tavern Barn Skin"
+    },
     "TELEPORTER_PILL": {
         "name": "Teleporter Pill"
     },
@@ -12281,6 +12446,9 @@
     "TOY": {
         "name": "Toy"
     },
+    "TRADING_POST_BARN_SKIN": {
+        "name": "Trading Post Barn Skin"
+    },
     "TRAINING_DUMMY": {
         "name": "Training Dummy"
     },
@@ -12500,6 +12668,9 @@
     "VERMIN_BELT": {
         "name": "Vermin Belt"
     },
+    "VERY_CRUDE_GABAGOOL": {
+        "name": "Very Crude Gabagool"
+    },
     "VERY_OFFICIAL_YELLOW_ROCK": {
         "name": "Very Official Yellow Rock of Love!"
     },
@@ -12514,6 +12685,36 @@
     },
     "VINE": {
         "name": "Vines"
+    },
+    "VINYL_BEETLE": {
+        "name": "Not Just a Pest Vinyl"
+    },
+    "VINYL_BUZZIN_BEATS": {
+        "name": "Buzzin' Beats Vinyl"
+    },
+    "VINYL_CICADA_SYMPHONY": {
+        "name": "Cicada Symphony Vinyl"
+    },
+    "VINYL_CRICKET_CHOIR": {
+        "name": "Cricket Choir Vinyl"
+    },
+    "VINYL_DYNAMITES": {
+        "name": "DynaMITES Vinyl"
+    },
+    "VINYL_EARTHWORM_ENSEMBLE": {
+        "name": "Earthworm Ensemble Vinyl"
+    },
+    "VINYL_PRETTY_FLY": {
+        "name": "Pretty Fly Vinyl"
+    },
+    "VINYL_RODENT_REVOLUTION": {
+        "name": "Rodent Revolution Vinyl"
+    },
+    "VINYL_SLOW_AND_GROOVY": {
+        "name": "Slow and Groovy Vinyl"
+    },
+    "VINYL_WINGS_OF_HARMONY": {
+        "name": "Wings of Harmony Vinyl"
     },
     "VITAMIN_DEATH": {
         "name": "Vitamin Death"
@@ -12821,6 +13022,9 @@
     "WILTED_BERBERIS_BUNCH": {
         "name": "Wilted Berberis Bunch"
     },
+    "WINDMILL_BARN_SKIN": {
+        "name": "Windmill Barn Skin"
+    },
     "WIND_CHIMES": {
         "name": "Wind Chimes"
     },
@@ -13093,6 +13297,9 @@
     },
     "WREATH": {
         "name": "Wreath"
+    },
+    "WRIGGLING_LARVA": {
+        "name": "Wriggling Larva"
     },
     "WYLD_BOOTS": {
         "name": "Wyld Boots"
