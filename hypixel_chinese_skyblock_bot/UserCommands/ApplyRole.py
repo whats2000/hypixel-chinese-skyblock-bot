@@ -23,8 +23,16 @@ class RoleAssigner(CodExtension):
             await inter.response.send_message(f"Role with ID `{role_to_assign_id}` not found.", ephemeral=True)
             return
 
+        member = inter.guild.get_member(user.id)
+        if not member:
+            try:
+                member = await inter.guild.fetch_member(user.id)
+            except disnake.Forbidden:
+                await inter.response.send_message("User not found in this guild.", ephemeral=True)
+                return
+
         # Assign the role
-        await add_role(ctx=inter, role_id=role_to_assign_id)
+        await member.add_roles(role)
         await inter.response.send_message(f"Assigned role to {user.mention}.", ephemeral=True)
 
     @commands.has_any_role(get_setting_json('AdminRole'))
@@ -40,8 +48,16 @@ class RoleAssigner(CodExtension):
             await inter.response.send_message(f"Role with ID `{role_to_remove_id}` not found.", ephemeral=True)
             return
 
-        # Remove the role
-        await remove_role(ctx=inter, role_id=role_to_remove_id)
+        member = inter.guild.get_member(user.id)
+        if not member:
+            try:
+                member = await inter.guild.fetch_member(user.id)
+            except disnake.Forbidden:
+                await inter.response.send_message("User not found in this guild.", ephemeral=True)
+                return
+
+        # Assign the role
+        await member.remove_roles(role)
         await inter.response.send_message(f"Removed role from {user.mention}.", ephemeral=True)
 
 
