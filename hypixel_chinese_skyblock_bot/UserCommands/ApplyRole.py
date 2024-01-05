@@ -1,9 +1,9 @@
-import disnake
 import logging
 
+import disnake
 from disnake.ext import commands
 
-from CoreFunction.Common import get_setting_json, CodExtension, add_role, remove_role
+from CoreFunction.Common import get_setting_json, CodExtension
 from CoreFunction.Logger import Logger
 
 bot_logger = Logger(__name__)
