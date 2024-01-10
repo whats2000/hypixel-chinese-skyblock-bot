@@ -686,6 +686,21 @@
     "BEADY_EYES": {
         "name": "Beady Eyes"
     },
+    "BEAR_BED": {
+        "name": "Bear Bed"
+    },
+    "BEAR_BENCH": {
+        "name": "Bear Bench"
+    },
+    "BEAR_BOOKSHELF": {
+        "name": "Bear Bookshelf"
+    },
+    "BEAR_CHAIR": {
+        "name": "Bear Chair"
+    },
+    "BEAR_SIDE_TABLE": {
+        "name": "Bear Side Table"
+    },
     "BEASTMASTER_CREST_COMMON": {
         "name": "Beastmaster Crest"
     },
@@ -1089,7 +1104,7 @@
         "name": "Bottled Odonata"
     },
     "BOTTLE_OF_JYRRE": {
-        "name": "Bottle of Jyrre"
+        "name": "Lost Bottle of Jyrre"
     },
     "BOTTLE_OF_NIGHTMARE": {
         "name": "Bottle of Nightmare"
@@ -3188,6 +3203,9 @@
     "EGG_THE_FISH": {
         "name": "Egg the Fish"
     },
+    "EINARY_RED_HOODIE": {
+        "name": "Einary's Red Hoodie"
+    },
     "ELECTRIC_WAND_ITEM": {
         "name": "Electric Wand"
     },
@@ -3210,10 +3228,10 @@
         "name": "Elle's Pickaxe"
     },
     "ELLE_FUEL_CELL": {
-        "name": "%%green%%Ballista Fuel Cell"
+        "name": "Ballista Fuel Cell"
     },
     "ELLE_SUPPLIES": {
-        "name": "%%green%%Elle's Supplies"
+        "name": "Elle's Supplies"
     },
     "EMBER_BOOTS": {
         "name": "Ember Boots"
@@ -3435,7 +3453,7 @@
         "name": "Enchanted Cobblestone"
     },
     "ENCHANTED_COCOA": {
-        "name": "Enchanted Cocoa Bean"
+        "name": "Enchanted Cocoa Beans"
     },
     "ENCHANTED_COMPOST": {
         "name": "Compost Bundle"
@@ -3992,6 +4010,9 @@
     "EXCEEDINGLY_RARE_ENDER_ARTIFACT_UPGRADER": {
         "name": "Exceedingly Rare Ender Artifact Upgrader"
     },
+    "EXPENSIVE_TOY": {
+        "name": "Expensive Toy"
+    },
     "EXPERIENCE_ARTIFACT": {
         "name": "Experience Artifact"
     },
@@ -4370,6 +4391,9 @@
     "FIREPLACE": {
         "name": "Fireplace"
     },
+    "FIREWORK": {
+        "name": "Firework Rocket"
+    },
     "FIREWORK_CHARGE": {
         "name": "Firework Star"
     },
@@ -4691,6 +4715,9 @@
     "FROSTY_SNOW_BALL": {
         "name": "Frosty Snowball"
     },
+    "FROZEN_BAIT": {
+        "name": "Frozen Bait"
+    },
     "FROZEN_BAUBLE": {
         "name": "Frozen Bauble"
     },
@@ -4958,6 +4985,9 @@
     "GIFT_COMPASS": {
         "name": "Gift Compass"
     },
+    "GIFT_OF_LEARNING": {
+        "name": "Gift of Learning"
+    },
     "GIFT_THE_FISH": {
         "name": "Gift the Fish"
     },
@@ -5131,6 +5161,9 @@
     },
     "GOLDEN_CARROT": {
         "name": "Golden Carrot"
+    },
+    "GOLDEN_COLLAR": {
+        "name": "Golden Collar"
     },
     "GOLDEN_DANTE_STATUE": {
         "name": "Golden Dante Statue"
@@ -5989,6 +6022,9 @@
     },
     "ICE_CREAM_PERSONALITY": {
         "name": "Ice Cream Minion Skin"
+    },
+    "ICE_CUBE": {
+        "name": "Ice Cube"
     },
     "ICE_DINNER_TABLE": {
         "name": "Ice Dinner Table"
@@ -7112,6 +7148,9 @@
     "MAGIC_MUSHROOM_SOUP": {
         "name": "Magical Mushroom Soup"
     },
+    "MAGIC_TOP_HAT": {
+        "name": "Magic Top Hat"
+    },
     "MAGMAG": {
         "name": "Magmag"
     },
@@ -7790,6 +7829,9 @@
     "MUSEUM_TRAVEL_SCROLL": {
         "name": "Travel Scroll to Museum"
     },
+    "MUSHED_MUSHROOM_MIXIN": {
+        "name": "Glowing Mush Mixin"
+    },
     "MUSHROOM_BARN_SKIN": {
         "name": "Mushroom Barn Skin"
     },
@@ -8047,6 +8089,9 @@
     },
     "NEUROTOXIN_NEEDLE": {
         "name": "Neurotoxin Needle"
+    },
+    "NEW_BOTTLE_OF_JYRRE": {
+        "name": "Bottle of Jyrre"
     },
     "NEW_YEAR_CAKE": {
         "name": "New Year Cake"
@@ -8356,6 +8401,9 @@
     },
     "PARTY_HAT_CRAB": {
         "name": "Crab Hat of Celebration"
+    },
+    "PARTY_HAT_CRAB_ANIMATED": {
+        "name": "Crab Hat of Celebration - 2022 Edition"
     },
     "PARTY_HAT_SLOTH": {
         "name": "Sloth Hat of Celebration"
@@ -9944,6 +9992,9 @@
     "REFINED_AMBER": {
         "name": "Refined Amber"
     },
+    "REFINED_BOTTLE_OF_JYRRE": {
+        "name": "Refined Bottle of Jyrre"
+    },
     "REFINED_DIAMOND": {
         "name": "Refined Diamond"
     },
@@ -10493,8 +10544,17 @@
     "SECOND_MASTER_STAR": {
         "name": "Second Master Star"
     },
+    "SECRET_BINGO_CARD": {
+        "name": "Secret Bingo Card"
+    },
+    "SECRET_BINGO_MEMENTO": {
+        "name": "Bingo's Secrets"
+    },
     "SECRET_DUNGEON_REDSTONE_KEY": {
         "name": "Redstone Key"
+    },
+    "SECRET_TRACKER": {
+        "name": "Secret Tracker 3000"
     },
     "SEEDS": {
         "name": "Seeds"
@@ -11678,6 +11738,12 @@
     "STARRED_FELTHORN_REAPER": {
         "name": "Felthorn Reaper"
     },
+    "STARRED_GLACIAL_SCYTHE": {
+        "name": "Glacial Scythe"
+    },
+    "STARRED_ICE_SPRAY_WAND": {
+        "name": "Ice Spray Wand"
+    },
     "STARRED_ITEM_SPIRIT_BOW": {
         "name": "Spirit Shortbow"
     },
@@ -11716,6 +11782,9 @@
     },
     "STARRED_VENOMS_TOUCH": {
         "name": "Venom's Touch"
+    },
+    "STARRED_YETI_SWORD": {
+        "name": "Yeti Sword"
     },
     "STARTER_LAVA_ROD": {
         "name": "Starter Lava Rod"
@@ -12013,6 +12082,9 @@
     },
     "SUSPICIOUS_VIAL": {
         "name": "Suspicious Vial"
+    },
+    "SWAPPABLE_PREVIEW": {
+        "name": "Swappable Preview (Click)"
     },
     "SWEET_AXE": {
         "name": "Sweet Axe"
@@ -12440,6 +12512,9 @@
     "TOTEM_OF_CORRUPTION": {
         "name": "Totem of Corruption"
     },
+    "TOWN_HALL_BARN_SKIN": {
+        "name": "Town Hall Barn Skin"
+    },
     "TOXIC_ARROW_POISON": {
         "name": "Toxic Arrow Poison"
     },
@@ -12767,6 +12842,9 @@
     "VOID_SWORD": {
         "name": "Void Sword"
     },
+    "VOLCANIC_ROCK": {
+        "name": "Volcanic Rock"
+    },
     "VOLLEYBALL": {
         "name": "Volleyball Court"
     },
@@ -13031,6 +13109,12 @@
     "WINTER_DISC": {
         "name": "Winter Disc"
     },
+    "WINTER_FRAGMENT": {
+        "name": "Winter Fragment"
+    },
+    "WINTER_HOMESTEAD_BARN_SKIN": {
+        "name": "Winter Homestead Barn Skin"
+    },
     "WINTER_ISLAND": {
         "name": "Winter Island"
     },
@@ -13285,6 +13369,9 @@
     },
     "WORKBENCH": {
         "name": "Crafting Table"
+    },
+    "WORM_BAIT": {
+        "name": "Worm Bait"
     },
     "WORM_MEMBRANE": {
         "name": "Worm Membrane"
