@@ -45,5 +45,13 @@ for filename in os.listdir('UserCommands'):
 
     pybot.load_extension(f'UserCommands.{filename[:-3]}')
 
+for filename in os.listdir('MessageCommand'):
+    if not filename.endswith('.py'):
+        continue
+
+    bot_logger.log_message(logging.DEBUG, f'Setup > MessageCommand.{filename[:-3]}')
+
+    pybot.load_extension(f'MessageCommand.{filename[:-3]}')
+
 if __name__ == '__main__':
     pybot.run((get_setting_json('Token')))
