@@ -11,7 +11,10 @@ bot_logger = Logger(__name__)
 
 class RoleAssigner(CodExtension):
     @commands.has_any_role(get_setting_json('AdminRole'))
-    @commands.user_command(name="讓 TA 冷靜一下")  # Assign role
+    @commands.user_command(
+        guild_ids=[int(get_setting_json('ServerId'))],
+        name="讓 TA 冷靜一下"
+    )  # Assign role
     async def assign_role(self, inter: disnake.ApplicationCommandInteraction, user: disnake.User):
         bot_logger.log_message(logging.INFO, f'Add Calm Down role to User : {inter.channel.name} | {inter.author.name}')
 

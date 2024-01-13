@@ -8,11 +8,11 @@ from CoreFunction.Logger import Logger
 bot_logger = Logger(__name__)
 
 
-class SlashErrorHandle(CodExtension):
+class UserCommandErrorHandle(CodExtension):
     @commands.Cog.listener()
-    async def on_slash_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
+    async def on_user_command_error(self, inter: disnake.AppCommandInteraction, error: commands.CommandError):
         await handle_interaction_error(bot_logger, self.bot, inter, error)
 
 
 def setup(pybot):
-    pybot.add_cog(SlashErrorHandle(pybot))
+    pybot.add_cog(UserCommandErrorHandle(pybot))
