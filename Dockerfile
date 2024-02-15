@@ -2,7 +2,7 @@ FROM python:3.11.4-alpine as base
 FROM base as builder
 
 COPY requirements.txt /requirements.txt
-RUN apt-get install build-essential -y
+RUN dnf install gcc-c++
 RUN pip install --user -r /requirements.txt
 
 FROM base
