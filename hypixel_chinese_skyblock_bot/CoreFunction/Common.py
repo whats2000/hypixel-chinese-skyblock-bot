@@ -155,7 +155,7 @@ def get_hypixel_api(name: str):
         if re.match(r'^[a-zA-Z0-9_]+$', name):
             url = f'{setting_json_data["NameLink"]}?name={name}'
             headers = {
-                'API-Key': setting_json_data["ApiKey"]
+                'API-Key': os.getenv("API_KEY")
             }
 
             js = requests.get(url, headers=headers)
@@ -175,7 +175,7 @@ def get_hypixel_skyblock_api(profile: str):
 
     url = f'{setting_json_data["SkyblockLink"]}?profile={profile}'
     headers = {
-        'API-Key': setting_json_data["ApiKey"]
+        'API-Key': os.getenv("API_KEY")
     }
 
     js = requests.get(url, headers=headers)
@@ -186,7 +186,7 @@ def get_hypixel_skyblock_api(profile: str):
 def get_senither_weight(profile: str):
     bot_logger.log_message(logging.INFO, f'嘗試獲取 {profile} 的 senither weight API')
 
-    js = requests.get(f'{setting_json_data["SenitherLink"]}{profile}/weight?key={setting_json_data["ApiKey"]}')
+    js = requests.get(f'{setting_json_data["SenitherLink"]}{profile}/weight?key={os.getenv("API_KEY")}')
 
     return js.json()
 

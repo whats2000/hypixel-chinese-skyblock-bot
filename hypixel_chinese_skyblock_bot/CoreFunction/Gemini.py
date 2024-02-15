@@ -1,9 +1,8 @@
+import os
 import google.generativeai as genai
 
-from CoreFunction.Common import get_setting_json
-
 # Config for Google AI
-GOOGLE_AI_KEY = get_setting_json('GeminiApiKey')
+GOOGLE_AI_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GOOGLE_AI_KEY)
 text_generation_config = genai.GenerationConfig(**{
     "temperature": 0.9,

@@ -1,8 +1,5 @@
 {
   "AuthorName": "whats2000_",
-  "Token": "",
-  "ApiKey": "",
-  "GeminiApiKey": "",
   "NameLink": "https://api.hypixel.net/player",
   "SkyblockLink": "https://api.hypixel.net/skyblock/profile",
   "SenitherLink": "https://hypixel-api.senither.com/v1/profiles/",
