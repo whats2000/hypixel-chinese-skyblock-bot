@@ -8,7 +8,7 @@ FROM base
 WORKDIR /base
 
 COPY --from=builder /root/.local /root/.local
-COPY ./bot ./hypixel_chinese_skyblock_bot
+COPY ./hypixel_chinese_skyblock_bot ./bot
 
 ENV PATH=/root/.local:$PATH
 

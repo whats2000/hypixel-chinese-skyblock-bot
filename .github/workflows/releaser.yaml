@@ -40,6 +40,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/386,linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x
+          platforms: linux/arm64/v8
           push: true
           tags: ${{ steps.lower-case.outputs.REGISTRY_PATH }}:latest
