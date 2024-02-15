@@ -1,8 +1,8 @@
-FROM python:3.11.4-alpine as base
+FROM python:3.11-slim as base
 FROM base as builder
 
 # Install build dependencies
-RUN apk update && apk add --no-cache g++
+RUN apt-get update && apt-get install -y gcc
 
 COPY requirements.txt /requirements.txt
 RUN pip install --user -r /requirements.txt
