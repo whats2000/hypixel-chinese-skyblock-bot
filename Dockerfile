@@ -11,9 +11,9 @@ FROM base
 WORKDIR /base
 
 COPY --from=builder /root/.local /root/.local
-COPY . ./bot
+COPY ./hypixel_chinese_skyblock_bot .
 
 ENV PATH=/root/.local:$PATH
 
 
-CMD ["python", "./__main__.py"]
+CMD ["python", "__main__.py"]
