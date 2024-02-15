@@ -15,5 +15,4 @@ COPY ./hypixel_chinese_skyblock_bot .
 
 ENV PATH=/root/.local:$PATH
 
-
 CMD ["python", "__main__.py"]
