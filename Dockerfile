@@ -2,7 +2,7 @@ FROM python:3.11.4-alpine as base
 FROM base as builder
 
 # Install build dependencies
-RUN apk update && apk add --no-cache gcc
+RUN apk update && apk add --no-cache gcc musl-dev
 
 COPY requirements.txt /requirements.txt
 RUN pip install --user -r /requirements.txt
