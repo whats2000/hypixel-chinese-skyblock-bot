@@ -1,8 +1,10 @@
 FROM python:3.11.4-alpine as base
 FROM base as builder
 
+# Install build dependencies
+RUN apk update && apk add --no-cache gcc
+
 COPY requirements.txt /requirements.txt
-RUN dnf install gcc-c++
 RUN pip install --user -r /requirements.txt
 
 FROM base
